@@ -53,6 +53,14 @@ Use this repository to generate a FastApi template project
 cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs from cookiecutter.json
 ```
 
+- **'project_name'** is the name on the top of ReadMe.
+
+- **'project_slug'** is the name of the generated folder
+
+- **'description'** will be added under the project name in the ReadMe.
+
+- **'maintainer'** has an informativ goal (not used in the template)
+
 ### TODO
 
 - CookieCut a FastApi project (Allow to choose either Firestore or SQL + use multi cookiecutter.json)

@@ -1,0 +1,25 @@
+{
+  "repository_name": "",
+  "project_name": "FastApi template",
+  "project_slug": "{{cookiecutter.project_name.lower().replace(' ', '_')}}",
+  "description": "Short description",
+  "maintainer": [
+    "Digital Lab",
+    "Cyril Sabourault",
+    "Stephane Conq",
+    "Raphaël Obadia",
+    "Eudes Grange",
+    "Augustin Hourlier",
+    "Sébastien Viguier",
+    "Nassim Mesdour",
+    "Benjamin Solano",
+    "Valdo Negou"
+  ],
+  "__prompts__": {
+    "repository_name": "Empty repository name you want to push to (let empty to refuse):",
+    "project_name": "Select your project name:",
+    "project_slug": "Select your project slug",
+    "description": "Add a description to the ReadMe",
+    "maintainer": "Select the main maintainer of the project:"
+  }
+}
