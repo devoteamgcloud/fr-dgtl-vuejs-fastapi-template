@@ -1,0 +1,37 @@
+<template>
+  <v-text-field
+    :rules="rules"
+    :label="label"
+    :placeholder="placeholder"
+    :density="density"
+    clearable
+    class="pa-2"
+  >
+    <template v-slot:append>
+      <slot v-if="$slots['append']" name="append"></slot>
+    </template>
+  </v-text-field>
+</template>
+
+<script setup lang="ts">
+defineProps({
+  rules: {
+    type: Array[Function as any],
+    default: () => []
+  },
+  label: {
+    type: String,
+    default: 'Label'
+  },
+  placeholder: {
+    type: String,
+    default: 'Enter text...'
+  },
+  density: {
+    type: String as any,
+    default: 'comfortable'
+  }
+})
+</script>
+
+<style scoped></style>
