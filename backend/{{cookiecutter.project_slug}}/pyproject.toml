@@ -7,8 +7,14 @@ authors = ["{{cookiecutter.maintainer}}"]
 [tool.poetry.dependencies]
 python = "^3.9"
 fastapi = { version = "^0.79.0", extras = ["all"] }
-google-cloud-logging = "^3.0.0"
+sqlmodel = "^0.0.6"
+alembic = "^1.8.0"
+psycopg2 = "^2.9.3"
+Faker = "^13.11.1"
 gunicorn = "^20.1.0"
+google-cloud-logging = "^3.0.0"
+cryptography = "^37.0.3"
+SQLAlchemy = "<1.4.42"
 httpx = "^0.23.0"
 
 [tool.poetry.dev-dependencies]
