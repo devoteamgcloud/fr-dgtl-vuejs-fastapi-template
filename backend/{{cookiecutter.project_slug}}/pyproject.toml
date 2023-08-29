@@ -19,6 +19,7 @@ httpx = "^0.23.0"
 psycopg2-binary = "^2.9.6"
 starlette-context = "^0.3.6"
 asgi-correlation-id = "^4.2.0"
+google-cloud-firestore = "^2.11.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1"
