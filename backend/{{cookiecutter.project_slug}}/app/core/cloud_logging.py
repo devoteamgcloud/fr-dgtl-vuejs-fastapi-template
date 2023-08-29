@@ -1,7 +1,7 @@
 import contextvars
 import logging
 import sys
-from typing import no_type_check
+from typing import Any, no_type_check
 
 from fastapi.logger import logger as fastapi_logger
 from google.cloud.logging_v2.client import Client as google_cloud_logging_v2_client
@@ -25,9 +25,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
     Middleware to grab the trace context from the incoming request and store it in the contextvars.
     """
 
-    async def dispatch(
-        self, request: Request, call_next: RequestResponseEndpoint
-    ) -> Response:
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         if "x-cloud-trace-context" in request.headers:
             cloud_trace_context.set(request.headers.get("x-cloud-trace-context"))
 
@@ -51,9 +49,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
         except Exception as ex:
             logging.exception(f"Request failed: {ex}")
-            return JSONResponse(
-                status_code=500, content={"success": False, "message": str(ex)}
-            )
+            return JSONResponse(status_code=500, content={"success": False, "message": str(ex)})
 
 
 class GoogleCloudLogFilter(CloudLoggingFilter):
@@ -95,12 +91,8 @@ class Logging:
 
     def init_cloud_logger(self) -> None:
         gcloud_logging_client = google_cloud_logging_v2_client()
-        gcloud_logging_handler = CloudLoggingHandler(
-            gcloud_logging_client, name=self.name
-        )
-        gcloud_logging_filter = GoogleCloudLogFilter(
-            project=gcloud_logging_client.project
-        )
+        gcloud_logging_handler = CloudLoggingHandler(gcloud_logging_client, name=self.name)
+        gcloud_logging_filter = GoogleCloudLogFilter(project=gcloud_logging_client.project)
 
         self.logger.addFilter(gcloud_logging_filter)
         self.logger.addHandler(gcloud_logging_handler)
@@ -127,6 +119,30 @@ class Logging:
         return self.logger
 
 
+class Singleton(type):
+    _instances: dict = {}
+
+    def __call__(cls, *args, **kwargs) -> Any:  # type: ignore
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class LoggerStruct(metaclass=Singleton):
+    def __init__(self) -> None:
+        # Log struct is only available in production, so we need to mock it
+        self._logger_struct = type("obj", (object,), {"log_struct": lambda x: None})
+        if settings.ENV not in ["local", "test"]:
+            gcloud_logging_client = google_cloud_logging_v2_client()
+            # Log struct is meant to make easier to query logs in production
+            self._logger_struct = gcloud_logging_client.logger(settings.LOG_NAME)
+
+    @property
+    def logger_struct(self) -> Any:
+        return self._logger_struct
+
+
 # Update the "fastapi" logger to have a _global_ level of `settings.LOG_LEVEL`
 logging.getLogger("fastapi").setLevel(settings.LOG_LEVEL)
 log: logging.Logger = Logging().get_logger()
+logger_struct = LoggerStruct().logger_struct
