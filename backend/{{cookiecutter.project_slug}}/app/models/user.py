@@ -1,7 +1,9 @@
-from app.models.base import AppBase, ReadBase, TableBase
+from datetime import datetime
+from app.models.base import DateTimeModelMixin
+from pydantic import BaseModel
 
 
-class UserBase(AppBase):
+class UserBase(BaseModel):
     """User Model"""
 
     first_name: str
@@ -9,19 +11,11 @@ class UserBase(AppBase):
     email: str
 
 
-class User(UserBase, TableBase, table=True):
+class UserRead(UserBase, DateTimeModelMixin[datetime]):
     pass
 
 
-class UserRead(ReadBase, UserBase):
-    id: int
-
-
-class UserReadTopics(ReadBase, UserBase):
-    pass
-
-
-class UserCreate(User, UserBase):
+class UserCreate(UserBase):
     pass
 
 

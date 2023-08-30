@@ -14,19 +14,24 @@ class Firestore(metaclass=Singleton):
         return [document.to_dict() for document in doc_list]
 
     def get_document(
-        self, collection_name: str, document_name: str, as_dict=True
-    ) -> firestore.DocumentReference:
-        doc = self.client.collection(collection_name).document(document_name).get()
+        self, collection_name: str, document_id: str, as_dict=True
+    ) -> firestore.DocumentReference | dict:
+        doc = self.client.collection(collection_name).document(document_id).get()
         if not as_dict:
             return doc
         return doc.to_dict()
 
     def add_document(
-        self, collection_name: str, document_name: str, data: dict
+        self, collection_name: str, data: dict
     ) -> firestore.DocumentReference:
-        return self.client.collection(collection_name).document(document_name).set(data)
+        return self.client.collection(collection_name).add(data)
 
     def update_document(
-        self, collection_name: str, document_name: str, data: dict
+        self, collection_name: str, document_id: str, data: dict
     ) -> firestore.DocumentReference:
-        return self.client.collection(collection_name).document(document_name).update(data)
+        return (
+            self.client.collection(collection_name).document(document_id).update(data)
+        )
+
+    def delete_document(self, collection_name: str, document_id: str):
+        return self.client.collection(collection_name).document(document_id).delete()

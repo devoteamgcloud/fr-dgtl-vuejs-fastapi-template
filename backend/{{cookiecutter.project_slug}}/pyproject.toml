@@ -7,7 +7,6 @@ authors = ["{{cookiecutter.maintainer}}"]
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = { version = "^0.79.0", extras = ["all"] }
-sqlmodel = "^0.0.6"
 alembic = "^1.8.0"
 psycopg2 = "^2.9.3"
 Faker = "^13.11.1"
