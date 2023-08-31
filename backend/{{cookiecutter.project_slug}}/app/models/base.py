@@ -2,7 +2,8 @@ import re
 from datetime import datetime, timezone
 from typing import Generic, List, TypeVar
 
-from pydantic.generics import GenericModel
+from pydantic import BaseModel
+
 
 T = TypeVar("T")
 
@@ -20,19 +21,19 @@ def convert_datetime_to_realworld(dt: datetime) -> str:
     return dt.replace(tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-class DateTimeModelMixin(GenericModel, Generic[T]):
+class DateTimeModelMixin(BaseModel, Generic[T]):
     created_at: T
     updated_at: T
 
     class Config:
         alias_generator = to_camel
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
-class Page(GenericModel, Generic[T]):
+class Page(BaseModel, Generic[T]):
     items: List[T]
     total: int
 
     class Config:
         alias_generator = to_camel
-        allow_population_by_field_name = True
+        populate_by_name = True

@@ -46,6 +46,7 @@ def add_user(userData: UserCreate) -> UserCreate:
         dict(userData),
     )
     user = doc_ref.get().to_dict()
+    user["id"] = doc_ref.id
     return user
 
 

@@ -1,5 +1,4 @@
-import json
-from typing import List, NoReturn, Optional
+from typing import NoReturn
 
 from fastapi import HTTPException, status
 from fastapi.security import HTTPBearer

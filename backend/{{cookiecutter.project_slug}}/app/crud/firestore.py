@@ -11,7 +11,11 @@ class Firestore(metaclass=Singleton):
         doc_list = self.client.collection(collection_name).get()
         if not as_dict:
             return doc_list
-        return [document.to_dict() for document in doc_list]
+
+        dict_list = []
+        for document in doc_list:
+            dict_list.append(Firestore._get_doc_as_dict(document))
+        return dict_list
 
     def get_document(
         self, collection_name: str, document_id: str, as_dict=True
@@ -19,19 +23,22 @@ class Firestore(metaclass=Singleton):
         doc = self.client.collection(collection_name).document(document_id).get()
         if not as_dict:
             return doc
-        return doc.to_dict()
 
-    def add_document(
-        self, collection_name: str, data: dict
-    ) -> firestore.DocumentReference:
+        return Firestore._get_doc_as_dict(doc)
+
+    def add_document(self, collection_name: str, data: dict) -> firestore.DocumentReference:
         return self.client.collection(collection_name).add(data)
 
     def update_document(
         self, collection_name: str, document_id: str, data: dict
     ) -> firestore.DocumentReference:
-        return (
-            self.client.collection(collection_name).document(document_id).update(data)
-        )
+        return self.client.collection(collection_name).document(document_id).update(data)
 
     def delete_document(self, collection_name: str, document_id: str):
         return self.client.collection(collection_name).document(document_id).delete()
+
+    @staticmethod
+    def _get_doc_as_dict(doc: firestore.DocumentSnapshot) -> dict:
+        element = doc.to_dict()
+        element["id"] = doc.id
+        return element

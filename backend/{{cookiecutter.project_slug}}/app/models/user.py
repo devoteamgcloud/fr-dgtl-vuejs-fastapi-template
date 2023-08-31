@@ -1,9 +1,8 @@
 from datetime import datetime
 from app.models.base import DateTimeModelMixin
-from pydantic import BaseModel
 
 
-class UserBase(BaseModel):
+class UserBase(DateTimeModelMixin[datetime]):
     """User Model"""
 
     first_name: str
@@ -11,8 +10,8 @@ class UserBase(BaseModel):
     email: str
 
 
-class UserRead(UserBase, DateTimeModelMixin[datetime]):
-    pass
+class UserRead(UserBase):
+    id: str
 
 
 class UserCreate(UserBase):
