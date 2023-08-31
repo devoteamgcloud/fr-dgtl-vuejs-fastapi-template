@@ -1,8 +1,7 @@
-from app.api.deps import raise_400, raise_404, raise_500
+from app.api.deps import raise_404
 from app.models.user import UserCreate, UserUpdate
 from fastapi import APIRouter, Depends, status
 
-from app.core.cloud_logging import log
 
 from app import crud
 from app.models.base import Page
@@ -50,8 +49,13 @@ def add_user(userData: UserCreate) -> UserCreate:
     return user
 
 
-@router.put("/{id}", status_code=status.HTTP_200_OK, dependencies=[Depends(get_user)])
-def update_user(user_id: str, userData: UserUpdate) -> UserRead:
+@router.put(
+    "/{id}",
+    response_model=UserUpdate,
+    status_code=status.HTTP_200_OK,
+    dependencies=[Depends(get_user)],
+)
+def update_user(user_id: str, userData: UserUpdate) -> UserUpdate:
     crud.firestore.update_document(USER_COLLECTION, user_id, dict(userData))
     return dict(userData)
 
@@ -62,4 +66,5 @@ def update_user(user_id: str, userData: UserUpdate) -> UserRead:
     dependencies=[Depends(get_user)],
 )
 def delete_user(user_id: str) -> str:
-    return crud.firestore.delete_document(USER_COLLECTION, user_id)
+    crud.firestore.delete_document(USER_COLLECTION, user_id)
+    return {"message": "User deleted successfully"}

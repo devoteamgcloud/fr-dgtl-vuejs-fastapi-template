@@ -39,6 +39,8 @@ class Firestore(metaclass=Singleton):
 
     @staticmethod
     def _get_doc_as_dict(doc: firestore.DocumentSnapshot) -> dict:
+        if not doc.exists:
+            return None
         element = doc.to_dict()
         element["id"] = doc.id
         return element
