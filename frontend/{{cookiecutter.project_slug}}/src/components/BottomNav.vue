@@ -1,5 +1,10 @@
 <template>
-  <v-bottom-navigation id="footer" grow :height="'--navigation-bar-height'" class="align-center">
+  <v-bottom-navigation
+    id="footer"
+    grow
+    :height="'--navigation-bar-height'"
+    class="align-center"
+  >
     @Copyright 2023
   </v-bottom-navigation>
 </template>

@@ -1,38 +1,44 @@
 <template>
-    <div class="text-center">
-      <v-dialog v-model="isOpen" width="auto">
-        <CardContainer :title="mainTitle" class="text-center">
-          <template #body>
-            <slot name="body" />
-          </template>
-          <template #footer>
-            <slot
-              v-if="$slots.customActions"
-              name="customActions"
-              :confirm="confirm"
-              :close="close"
+  <div class="text-center">
+    <v-dialog
+      v-model="isOpen"
+      width="auto"
+    >
+      <CardContainer
+        :title="mainTitle"
+        class="text-center"
+      >
+        <template #body>
+          <slot name="body" />
+        </template>
+        <template #footer>
+          <slot
+            v-if="$slots.customActions"
+            name="customActions"
+            :confirm="confirm"
+            :close="close"
+          />
+          <div v-else>
+            <v-btn
+              density="compact"
+              icon="mdi-check-circle-outline"
+              color="green"
+              size="x-large"
+              @click="confirm()"
             />
-            <div v-else>
-              <v-btn
-                density="compact"
-                icon="mdi-check-circle-outline"
-                color="green"
-                size="x-large"
-                @click="confirm()"
-              />
-              <v-btn
-                density="compact"
-                icon="mdi-close-circle-outline"
-                color="red"
-                size="x-large"
-                @click="close()"
-              />
-            </div>
-          </template>
-        </CardContainer>
-      </v-dialog>
-    </div>
-  </template>
+            <v-btn
+              density="compact"
+              icon="mdi-close-circle-outline"
+              color="red"
+              size="x-large"
+              @click="close()"
+            />
+          </div>
+        </template>
+      </CardContainer>
+    </v-dialog>
+  </div>
+</template>
   
   <script setup lang="ts">
   import { ref } from 'vue'

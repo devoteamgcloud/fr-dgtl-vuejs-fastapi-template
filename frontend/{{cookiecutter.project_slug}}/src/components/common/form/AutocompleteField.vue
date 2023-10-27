@@ -2,14 +2,17 @@
   <v-autocomplete
     :label="label || 'Autocomplete'"
     :items="props.items"
-    :itemValue="props.itemValue"
-    :itemTitle="props.itemTitle"
+    :item-value="props.itemValue"
+    :item-title="props.itemTitle"
     :multiple="props.multiple"
     :chips="props.chips"
     class="pa-2"
   >
-    <template v-slot:append>
-      <slot v-if="$slots['append']" name="append"></slot>
+    <template #append>
+      <slot
+        v-if="$slots['append']"
+        name="append"
+      />
     </template>
   </v-autocomplete>
 </template>

@@ -1,11 +1,24 @@
 <template>
-  <v-app-bar id="navbar" app :height="'--navigation-bar-height'" dark>
-    <h3 class="ml-4">{{ cookiecutter.project_name }}</h3>
+  <v-app-bar
+    id="navbar"
+    app
+    :height="'--navigation-bar-height'"
+    dark
+  >
+    <h3 class="ml-4">
+      {{ cookiecutter.project_name }}
+    </h3>
     <v-app-bar-nav-icon />
     <v-spacer />
     <v-btn @click="prefStore.toggleTheme(theme)">
-      <v-icon v-if="prefStore.isDark" icon="fa:fa fa-moon" />
-      <v-icon v-else icon="fa:fa fa-sun" />
+      <v-icon
+        v-if="prefStore.isDark"
+        icon="fa:fa fa-moon"
+      />
+      <v-icon
+        v-else
+        icon="fa:fa fa-sun"
+      />
     </v-btn>
   </v-app-bar>
 </template>
