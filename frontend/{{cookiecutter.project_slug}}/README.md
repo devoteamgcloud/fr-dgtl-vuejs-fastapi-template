@@ -13,6 +13,12 @@
 - [Pinia](https://pinia.vuejs.org/)
 - [piniaPluginPersistedstate](https://github.com/prazdevs/pinia-plugin-persistedstate/)
 
+## Formatting / Linting
+
+The template is using [ESLint for VueJS](https://eslint.vuejs.org/).
+
+By default, **auto formatting is enabled on save**.
+
 ## Project Setup
 
 ```sh

@@ -7,8 +7,11 @@
     clearable
     class="pa-2"
   >
-    <template v-slot:append>
-      <slot v-if="$slots['append']" name="append"></slot>
+    <template #append>
+      <slot
+        v-if="$slots['append']"
+        name="append"
+      />
     </template>
   </v-text-field>
 </template>

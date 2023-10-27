@@ -7,13 +7,21 @@
     :location="sStore.location"
   >
     <div class="d-flex align-center">
-      <v-icon v-if="sStore.icon" :icon="sStore.icon" class="mr-2"></v-icon>
-      {% raw %}
-      {{ sStore.text }}
-      {% endraw %}
+      <v-icon
+        v-if="sStore.icon"
+        :icon="sStore.icon"
+        class="mr-2"
+      />
+      {% raw %}{{ sStore.text }}{% endraw %}
     </div>
-    <template v-slot:actions>
-      <v-btn v-if="sStore.closable" variant="text" @click="sStore.displayed = false"> Close </v-btn>
+    <template #actions>
+      <v-btn
+        v-if="sStore.closable"
+        variant="text"
+        @click="sStore.displayed = false"
+      >
+        Close
+      </v-btn>
     </template>
   </v-snackbar>
 </template>

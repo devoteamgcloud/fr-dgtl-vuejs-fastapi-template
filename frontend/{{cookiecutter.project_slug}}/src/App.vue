@@ -2,7 +2,10 @@
   <v-app id="app">
     <NavigationDrawer @expand="adaptMargin($event)" />
     <NavBar />
-    <v-main id="main-container" class="d-flex">
+    <v-main
+      id="main-container"
+      class="d-flex"
+    >
       <RouterView />
     </v-main>
     <BottomNav />

@@ -1,33 +1,39 @@
 <template>
   <v-select
     v-model="selectedItems"
-    @update:modelValue="$emit('selectionUpdated', $event)"
     :label="label"
     :items="props.items"
-    :itemValue="props.itemValue"
-    :itemTitle="props.itemTitle"
+    :item-value="props.itemValue"
+    :item-title="props.itemTitle"
     :multiple="multiple"
     :chips="showAsChips"
     class="pa-2"
+    @update:model-value="$emit('selectionUpdated', $event)"
   >
-    <template v-slot:prepend-item>
+    <template #prepend-item>
       <div v-if="multiple">
-        <v-list-item :title="`Select All (${selectedItems.length})`" @click="selectAll">
-          <template v-slot:prepend>
+        <v-list-item
+          :title="`Select All (${selectedItems.length})`"
+          @click="selectAll"
+        >
+          <template #prepend>
             <v-checkbox-btn
               :color="selectedSome ? 'indigo-darken-4' : undefined"
               :indeterminate="selectedSome && !selectedAll"
               :model-value="selectedSome"
-            ></v-checkbox-btn>
+            />
           </template>
         </v-list-item>
 
-        <v-divider class="mt-2"></v-divider>
+        <v-divider class="mt-2" />
       </div>
     </template>
 
-    <template v-slot:append>
-      <slot v-if="$slots['append']" name="append"></slot>
+    <template #append>
+      <slot
+        v-if="$slots['append']"
+        name="append"
+      />
     </template>
   </v-select>
 </template>
@@ -35,9 +41,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+defineEmits(['selectionUpdated'])
+
 const props = defineProps({
   modelValue: {
-    type: String || Array
+    type: String || Array,
+    default: () => []
   },
   items: {
     type: Array,

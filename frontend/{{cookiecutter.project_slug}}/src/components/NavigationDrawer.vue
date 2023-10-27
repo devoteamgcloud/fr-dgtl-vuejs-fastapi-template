@@ -12,10 +12,18 @@
       variant="text"
       :icon="rail ? 'mdi-chevron-right' : 'mdi-chevron-left'"
       @click.stop="expandRail(!rail)"
-    ></v-btn>
-    <v-divider></v-divider>
-    <v-list density="compact" nav>
-      <v-list-item to="/" prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
+    />
+    <v-divider />
+    <v-list
+      density="compact"
+      nav
+    >
+      <v-list-item
+        to="/"
+        prepend-icon="mdi-home-city"
+        title="Home"
+        value="home"
+      />
     </v-list>
   </v-navigation-drawer>
 </template>

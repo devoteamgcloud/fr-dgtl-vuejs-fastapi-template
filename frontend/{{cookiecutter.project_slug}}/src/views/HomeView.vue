@@ -1,8 +1,15 @@
 <template>
   <v-container>
-    <h2 class="text-center">Form & API call exemple</h2>
+    <h2 class="text-center">
+      Form & API call exemple
+    </h2>
     <!-- Form Example -->
-    <FormFields :id="1" clearable custom-actions @submit="showModal = true">
+    <FormFields
+      :id="1"
+      clearable
+      custom-actions
+      @submit="showModal = true"
+    >
       <template #body>
         <!-- TextField example -->
         <TextField
@@ -12,10 +19,13 @@
           prepend-inner-icon="mdi-account"
           class="mt-4"
         >
-          <template v-slot:append>
-            {% raw %}
-            <v-alert type="info" variant="tonal"> Value: {{ usernameExample }}</v-alert>
-            {% endraw %}
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
+            >
+              Value: {% raw %}{{ usernameExample }}{% endraw %}
+            </v-alert>
           </template>
         </TextField>
 
@@ -25,10 +35,13 @@
           label="Email"
           prepend-inner-icon="mdi-email"
         >
-          <template v-slot:append>
-            {% raw %}
-            <v-alert type="info" variant="tonal"> Value: {{ emailExemple }}</v-alert>
-            {% endraw %}
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
+            >
+              Value: {% raw %}{{ emailExemple }} {% endraw %}
+            </v-alert>
           </template>
         </TextField>
 
@@ -39,10 +52,13 @@
           label="Password"
           prepend-inner-icon="mdi-lock"
         >
-          <template v-slot:append>
-            {% raw %}
-            <v-alert type="info" variant="tonal"> Value: {{ passwordExemple }}</v-alert>
-            {% endraw %}
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
+            >
+              Value: {% raw %}{{ passwordExemple }}{% endraw %}
+            </v-alert>
           </template>
         </TextField>
 
@@ -64,19 +80,22 @@
           :chips="true"
           closable-chips
           prepend-inner-icon="mdi-flag"
-          @selectionUpdated="selectExemple = $event"
+          @selection-updated="selectExemple = $event"
         >
-          <template v-slot:append>
-            {% raw %}
-            <v-alert type="info" variant="tonal"> Value: {{ selectExemple }}</v-alert>
-            {% endraw %}
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
+            >
+              Value: {% raw %}{{ selectExemple }}{% endraw %}
+            </v-alert>
           </template>
         </SelectField>
 
         <!-- AutocompleteField example -->
         <AutocompleteField
-          label="Select multiple states (autocomplete)"
           v-model="autocompleteExemple"
+          label="Select multiple states (autocomplete)"
           :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
           :items="[
             { title: 'Florida', value: 'FL' },
@@ -90,15 +109,16 @@
           closable-chips
           prepend-inner-icon="mdi-city"
         >
-          <template v-slot:append>
-            {% raw %}
-            <v-alert type="info" variant="tonal">
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
+            >
               Value:
               <template v-if="autocompleteExemple.length > 0">
-                {{ autocompleteExemple }}
+                {% raw %}{{ autocompleteExemple }}{% endraw %}
               </template>
             </v-alert>
-            {% endraw %}
           </template>
         </AutocompleteField>
         <FileField
@@ -106,9 +126,8 @@
           label="Optional field"
           :multiple="true"
           clearable
-          @fileChange="exampleFiles = $event"
-        >
-        </FileField>
+          @file-change="exampleFiles = $event"
+        />
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
       <template #actions="{ validate, clear }">
@@ -119,10 +138,14 @@
             color="green"
             size="x-large"
             @click="validate"
-          >
-          </v-btn>
-          <v-btn density="compact" icon="mdi-sync-circle" color="red" size="x-large" @click="clear">
-          </v-btn>
+          />
+          <v-btn
+            density="compact"
+            icon="mdi-sync-circle"
+            color="red"
+            size="x-large"
+            @click="clear"
+          />
         </div>
       </template>
     </FormFields>
@@ -133,7 +156,9 @@
       @confirm="confirmSubmit()"
       @close="showModal = false"
     >
-      <template #body> This will call a public API, are you sure? </template>
+      <template #body>
+        This will call a public API, are you sure?
+      </template>
       <!-- Replace default actions if needed -->
       <!-- <template #customActions="{ confirm, close }">
         <v-btn @click="confirm()"></v-btn>
@@ -142,27 +167,35 @@
     </ModalContainer>
 
     <!-- Call API example -->
-    <div v-if="loading" class="pa-8">
-      <div class="text-caption">Call in progress...</div>
-      <v-progress-linear color="primary" indeterminate :height="5"></v-progress-linear>
+    <div
+      v-if="loading"
+      class="pa-8"
+    >
+      <div class="text-caption">
+        Call in progress...
+      </div>
+      <v-progress-linear
+        color="primary"
+        indeterminate
+        :height="5"
+      />
     </div>
-    <div v-else-if="apiResult.count" class="d-flex justify-content-center flex-wrap">
+    <div
+      v-else-if="apiResult.count"
+      class="d-flex justify-content-center flex-wrap"
+    >
       <CardContainer
-        :key="entry.API"
         v-for="entry in apiResult.entries.slice(0, 3)"
+        :key="entry.API"
         :title="entry.API"
       >
-        <template v-slot:body>
+        <template #body>
           <div>
-            {% raw %}
-            {{ entry.Description }}
-            {% endraw %}
+            {% raw %}{{ entry.Description }}{% endraw %}
           </div>
         </template>
-        <template v-slot:footer>
-          {% raw %}
-          {{ entry.Category }}
-          {% endraw %}
+        <template #footer>
+          {% raw %}{{ entry.Category }}{% endraw %}
         </template>
       </CardContainer>
     </div>

@@ -1,9 +1,16 @@
 <template>
-  <v-card :title="props.title" :width="props.width" :prepend-icon="props.icon" class="mx-auto ma-4">
+  <v-card
+    :title="props.title"
+    :width="props.width"
+    :prepend-icon="props.icon"
+    class="mx-auto ma-4"
+  >
     <slot name="header" />
-    <v-divider></v-divider>
-    <v-card-text class="pa-4"> <slot name="body" /> </v-card-text>
-    <v-divider v-if="$slots.footer"></v-divider>
+    <v-divider />
+    <v-card-text class="pa-4">
+      <slot name="body" />
+    </v-card-text>
+    <v-divider v-if="$slots.footer" />
     <v-card-actions class="mx-6 text-center">
       <slot name="footer" />
     </v-card-actions>

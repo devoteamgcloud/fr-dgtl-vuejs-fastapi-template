@@ -6,9 +6,12 @@
       name="actions"
       :validate="validate"
       :clear="clear"
-      :resetValidation="resetValidation"
+      :reset-validation="resetValidation"
     />
-    <div v-else class="d-flex justify-space-evenly">
+    <div
+      v-else
+      class="d-flex justify-space-evenly"
+    >
       <v-btn
         density="compact"
         icon="mdi-check-circle-outline"
@@ -23,8 +26,7 @@
         color="red"
         size="x-large"
         @click="clear"
-      >
-      </v-btn>
+      />
     </div>
   </v-form>
 </template>
