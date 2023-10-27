@@ -5,6 +5,7 @@
     :placeholder="placeholder"
     :density="density"
     clearable
+    autocomplete="on"
     class="pa-2"
   >
     <template #append>

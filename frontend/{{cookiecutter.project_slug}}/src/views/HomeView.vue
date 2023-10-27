@@ -64,8 +64,8 @@
 
         <!-- SelectField example -->
         <SelectField
+          v-model="selectExemple"
           label="Select one state"
-          :v-model="selectExemple"
           :rules="[formValidation.fieldRequired()]"
           :items="[
             { state: 'Florida', abbr: 'FL' },

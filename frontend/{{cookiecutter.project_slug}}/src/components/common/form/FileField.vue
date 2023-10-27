@@ -8,7 +8,7 @@
     prepend-inner-icon="mdi-paperclip"
     :prepend-icon="null"
     class="pa-2"
-    @update:model-value="$emit('fileChange', $event)"
+    @update:model-value="fileChanged($event)"
   >
     <template #selection="{ fileNames }">
       <div v-if="multiple">
@@ -33,7 +33,7 @@
   <script setup lang="ts">
   import { ref } from 'vue'
 
-  defineEmits(['fileChange'])
+  const emit = defineEmits(['fileChange'])
 
   const props = defineProps({
     modelValue: {
@@ -59,6 +59,11 @@
   })
   
   let files = ref(props.modelValue)
+
+  function fileChanged(event) {
+    this.files = event
+    emit('fileChange', event)
+  }
   </script>
   
   <style scoped></style>
