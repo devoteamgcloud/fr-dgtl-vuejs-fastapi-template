@@ -15,4 +15,4 @@ export interface ApiResponseSettings {
   mapping?: Record<string, string> // Custom mapping for snackbar text
 }
 
-export const TEST_PREFIX = 'entries'
+export const TEST_PREFIX = 'quotes'

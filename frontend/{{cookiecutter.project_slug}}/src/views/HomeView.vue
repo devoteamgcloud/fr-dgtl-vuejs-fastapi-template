@@ -181,21 +181,21 @@
       />
     </div>
     <div
-      v-else-if="apiResult.count"
+      v-else-if="apiResult.length > 0"
       class="d-flex justify-content-center flex-wrap"
     >
       <CardContainer
-        v-for="entry in apiResult.entries.slice(0, 3)"
-        :key="entry.API"
-        :title="entry.API"
+        v-for="entry in apiResult.slice(0, 3)"
+        :key="entry.anime"
+        :title="'Anime: ' + entry.anime"
       >
         <template #body>
           <div>
-            {% raw %}{{ entry.Description }}{% endraw %}
+            "{% raw %}{{ entry.quote }}{% endraw %}"
           </div>
         </template>
         <template #footer>
-          {% raw %}{{ entry.Category }}{% endraw %}
+          From {% raw %}{{ entry.character }}{% endraw %}
         </template>
       </CardContainer>
     </div>
@@ -217,7 +217,7 @@ import FileField from '@/components/common/form/FileField.vue'
 import ModalContainer from '@/components/common/ModalContainer.vue'
 
 const apis = useApis()
-let apiResult = ref({ count: 0, entries: [] })
+let apiResult = ref([] as any[])
 let loading = ref(false)
 
 let usernameExample = ref('')

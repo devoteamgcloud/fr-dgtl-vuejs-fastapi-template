@@ -16,6 +16,6 @@ export default {
   },
 
   passwordRules() {
-    return (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) || 'Password must contain at least 8 characters, one letter and one number'
+    return (value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value) || 'Password must contain at least 8 characters, one letter and one number (no spaces)'
   }
 }
