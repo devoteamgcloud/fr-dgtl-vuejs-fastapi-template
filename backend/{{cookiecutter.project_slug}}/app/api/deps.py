@@ -1,6 +1,17 @@
 from typing import NoReturn
 
 from fastapi import HTTPException, status
+from fastapi.security import HTTPBearer
+
+
+oauth2_scheme = HTTPBearer()
+
+
+def raise_400() -> NoReturn:
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Bad Request",
+    )
 
 
 def raise_401() -> NoReturn:
@@ -14,6 +25,13 @@ def raise_403() -> NoReturn:
     raise HTTPException(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Forbidden.",
+    )
+
+
+def raise_404() -> NoReturn:
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Not found.",
     )
 
 
