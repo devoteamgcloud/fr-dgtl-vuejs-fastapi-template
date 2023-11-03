@@ -3,6 +3,12 @@
     <h2 class="text-center">
       Form & API call exemple
     </h2>
+    <v-img
+      :src="imgSrc"
+      alt="Vue logo"
+      width="200"
+      class="float-right"
+    />
     <!-- Form Example -->
     <FormFields
       :id="1"
@@ -121,6 +127,7 @@
             </v-alert>
           </template>
         </AutocompleteField>
+
         <FileField
           v-model="exampleFiles"
           label="Optional field"
@@ -203,23 +210,23 @@
 </template>
 
 <script setup lang="ts">
+import imgSrc from '@/assets/logo.svg'
 import CardContainer from '@/components/common/CardContainer.vue'
-import { useApis } from '@/composables/use-apis'
-import { wrapper } from '@/composables/use-api-wrapper'
-import TextField from '@/components/common/form/TextField.vue'
-import SelectField from '@/components/common/form/SelectField.vue'
-import formValidation from '@/helpers/form-validation'
-import { ApiResponseSettings } from '@/api/config'
-import { ref } from 'vue'
 import AutocompleteField from '@/components/common/form/AutocompleteField.vue'
 import FormFields from '@/components/common/form/FormFields.vue'
 import FileField from '@/components/common/form/FileField.vue'
 import ModalContainer from '@/components/common/ModalContainer.vue'
+import TextField from '@/components/common/form/TextField.vue'
+import SelectField from '@/components/common/form/SelectField.vue'
+import formValidation from '@/helpers/form-validation'
+import { SnackSettings } from '@/api/config'
+import { ref } from 'vue'
+import { useApis } from '@/composables/use-apis'
+import { wrapper } from '@/composables/use-api-wrapper'
 
 const apis = useApis()
 let apiResult = ref([] as any[])
 let loading = ref(false)
-
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
@@ -234,15 +241,14 @@ function confirmSubmit() {
 }
 
 async function callTestApi() {
-  let options: ApiResponseSettings = {
-    loading: loading,
-    popup: true,
-    location: 'top right',
-    mapping: {
+  let options = new SnackSettings(
+    loading,
+    true,
+    'bottom',
+    {
       200: 'Custom success message'
     }
-  }
-
+  )
   apiResult.value = await wrapper(apis.test.callExemple(), options)
 }
 </script>

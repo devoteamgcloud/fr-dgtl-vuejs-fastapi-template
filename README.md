@@ -13,12 +13,20 @@ python3 -m pip install -r requirements.txt
 
 ## Usage
 
-### Frontend
+### Workspace
+
+To open the template in VSCode, use the following command
+
+```bash
+cd cookiecutter-vuejs-fastapi-template
+code .vscode/cookiecutter.code-workspace
+```
+
+### Generate Frontend Project
 
 Use this repository to generate a Vuejs template project
 
 ```bash
-cd ..
 cookiecutter cookiecutter-vuejs-fastapi-template/frontend   # Will ask your needs from cookiecutter.json
 ```
 
@@ -45,7 +53,7 @@ Ensure you have corrects  **SSH rights & access**
 
 - **'footer'** allow you to choose if you want an existing footer on first run.
 
-### Backend (WIP)
+### ### Generate Backend Project (WIP)
 
 Use this repository to generate a FastApi template project
 
@@ -63,5 +71,16 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 ### TODO
 
-- CookieCut a FastApi project (Allow to choose either Firestore or SQL + use multi cookiecutter.json)
-- CookieCut a deployment method (App Engine, Cloud Run...)
+#### Front
+
+- Deployment method (App Engine, Cloud Run...)
+- I18N
+- Generic components : Switch, Radio, Dates, Number (v-currency-field)
+
+#### Back
+
+- Allow to choose either Firestore or SQL + use multi cookiecutter.json
+
+#### Both
+
+- CookieCut Dockerfile questions (For both Front & Back, & docker-compose)
