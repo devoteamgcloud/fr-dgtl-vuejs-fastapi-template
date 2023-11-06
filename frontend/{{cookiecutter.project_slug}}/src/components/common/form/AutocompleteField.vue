@@ -8,11 +8,11 @@
     :chips="props.chips"
     class="pa-2"
   >
-    <template #append>
-      <slot
-        v-if="$slots['append']"
-        name="append"
-      />
+    <template
+      v-if="$slots['append']"
+      #append
+    >
+      <slot name="append" />
     </template>
   </v-autocomplete>
 </template>

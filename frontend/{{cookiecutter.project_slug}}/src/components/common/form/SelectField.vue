@@ -29,11 +29,11 @@
       </div>
     </template>
 
-    <template #append>
-      <slot
-        v-if="$slots['append']"
-        name="append"
-      />
+    <template
+      v-if="$slots['append']"
+      #append
+    >
+      <slot name="append" />
     </template>
   </v-select>
 </template>

@@ -3,12 +3,6 @@
     <h2 class="text-center">
       Form & API call exemple
     </h2>
-    <v-img
-      :src="imgSrc"
-      alt="Vue logo"
-      width="200"
-      class="float-right"
-    />
     <!-- Form Example -->
     <FormFields
       :id="1"
@@ -17,6 +11,11 @@
       @submit="showModal = true"
     >
       <template #body>
+        <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
+        <DatePicker
+          v-model="dateExemple"
+          class="float-left mx-6"
+        />
         <!-- TextField example -->
         <TextField
           v-model="usernameExample"
@@ -135,6 +134,39 @@
           clearable
           @file-change="exampleFiles = $event"
         />
+
+        <v-row class="mb-4">
+          <v-col cols="6">
+            <SwitchField
+              v-model="switchExemple"
+              label="Click me !"
+              class="d-flex space-between"
+              @change="switchExemple = $event"
+            >
+              <template
+                v-if="switchExemple"
+                #label
+              >
+                Fake progress
+                <v-progress-circular
+                  indeterminate
+                  color="secondary"
+                  size="24"
+                  class="ms-2"
+                />
+              </template>
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ switchExemple }}{% endraw %}
+                </v-alert>
+              </template>
+            </SwitchField>
+          </v-col>
+          <v-col cols="6" />
+        </v-row>
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
       <template #actions="{ validate, clear }">
@@ -197,9 +229,7 @@
         :title="'Anime: ' + entry.anime"
       >
         <template #body>
-          <div>
-            "{% raw %}{{ entry.quote }}{% endraw %}"
-          </div>
+          <div>"{% raw %}{{ entry.quote }}{% endraw %}"</div>
         </template>
         <template #footer>
           From {% raw %}{{ entry.character }}{% endraw %}
@@ -210,14 +240,15 @@
 </template>
 
 <script setup lang="ts">
-import imgSrc from '@/assets/logo.svg'
 import CardContainer from '@/components/common/CardContainer.vue'
 import AutocompleteField from '@/components/common/form/AutocompleteField.vue'
 import FormFields from '@/components/common/form/FormFields.vue'
 import FileField from '@/components/common/form/FileField.vue'
 import ModalContainer from '@/components/common/ModalContainer.vue'
 import TextField from '@/components/common/form/TextField.vue'
+import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
+import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation'
 import { SnackSettings } from '@/api/config'
 import { ref } from 'vue'
@@ -230,7 +261,9 @@ let loading = ref(false)
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
+let switchExemple = ref(false)
 let selectExemple = ref(null as any)
+let dateExemple = ref(null as any)
 let autocompleteExemple = ref([])
 let exampleFiles = ref([])
 let showModal = ref(false)
@@ -241,14 +274,19 @@ function confirmSubmit() {
 }
 
 async function callTestApi() {
-  let options = new SnackSettings(
-    loading,
-    true,
-    'bottom',
-    {
-      200: 'Custom success message'
-    }
-  )
+  let options = new SnackSettings(loading, true, 'bottom', {
+    200: 'Custom success message'
+  })
   apiResult.value = await wrapper(apis.test.callExemple(), options)
 }
 </script>
+
+<style scoped>
+.v-date-picker {
+  padding: 0 !important;
+}
+.text-info {
+  padding: 5px !important
+}
+
+</style>
