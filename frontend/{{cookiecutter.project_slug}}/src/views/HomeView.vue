@@ -219,22 +219,23 @@
         :height="5"
       />
     </div>
-    <div
-      v-else-if="apiResult.length > 0"
-      class="d-flex justify-content-center flex-wrap"
-    >
-      <CardContainer
-        v-for="entry in apiResult.slice(0, 3)"
-        :key="entry.anime"
-        :title="'Anime: ' + entry.anime"
-      >
-        <template #body>
-          <div>"{% raw %}{{ entry.quote }}{% endraw %}"</div>
-        </template>
-        <template #footer>
-          From {% raw %}{{ entry.character }}{% endraw %}
-        </template>
-      </CardContainer>
+
+    <div v-else-if="apiResult.length > 0" class="mt-8">
+      <hr>
+      <div class="d-flex justify-content-center flex-wrap">
+        <CardContainer
+          v-for="entry in apiResult.slice(0, 3)"
+          :key="entry.anime"
+          :title="'Anime: ' + entry.anime"
+        >
+          <template #body>
+            <div>"{% raw %}{{ entry.quote }}{% endraw %}"</div>
+          </template>
+          <template #footer>
+            From {% raw %}{{ entry.character }}{% endraw %}
+          </template>
+        </CardContainer>
+      </div>
     </div>
   </v-container>
 </template>
@@ -274,10 +275,12 @@ function confirmSubmit() {
 }
 
 async function callTestApi() {
-  let options = new SnackSettings(loading, true, 'bottom', {
-    200: 'Custom success message'
+  const options = new SnackSettings(true, 'bottom', {
+    200: 'Public API called with success',
+    400: 'Error from client',
+    500: 'Error from server'
   })
-  apiResult.value = await wrapper(apis.test.callExemple(), options)
+  apiResult.value = await wrapper(apis.test.callExemple(), loading, options)
 }
 </script>
 

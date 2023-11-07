@@ -1,30 +1,47 @@
+import { Ref } from 'vue'
 import { useStores } from './use-stores'
 import { getReasonPhrase } from 'http-status-codes'
+import { SnackSettings } from '@/api/config'
 
-export async function wrapper(callback, options) {
-  // Manage loading state
-  options.loading.value = true
-  const res = await callback
-  options.loading.value = false
-  // Manage snackbar
-  if (options.popup) {
-    const { snack } = useStores()
-    snack.display({
-      text: getText(res, options),
-      type: getType(res.status),
-      icon: getIcon(res.status),
-      location: options.location || 'bottom'
-    })
+export async function wrapper(callback, loading: Ref<boolean>, options = null) {
+  const { snack } = useStores()
+  if (!options) {
+    options = new SnackSettings(true, 'top right', null)
   }
-  return res.data
+  loading.value = true
+  try {
+    const res = await callback
+    if (options.popup) {
+      const { snack } = useStores()
+      snack.display({
+        text: getText(res, options),
+        type: getType(res.status),
+        icon: getIcon(res.status),
+        location: options.location || 'bottom'
+      })
+    }
+    return res.data
+  } catch (res) {
+    if (options.popup) {
+      snack.display({
+        text: res.message,
+        type: 'error',
+        icon: getIcon(null),
+        location: options.location || 'bottom'
+      })
+      return []
+    }
+  } finally {
+    loading.value = false
+  }
 }
 
 function getText(res, options) {
-  //  Define snackbar text priority:
+  // Define snackbar text priority:
   // 1. Custom Mapping
-  // 2. API message
+  // 2. API 'message' key
   // 3. HTTP status message from http-status-codes
-  if ('mapping' in options && res.status in options.mapping) {
+  if (options.mapping && res.status in options.mapping) {
     return options.mapping[res.status]
   }
   return res.data?.message || `${res.status}: ${getReasonPhrase(res.status)}`

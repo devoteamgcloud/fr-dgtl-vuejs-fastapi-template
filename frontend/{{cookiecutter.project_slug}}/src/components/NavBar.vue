@@ -10,12 +10,11 @@
     </h3>
     <v-app-bar-nav-icon />
     <v-spacer />
-    <v-btn>
+    <v-btn @click="openDocumentation()">
       <v-img
         :src="imgSrc"
         alt="Vue logo"
         width="20"
-        @click="openDocumentation()"
       />
     </v-btn>
    
