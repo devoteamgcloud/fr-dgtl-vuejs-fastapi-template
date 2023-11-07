@@ -3,7 +3,9 @@ import helpers from '@/helpers/form-validation'
 
 test('Test required field', () => {
   expect(helpers.fieldRequired()('')).toBe('Field is required')
+  expect(helpers.fieldRequired()(false)).toBe('Field is required')
   expect(helpers.fieldRequired()('test')).toBe(true)
+  expect(helpers.fieldRequired()(true)).toBe(true)
 })
 
 test('Test minimal length field', () => {

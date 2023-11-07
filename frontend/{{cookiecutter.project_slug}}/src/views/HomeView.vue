@@ -135,38 +135,33 @@
           @file-change="exampleFiles = $event"
         />
 
-        <v-row class="mb-4">
-          <v-col cols="6">
-            <SwitchField
-              v-model="switchExemple"
-              label="Click me !"
-              class="d-flex space-between"
-              @change="switchExemple = $event"
+        <SwitchField
+          v-model="switchExemple"
+          :rules="[formValidation.fieldRequired()]"
+          label="Click me !"
+          @change="switchExemple = $event"
+        >
+          <template
+            v-if="switchExemple"
+            #label
+          >
+            Fake progress
+            <v-progress-circular
+              indeterminate
+              color="secondary"
+              size="24"
+              class="ms-2"
+            />
+          </template>
+          <template #append>
+            <v-alert
+              type="info"
+              variant="tonal"
             >
-              <template
-                v-if="switchExemple"
-                #label
-              >
-                Fake progress
-                <v-progress-circular
-                  indeterminate
-                  color="secondary"
-                  size="24"
-                  class="ms-2"
-                />
-              </template>
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ switchExemple }}{% endraw %}
-                </v-alert>
-              </template>
-            </SwitchField>
-          </v-col>
-          <v-col cols="6" />
-        </v-row>
+              Value: {% raw %}{{ switchExemple }}{% endraw %}
+            </v-alert>
+          </template>
+        </SwitchField>
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
       <template #actions="{ validate, clear }">

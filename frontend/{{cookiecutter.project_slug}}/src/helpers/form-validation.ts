@@ -1,6 +1,6 @@
 export default {
   fieldRequired() {
-    return (value) => !!value && value.length > 0 || 'Field is required'
+    return (value) => !!value || (!!value && value.length > 0) || 'Field is required'
   },
 
   fieldMinLength(size: number) {
