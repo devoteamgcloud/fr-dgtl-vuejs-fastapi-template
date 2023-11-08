@@ -11,157 +11,179 @@
       @submit="showModal = true"
     >
       <template #body>
-        <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
-        <DatePicker
-          v-model="dateExemple"
-          class="float-left mx-6"
-        />
-        <!-- TextField example -->
-        <TextField
-          v-model="usernameExample"
-          :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
-          label="Username"
-          prepend-inner-icon="mdi-account"
-          class="mt-4"
-        >
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
-            >
-              Value: {% raw %}{{ usernameExample }}{% endraw %}
-            </v-alert>
-          </template>
-        </TextField>
-
-        <TextField
-          v-model="emailExemple"
-          :rules="[formValidation.fieldRequired(), formValidation.isEmail()]"
-          label="Email"
-          prepend-inner-icon="mdi-email"
-        >
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
-            >
-              Value: {% raw %}{{ emailExemple }} {% endraw %}
-            </v-alert>
-          </template>
-        </TextField>
-
-        <TextField
-          v-model="passwordExemple"
-          :rules="[formValidation.passwordRules()]"
-          type="password"
-          label="Password"
-          prepend-inner-icon="mdi-lock"
-        >
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
-            >
-              Value: {% raw %}{{ passwordExemple }}{% endraw %}
-            </v-alert>
-          </template>
-        </TextField>
-
-        <!-- SelectField example -->
-        <SelectField
-          v-model="selectExemple"
-          label="Select one state"
-          :rules="[formValidation.fieldRequired()]"
-          :items="[
-            { state: 'Florida', abbr: 'FL' },
-            { state: 'Georgia', abbr: 'GA' },
-            { state: 'Nebraska', abbr: 'NE' },
-            { state: 'California', abbr: 'CA' },
-            { state: 'New York', abbr: 'NY' }
-          ]"
-          item-title="state"
-          item-value="abbr"
-          :multiple="false"
-          :chips="true"
-          closable-chips
-          prepend-inner-icon="mdi-flag"
-          @selection-updated="selectExemple = $event"
-        >
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
-            >
-              Value: {% raw %}{{ selectExemple }}{% endraw %}
-            </v-alert>
-          </template>
-        </SelectField>
-
-        <!-- AutocompleteField example -->
-        <AutocompleteField
-          v-model="autocompleteExemple"
-          label="Select multiple states (autocomplete)"
-          :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
-          :items="[
-            { title: 'Florida', value: 'FL' },
-            { title: 'Georgia', value: 'GA' },
-            { title: 'Nebraska', value: 'NE' },
-            { title: 'California', value: 'CA' },
-            { title: 'New York', value: 'NY' }
-          ]"
-          :multiple="true"
-          :chips="true"
-          closable-chips
-          prepend-inner-icon="mdi-city"
-        >
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
-            >
-              Value:
-              <template v-if="autocompleteExemple.length > 0">
-                {% raw %}{{ autocompleteExemple }}{% endraw %}
-              </template>
-            </v-alert>
-          </template>
-        </AutocompleteField>
-
-        <FileField
-          v-model="exampleFiles"
-          label="Optional field"
-          :multiple="true"
-          clearable
-          @file-change="exampleFiles = $event"
-        />
-
-        <SwitchField
-          v-model="switchExemple"
-          :rules="[formValidation.fieldRequired()]"
-          label="Click me !"
-          @change="switchExemple = $event"
-        >
-          <template
-            v-if="switchExemple"
-            #label
-          >
-            Fake progress
-            <v-progress-circular
-              indeterminate
-              color="secondary"
-              size="24"
-              class="ms-2"
+        <v-row>
+          <v-col cols="4">
+            <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
+            <DatePicker
+              v-model="dateExemple"
+              class="float-left mx-6"
             />
-          </template>
-          <template #append>
-            <v-alert
-              type="info"
-              variant="tonal"
+          </v-col>
+          <v-col cols="8">
+            <!-- CurrencyField example -->
+            <CurrencyField
+              v-model="currencyExemple"
+              :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
+              :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
+              prepend-inner-icon="mdi-currency-eur"
+              class="mt-4"
             >
-              Value: {% raw %}{{ switchExemple }}{% endraw %}
-            </v-alert>
-          </template>
-        </SwitchField>
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ currencyExemple }}{% endraw %}
+                </v-alert>
+              </template>
+            </CurrencyField>
+            <!-- TextField example -->
+            <TextField
+              v-model="usernameExample"
+              :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
+              label="Username"
+              prepend-inner-icon="mdi-account"
+            >
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ usernameExample }}{% endraw %}
+                </v-alert>
+              </template>
+            </TextField>
+
+            <TextField
+              v-model="emailExemple"
+              :rules="[formValidation.fieldRequired(), formValidation.isEmail()]"
+              label="Email"
+              prepend-inner-icon="mdi-email"
+            >
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ emailExemple }} {% endraw %}
+                </v-alert>
+              </template>
+            </TextField>
+
+            <TextField
+              v-model="passwordExemple"
+              :rules="[formValidation.passwordRules()]"
+              type="password"
+              label="Password"
+              prepend-inner-icon="mdi-lock"
+            >
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ passwordExemple }}{% endraw %}
+                </v-alert>
+              </template>
+            </TextField>
+
+            <!-- SelectField example -->
+            <SelectField
+              v-model="selectExemple"
+              label="Select one state"
+              :rules="[formValidation.fieldRequired()]"
+              :items="[
+                { state: 'Florida', abbr: 'FL' },
+                { state: 'Georgia', abbr: 'GA' },
+                { state: 'Nebraska', abbr: 'NE' },
+                { state: 'California', abbr: 'CA' },
+                { state: 'New York', abbr: 'NY' }
+              ]"
+              item-title="state"
+              item-value="abbr"
+              :multiple="false"
+              :chips="true"
+              closable-chips
+              prepend-inner-icon="mdi-flag"
+              @selection-updated="selectExemple = $event"
+            >
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ selectExemple }}{% endraw %}
+                </v-alert>
+              </template>
+            </SelectField>
+
+            <!-- AutocompleteField example -->
+            <AutocompleteField
+              v-model="autocompleteExemple"
+              label="Select multiple states (autocomplete)"
+              :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
+              :items="[
+                { title: 'Florida', value: 'FL' },
+                { title: 'Georgia', value: 'GA' },
+                { title: 'Nebraska', value: 'NE' },
+                { title: 'California', value: 'CA' },
+                { title: 'New York', value: 'NY' }
+              ]"
+              :multiple="true"
+              :chips="true"
+              closable-chips
+              prepend-inner-icon="mdi-city"
+            >
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value:
+                  <template v-if="autocompleteExemple.length > 0">
+                    {% raw %}{{ autocompleteExemple }}{% endraw %}
+                  </template>
+                </v-alert>
+              </template>
+            </AutocompleteField>
+
+            <FileField
+              v-model="exampleFiles"
+              label="Optional field"
+              :multiple="true"
+              clearable
+              @file-change="exampleFiles = $event"
+            />
+
+            <SwitchField
+              v-model="switchExemple"
+              :rules="[formValidation.fieldRequired()]"
+              label="Click me !"
+              @change="switchExemple = $event"
+            >
+              <template
+                v-if="switchExemple"
+                #label
+              >
+                Fake progress
+                <v-progress-circular
+                  indeterminate
+                  color="secondary"
+                  size="24"
+                  class="ms-2"
+                />
+              </template>
+              <template #append>
+                <v-alert
+                  type="info"
+                  variant="tonal"
+                >
+                  Value: {% raw %}{{ switchExemple }}{% endraw %}
+                </v-alert>
+              </template>
+            </SwitchField>
+          </v-col>
+        </v-row>
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
       <template #actions="{ validate, clear }">
@@ -215,7 +237,10 @@
       />
     </div>
 
-    <div v-else-if="apiResult.length > 0" class="mt-8">
+    <div
+      v-else-if="apiResult.length > 0"
+      class="mt-8"
+    >
       <hr>
       <div class="d-flex justify-content-center flex-wrap">
         <CardContainer
@@ -244,6 +269,7 @@ import ModalContainer from '@/components/common/ModalContainer.vue'
 import TextField from '@/components/common/form/TextField.vue'
 import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
+import CurrencyField from '@/components/common/form/CurrencyField.vue'
 import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation'
 import { SnackSettings } from '@/api/config'
@@ -254,12 +280,13 @@ import { wrapper } from '@/composables/use-api-wrapper'
 const apis = useApis()
 let apiResult = ref([] as any[])
 let loading = ref(false)
+let dateExemple = ref(null as any)
+let currencyExemple = ref(0)
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
 let switchExemple = ref(false)
 let selectExemple = ref(null as any)
-let dateExemple = ref(null as any)
 let autocompleteExemple = ref([])
 let exampleFiles = ref([])
 let showModal = ref(false)

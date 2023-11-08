@@ -18,6 +18,20 @@ test('Test maximal length field', () => {
   expect(helpers.fieldMaxLength(5)('Ok')).toBe(true)
 })
 
+test('Test minimal value field', () => {
+  expect(helpers.fieldMinValue(5)(4)).toBe('Minimal value is 5')
+  expect(helpers.fieldMinValue(5)("4,95")).toBe('Minimal value is 5') // CurrencyField returns float string representation
+  expect(helpers.fieldMinValue(5)(5)).toBe(true)
+  expect(helpers.fieldMinValue(5)("5,95")).toBe(true)
+})
+
+test('Test maximal value field', () => {
+  expect(helpers.fieldMaxValue(5)(6)).toBe('Maximal value is 5')
+  expect(helpers.fieldMaxValue(5)("6,95")).toBe('Maximal value is 5')
+  expect(helpers.fieldMaxValue(5)(5)).toBe(true)
+  expect(helpers.fieldMaxValue(5)("4,95")).toBe(true)
+})
+
 test('Test e-mail field', () => {
   expect(helpers.isEmail()('test')).toBe('E-mail must be valid')
   expect(helpers.isEmail()('test@gmail.com')).toBe(true)

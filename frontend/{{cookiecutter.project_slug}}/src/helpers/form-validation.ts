@@ -11,6 +11,24 @@ export default {
     return (value) => value.length <= size || 'Maximal length is ' + size
   },
 
+  fieldMinValue(size: number) {
+    return function asNumber(value) {
+      if (typeof value === 'number') {
+        return value >= size || 'Minimal value is ' + size
+      }
+      return Number.parseFloat(value.replaceAll(',', '.')) >= size || 'Minimal value is ' + size
+    }
+  },
+
+  fieldMaxValue(size: number) {
+    return function asNumber(value) {
+      if (typeof value === 'number') {
+        return value <= size || 'Maximal value is ' + size
+      }
+      return Number.parseFloat(value.replaceAll(',', '.')) <= size || 'Maximal value is ' + size
+    }
+  },
+
   isEmail() {
     return (value) => /.+@.+\..+/.test(value) || 'E-mail must be valid'
   },

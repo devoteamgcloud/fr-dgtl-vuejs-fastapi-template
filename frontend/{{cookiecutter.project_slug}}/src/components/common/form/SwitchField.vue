@@ -3,6 +3,7 @@
     v-model="state"
     :label="label"
     inset
+    class="pa-2"
     @update:model-value="$emit('change', $event)"
   >
     <template

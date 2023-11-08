@@ -75,7 +75,7 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 - Deployment method (App Engine, Cloud Run...)
 - I18N
-- Generic components : Dates (Waiting v3.4.0), Number (v-currency-field)
+- Generic components : Dates (Waiting v3.4.0)
 
 #### Back
 
