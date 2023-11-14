@@ -44,10 +44,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  submitLabel: {
-    type: String,
-    default: 'Submit'
-  },
   clearable: {
     type: Boolean,
     default: false

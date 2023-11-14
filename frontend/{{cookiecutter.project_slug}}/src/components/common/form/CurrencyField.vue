@@ -2,8 +2,8 @@
   <v-text-field 
     ref="inputRef"
     clearable
-    :rules="rules"
-    :label="label"
+    :rules="props.rules"
+    :label="$t(props.label) || label"
     class="pa-2"
   >
     <template
@@ -34,7 +34,7 @@
     label: {
       type: String,
       required: false,
-      default: "Montant",
+      default: "common.currencyField.label",
     },
     icon: {
       type: String,

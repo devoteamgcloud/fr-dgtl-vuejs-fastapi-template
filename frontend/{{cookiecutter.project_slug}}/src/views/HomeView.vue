@@ -1,47 +1,29 @@
 <template>
   <v-container>
     <h2 class="text-center">
-      Form & API call exemple
+      {% raw %}{{ $t('homeView.formTitle') }}{% endraw %}
     </h2>
     <!-- Form Example -->
-    <FormFields
+    <FormField
       :id="1"
       clearable
       custom-actions
       @submit="showModal = true"
     >
       <template #body>
+        <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
+        <!-- <DatePicker
+          v-model="dateExemple"
+          class="float-left mx-6"
+        /> -->
         <v-row>
-          <v-col cols="4">
-            <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
-            <DatePicker
-              v-model="dateExemple"
-              class="float-left mx-6"
-            />
-          </v-col>
-          <v-col cols="8">
-            <!-- CurrencyField example -->
-            <CurrencyField
-              v-model="currencyExemple"
-              :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
-              :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
-              prepend-inner-icon="mdi-currency-eur"
-              class="mt-4"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ currencyExemple }}{% endraw %}
-                </v-alert>
-              </template>
-            </CurrencyField>
+          <v-col cols="6">
             <!-- TextField example -->
             <TextField
               v-model="usernameExample"
               :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
-              label="Username"
+              :label="$t('homeView.usernameField.label')"
+              :placeholder="$t('homeView.usernameField.placeholder')"
               prepend-inner-icon="mdi-account"
             >
               <template #append>
@@ -53,11 +35,13 @@
                 </v-alert>
               </template>
             </TextField>
-
+          </v-col>
+          <v-col cols="6">
             <TextField
               v-model="emailExemple"
               :rules="[formValidation.fieldRequired(), formValidation.isEmail()]"
-              label="Email"
+              :label="$t('common.emailField.label')"
+              :placeholder="$t('common.emailField.placeholder')"
               prepend-inner-icon="mdi-email"
             >
               <template #append>
@@ -69,28 +53,51 @@
                 </v-alert>
               </template>
             </TextField>
-
-            <TextField
-              v-model="passwordExemple"
-              :rules="[formValidation.passwordRules()]"
-              type="password"
-              label="Password"
-              prepend-inner-icon="mdi-lock"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ passwordExemple }}{% endraw %}
-                </v-alert>
-              </template>
-            </TextField>
-
+          </v-col>
+        </v-row>
+        <v-row>
+          <TextField
+            v-model="passwordExemple"
+            :rules="[formValidation.passwordRules()]"
+            type="password"
+            :label="$t('common.passwordField.label')"
+            :placeholder="$t('common.passwordField.placeholder')"
+            prepend-inner-icon="mdi-lock"
+          >
+            <template #append>
+              <v-alert
+                type="info"
+                variant="tonal"
+              >
+                Value: {% raw %}{{ passwordExemple }}{% endraw %}
+              </v-alert>
+            </template>
+          </TextField>
+        </v-row>
+        <v-row>
+          <!-- CurrencyField example -->
+          <CurrencyField
+            v-model="currencyExemple"
+            :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
+            :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
+            prepend-inner-icon="mdi-currency-eur"
+            class="mt-4"
+          >
+            <template #append>
+              <v-alert
+                type="info"
+                variant="tonal"
+              >
+                Value: {% raw %}{{ currencyExemple }}{% endraw %}
+              </v-alert>
+            </template>
+          </CurrencyField>
+        </v-row>
+        <v-row>
+          <v-col cols="6">
             <!-- SelectField example -->
             <SelectField
               v-model="selectExemple"
-              label="Select one state"
               :rules="[formValidation.fieldRequired()]"
               :items="[
                 { state: 'Florida', abbr: 'FL' },
@@ -116,11 +123,11 @@
                 </v-alert>
               </template>
             </SelectField>
-
+          </v-col>
+          <v-col cols="6">
             <!-- AutocompleteField example -->
             <AutocompleteField
               v-model="autocompleteExemple"
-              label="Select multiple states (autocomplete)"
               :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
               :items="[
                 { title: 'Florida', value: 'FL' },
@@ -146,43 +153,43 @@
                 </v-alert>
               </template>
             </AutocompleteField>
-
-            <FileField
-              v-model="exampleFiles"
-              label="Optional field"
-              :multiple="true"
-              clearable
-              @file-change="exampleFiles = $event"
-            />
-
-            <SwitchField
-              v-model="switchExemple"
-              :rules="[formValidation.fieldRequired()]"
-              label="Click me !"
-              @change="switchExemple = $event"
-            >
-              <template
-                v-if="switchExemple"
-                #label
-              >
-                Fake progress
-                <v-progress-circular
-                  indeterminate
-                  color="secondary"
-                  size="24"
-                  class="ms-2"
-                />
-              </template>
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ switchExemple }}{% endraw %}
-                </v-alert>
-              </template>
-            </SwitchField>
           </v-col>
+        </v-row>
+        <v-row>
+          <FileField
+            v-model="exampleFiles"
+            :multiple="true"
+            clearable
+            @file-change="exampleFiles = $event"
+          />
+        </v-row>
+        <v-row>
+          <SwitchField
+            v-model="switchExemple"
+            :rules="[formValidation.fieldRequired()]"
+            @change="switchExemple = $event"
+          >
+            <template
+              v-if="switchExemple"
+              #label
+            >
+              Fake progress
+              <v-progress-circular
+                indeterminate
+                color="secondary"
+                size="24"
+                class="ms-2"
+              />
+            </template>
+            <template #append>
+              <v-alert
+                type="info"
+                variant="tonal"
+              >
+                Value: {% raw %}{{ switchExemple }}{% endraw %}
+              </v-alert>
+            </template>
+          </SwitchField>
         </v-row>
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
@@ -204,16 +211,15 @@
           />
         </div>
       </template>
-    </FormFields>
+    </FormField>
 
     <ModalContainer
       :model-value="showModal"
-      main-title="Confirm?"
       @confirm="confirmSubmit()"
       @close="showModal = false"
     >
       <template #body>
-        This will call a public API, are you sure?
+        {% raw %}{{ $t('homeView.modalBody') }}{% endraw %}
       </template>
       <!-- Replace default actions if needed -->
       <!-- <template #customActions="{ confirm, close }">
@@ -263,14 +269,14 @@
 <script setup lang="ts">
 import CardContainer from '@/components/common/CardContainer.vue'
 import AutocompleteField from '@/components/common/form/AutocompleteField.vue'
-import FormFields from '@/components/common/form/FormFields.vue'
+import FormField from '@/components/common/form/FormField.vue'
 import FileField from '@/components/common/form/FileField.vue'
 import ModalContainer from '@/components/common/ModalContainer.vue'
 import TextField from '@/components/common/form/TextField.vue'
 import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
 import CurrencyField from '@/components/common/form/CurrencyField.vue'
-import DatePicker from '@/components/common/form/DatePicker.vue'
+// import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation'
 import { SnackSettings } from '@/api/config'
 import { ref } from 'vue'
@@ -280,11 +286,12 @@ import { wrapper } from '@/composables/use-api-wrapper'
 const apis = useApis()
 let apiResult = ref([] as any[])
 let loading = ref(false)
-let dateExemple = ref(null as any)
-let currencyExemple = ref(0)
+// let dateExemple = ref(null as any)
+
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
+let currencyExemple = ref(0)
 let switchExemple = ref(false)
 let selectExemple = ref(null as any)
 let autocompleteExemple = ref([])
@@ -313,5 +320,4 @@ async function callTestApi() {
 .text-info {
   padding: 5px !important
 }
-
 </style>

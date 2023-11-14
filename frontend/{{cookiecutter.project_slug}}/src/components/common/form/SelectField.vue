@@ -1,11 +1,11 @@
 <template>
   <v-select
     v-model="selectedItems"
-    :label="label"
+    :label="$t(props.label) || label"
     :items="props.items"
     :item-value="props.itemValue"
     :item-title="props.itemTitle"
-    :multiple="multiple"
+    :multiple="props.multiple"
     :chips="showAsChips"
     class="pa-2"
     @update:model-value="$emit('selectionUpdated', $event)"
@@ -66,7 +66,7 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: 'Select items'
+    default: 'common.selectField.label'
   },
   density: {
     type: String as any,

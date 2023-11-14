@@ -1,8 +1,8 @@
 <template>
   <v-text-field
     :rules="rules"
-    :label="label"
-    :placeholder="placeholder"
+    :label="$t(label) || label"
+    :placeholder="$t(placeholder) || label"
     :density="density"
     clearable
     autocomplete="on"
@@ -25,11 +25,12 @@ defineProps({
   },
   label: {
     type: String,
-    default: 'Label'
+    default: 'common.textField.label'
   },
   placeholder: {
     type: String,
-    default: 'Enter text...'
+    default: 'common.textField.placeholder'
+
   },
   density: {
     type: String as any,

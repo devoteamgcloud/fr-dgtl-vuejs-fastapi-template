@@ -19,6 +19,17 @@ The template is using [ESLint for VueJS](https://eslint.vuejs.org/).
 
 By default, **auto formatting is enabled on save**.
 
+## I18N
+
+To add any new langage:
+
+- Add new languages in JSON format to `i18n` directory
+- Complete 'languages' & 'countries_info' variables in `i18n/index.js`
+
+(see [vue-i18n](https://kazupon.github.io/vue-i18n/) for more documentation)
+
+(see [vue-country-flag-next](https://www.npmjs.com/package/vue-country-flag-next) for country flags)
+
 ## Project Setup
 
 ```sh

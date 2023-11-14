@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    :label="label || 'Autocomplete'"
+    :label="$t(props.label) || label"
     :items="props.items"
     :item-value="props.itemValue"
     :item-title="props.itemTitle"
@@ -21,7 +21,7 @@
 const props = defineProps({
   label: {
     type: String,
-    default: ''
+    default: 'common.autocompleteField.label'
   },
   items: {
     type: Array,

@@ -21,10 +21,10 @@
   "__prompts__": {
     "repository_name": "Empty repository name you want to push to (let empty to refuse):",
     "project_name": "Select your project name:",
-    "project_slug": "Select your project slug",
-    "description": "Add a description to the ReadMe",
-    "maintainer": "Select the main maintainer of the project:",
-    "navbar": "Do you want a navbar? (Dark theme included)",
+    "project_slug": "Select your project slug:",
+    "description": "Add a description to the Readme:",
+    "maintainer": "Add the main maintainer of the project:",
+    "navbar": "Do you want a navbar? (Dark theme & i18n included)",
     "sidebar": "Do you want a sidebar?",
     "footer": "Do you want a footer?"
   }

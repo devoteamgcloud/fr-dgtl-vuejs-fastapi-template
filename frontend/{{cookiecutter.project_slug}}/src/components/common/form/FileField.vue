@@ -1,7 +1,7 @@
 <template>
   <v-file-input
     :accept="accept"
-    :label="label"
+    :label="$t(label) || label"
     :multiple="multiple"
     :rules="rules"
     show-size
@@ -50,7 +50,7 @@
     },
     label: {
       type: String,
-      default: 'Select file'
+      default: 'common.fileField.label'
     },
     multiple: {
       type: Boolean,
