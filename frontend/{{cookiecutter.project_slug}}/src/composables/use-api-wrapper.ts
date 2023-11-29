@@ -1,17 +1,18 @@
 import { Ref } from 'vue'
 import { useStores } from './use-stores'
 import { getReasonPhrase } from 'http-status-codes'
-import { SnackSettings } from '@/api/config'
+import { SnackBar } from '@/api/config'
+import { AxiosResponse } from 'axios'
 
-export async function wrapper(callback, loading: Ref<boolean>, options = null) {
+export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boolean>, options: SnackBar = null) {
   const { snack } = useStores()
   if (!options) {
-    options = new SnackSettings(true, 'top right', null)
+    options = new SnackBar(true, 'top right', null)
   }
   loading.value = true
   try {
     const res = await callback
-    if (options.popup) {
+    if (options.show) {
       const { snack } = useStores()
       snack.display({
         text: getText(res, options),
@@ -22,7 +23,7 @@ export async function wrapper(callback, loading: Ref<boolean>, options = null) {
     }
     return res.data
   } catch (res) {
-    if (options.popup) {
+    if (options.show) {
       snack.display({
         text: res.message,
         type: 'error',
@@ -36,7 +37,7 @@ export async function wrapper(callback, loading: Ref<boolean>, options = null) {
   }
 }
 
-function getText(res, options) {
+function getText(res: AxiosResponse, options: SnackBar) {
   // Define snackbar text priority:
   // 1. Custom Mapping
   // 2. API 'message' key

@@ -10,7 +10,7 @@ export default {
   },
 
   fieldMaxLength(size: number) {
-    return (value) => value.length <= size || i18n.global.t('form.maximalLength', { length: size })
+    return (value) => value.length <= size || i18n.global.t('form.maxLength', { length: size })
   },
 
   fieldMinValue(size: number) {

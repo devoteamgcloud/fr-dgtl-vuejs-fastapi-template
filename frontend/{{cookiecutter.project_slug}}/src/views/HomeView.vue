@@ -219,7 +219,7 @@ import SelectField from '@/components/common/form/SelectField.vue'
 import CurrencyField from '@/components/common/form/CurrencyField.vue'
 import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation'
-import { SnackSettings } from '@/api/config'
+import { SnackBar } from '@/api/config'
 import { ref } from 'vue'
 import { useApis } from '@/composables/use-apis'
 import { wrapper } from '@/composables/use-api-wrapper'
@@ -247,7 +247,7 @@ function confirmSubmit() {
 }
 
 async function callTestApi() {
-  const options = new SnackSettings(true, 'bottom', {
+  const options = new SnackBar(true, 'bottom', {
     200: 'Public API called with success',
     400: 'Error from client',
     500: 'Error from server'
