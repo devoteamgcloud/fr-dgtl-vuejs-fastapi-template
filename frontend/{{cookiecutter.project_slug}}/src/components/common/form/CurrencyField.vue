@@ -4,6 +4,7 @@
     clearable
     :rules="props.rules"
     :label="$t(props.label)"
+    :density="density"
     class="pa-2"
   >
     <template
@@ -45,6 +46,10 @@
       type: Object as () => CurrencyInputOptions,
       required: false,
       default: () => (defaultOptions),
+    },
+    density: {
+      type: String as any,
+      default: 'comfortable'
     }
   })
   

@@ -29,6 +29,9 @@
         "textField": {
             "placeholder": "Entrez votre texte",
             "label": "Texte"
+        },
+        "datePickerField": {
+            "label": "Sélectionnez une date"
         }
     },
     "form": {

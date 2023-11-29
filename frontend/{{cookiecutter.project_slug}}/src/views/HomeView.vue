@@ -14,7 +14,8 @@
         <!-- DatePicker exemple WIP -->
         <DatePicker
           v-model="dateExemple"
-          class="float-left mx-6"
+          :min="date.addDays(new Date(), -10)"
+          :max="date.addDays(new Date(), 10)"
         />
         <v-row>
           <v-col cols="6">
@@ -25,16 +26,7 @@
               label="homeView.usernameField.label"
               placeholder="homeView.usernameField.placeholder"
               prepend-inner-icon="mdi-account"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ usernameExample }}{% endraw %}
-                </v-alert>
-              </template>
-            </TextField>
+            />
           </v-col>
           <v-col cols="6">
             <TextField
@@ -43,55 +35,29 @@
               label="common.emailField.label"
               placeholder="common.emailField.placeholder"
               prepend-inner-icon="mdi-email"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ emailExemple }} {% endraw %}
-                </v-alert>
-              </template>
-            </TextField>
+            />
           </v-col>
         </v-row>
         <v-row>
-          <TextField
-            v-model="passwordExemple"
-            :rules="[formValidation.passwordRules()]"
-            type="password"
-            label="common.passwordField.label"
-            placeholder="common.passwordField.placeholder"
-            prepend-inner-icon="mdi-lock"
-          >
-            <template #append>
-              <v-alert
-                type="info"
-                variant="tonal"
-              >
-                Value: {% raw %}{{ passwordExemple }}{% endraw %}
-              </v-alert>
-            </template>
-          </TextField>
-        </v-row>
-        <v-row>
-          <!-- CurrencyField example -->
-          <CurrencyField
-            v-model="currencyExemple"
-            :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
-            :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
-            prepend-inner-icon="mdi-currency-eur"
-            class="mt-4"
-          >
-            <template #append>
-              <v-alert
-                type="info"
-                variant="tonal"
-              >
-                Value: {% raw %}{{ currencyExemple }}{% endraw %}
-              </v-alert>
-            </template>
-          </CurrencyField>
+          <v-col cols="6">
+            <TextField
+              v-model="passwordExemple"
+              :rules="[formValidation.passwordRules()]"
+              type="password"
+              label="common.passwordField.label"
+              placeholder="common.passwordField.placeholder"
+              prepend-inner-icon="mdi-lock"
+            />
+          </v-col>
+          <v-col cols="6">
+            <!-- CurrencyField example -->
+            <CurrencyField
+              v-model="currencyExemple"
+              :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
+              :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
+              prepend-inner-icon="mdi-currency-eur"
+            />
+          </v-col>
         </v-row>
         <v-row>
           <v-col cols="6">
@@ -113,21 +79,13 @@
               closable-chips
               prepend-inner-icon="mdi-flag"
               @selection-updated="selectExemple = $event"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value: {% raw %}{{ selectExemple }}{% endraw %}
-                </v-alert>
-              </template>
-            </SelectField>
+            />
           </v-col>
           <v-col cols="6">
             <!-- AutocompleteField example -->
             <AutocompleteField
               v-model="autocompleteExemple"
+              label="common.autocompleteField.labelMultiple"
               :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
               :items="[
                 { title: 'Florida', value: 'FL' },
@@ -140,56 +98,39 @@
               :chips="true"
               closable-chips
               prepend-inner-icon="mdi-city"
-            >
-              <template #append>
-                <v-alert
-                  type="info"
-                  variant="tonal"
-                >
-                  Value:
-                  <template v-if="autocompleteExemple.length > 0">
-                    {% raw %}{{ autocompleteExemple }}{% endraw %}
-                  </template>
-                </v-alert>
-              </template>
-            </AutocompleteField>
+            />
           </v-col>
         </v-row>
         <v-row>
-          <FileField
-            v-model="exampleFiles"
-            :multiple="true"
-            clearable
-            @file-change="exampleFiles = $event"
-          />
-        </v-row>
-        <v-row>
-          <SwitchField
-            v-model="switchExemple"
-            :rules="[formValidation.fieldRequired()]"
-            @change="switchExemple = $event"
-          >
-            <template
-              v-if="switchExemple"
-              #label
+          <v-col cols="6">
+            <FileField
+              v-model="exampleFiles"
+              label="common.fileField.labelMultiple"
+              :multiple="true"
+              clearable
+              @file-change="exampleFiles = $event"
+            />
+          </v-col>
+          <v-col cols="6">
+            <SwitchField
+              v-model="switchExemple"
+              :rules="[formValidation.fieldRequired()]"
+              @change="switchExemple = $event"
             >
-              Fake progress
-              <v-progress-circular
-                indeterminate
-                color="secondary"
-                size="24"
-                class="ms-2"
-              />
-            </template>
-            <template #append>
-              <v-alert
-                type="info"
-                variant="tonal"
+              <template
+                v-if="switchExemple"
+                #label
               >
-                Value: {% raw %}{{ switchExemple }}{% endraw %}
-              </v-alert>
-            </template>
-          </SwitchField>
+                Random progress
+                <v-progress-circular
+                  indeterminate
+                  color="secondary"
+                  size="24"
+                  class="ms-2"
+                />
+              </template>
+            </SwitchField>
+          </v-col>
         </v-row>
       </template>
       <!-- Replace default actions when custom-actions props is passed -->
@@ -282,12 +223,14 @@ import { SnackSettings } from '@/api/config'
 import { ref } from 'vue'
 import { useApis } from '@/composables/use-apis'
 import { wrapper } from '@/composables/use-api-wrapper'
+import { useDate } from 'vuetify'
 
 const apis = useApis()
+const date = useDate()
+
 let apiResult = ref([] as any[])
 let loading = ref(false)
-let dateExemple = ref(null as any)
-
+let dateExemple = ref([] as any)
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')

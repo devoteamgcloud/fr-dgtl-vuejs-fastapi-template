@@ -63,13 +63,14 @@
 <script setup lang="ts">
 import imgSrc from '@/assets/logo.svg'
 import { ref } from 'vue'
-import { useTheme } from 'vuetify'
+import { useLocale, useTheme } from 'vuetify'
 import { preferencesStore } from '@/stores/preferences'
 import { onMounted } from 'vue'
 import CountryFlag from 'vue-country-flag-next'
 import { countries_infos } from '@/../i18n/index.js'
 
 const theme = useTheme()
+const { current } = useLocale()
 const prefStore = preferencesStore()
 const showLang = ref(false)
 
@@ -85,7 +86,10 @@ function openDocumentation() {
 function getFlag(lang) {
   return countries_infos.find((item) => item.value === lang).flag
 }
-async function setLang(lang) {
+function setLang(lang) {
+  // Vuetify translation
+  current.value = lang
+  // Custom translation
   prefStore.setLang(lang)
   showLang.value = false
 }

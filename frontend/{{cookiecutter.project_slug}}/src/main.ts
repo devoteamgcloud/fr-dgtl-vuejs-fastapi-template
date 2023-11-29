@@ -7,7 +7,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // I18n
-import { createI18n, useI18n } from 'vue-i18n'
+import { createI18n } from 'vue-i18n'
 import { languages } from '../i18n/index.js'
 import { defaultLocale } from '../i18n/index.js'
 
@@ -19,6 +19,7 @@ import router from './router'
 import { createVuetify, ThemeDefinition } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { en, fr } from 'vuetify/locale'
 // Material design & Font awesome icons
 import '@mdi/font/css/materialdesignicons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -74,6 +75,11 @@ const vuetify = createVuetify({
       fa,
       mdi
     }
+  },
+  locale: {
+    locale: defaultLocale,
+    fallback: "en",
+    messages: {fr, en},
   },
   theme: {
     defaultTheme: 'customDarkTheme',
