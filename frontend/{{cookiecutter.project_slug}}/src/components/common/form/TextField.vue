@@ -1,8 +1,8 @@
 <template>
   <v-text-field
     :rules="rules"
-    :label="$t(label) || label"
-    :placeholder="$t(placeholder) || label"
+    :label="$t(label)"
+    :placeholder="$t(placeholder)"
     :density="density"
     clearable
     autocomplete="on"

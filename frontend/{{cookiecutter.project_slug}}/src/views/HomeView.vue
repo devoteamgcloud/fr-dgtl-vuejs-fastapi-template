@@ -11,19 +11,19 @@
       @submit="showModal = true"
     >
       <template #body>
-        <!-- DatePicker exemple WIP (Waiting v3.4.0) -->
-        <!-- <DatePicker
+        <!-- DatePicker exemple WIP -->
+        <DatePicker
           v-model="dateExemple"
           class="float-left mx-6"
-        /> -->
+        />
         <v-row>
           <v-col cols="6">
             <!-- TextField example -->
             <TextField
               v-model="usernameExample"
               :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
-              :label="$t('homeView.usernameField.label')"
-              :placeholder="$t('homeView.usernameField.placeholder')"
+              label="homeView.usernameField.label"
+              placeholder="homeView.usernameField.placeholder"
               prepend-inner-icon="mdi-account"
             >
               <template #append>
@@ -40,8 +40,8 @@
             <TextField
               v-model="emailExemple"
               :rules="[formValidation.fieldRequired(), formValidation.isEmail()]"
-              :label="$t('common.emailField.label')"
-              :placeholder="$t('common.emailField.placeholder')"
+              label="common.emailField.label"
+              placeholder="common.emailField.placeholder"
               prepend-inner-icon="mdi-email"
             >
               <template #append>
@@ -60,8 +60,8 @@
             v-model="passwordExemple"
             :rules="[formValidation.passwordRules()]"
             type="password"
-            :label="$t('common.passwordField.label')"
-            :placeholder="$t('common.passwordField.placeholder')"
+            label="common.passwordField.label"
+            placeholder="common.passwordField.placeholder"
             prepend-inner-icon="mdi-lock"
           >
             <template #append>
@@ -276,7 +276,7 @@ import TextField from '@/components/common/form/TextField.vue'
 import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
 import CurrencyField from '@/components/common/form/CurrencyField.vue'
-// import DatePicker from '@/components/common/form/DatePicker.vue'
+import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation'
 import { SnackSettings } from '@/api/config'
 import { ref } from 'vue'
@@ -286,7 +286,7 @@ import { wrapper } from '@/composables/use-api-wrapper'
 const apis = useApis()
 let apiResult = ref([] as any[])
 let loading = ref(false)
-// let dateExemple = ref(null as any)
+let dateExemple = ref(null as any)
 
 let usernameExample = ref('')
 let emailExemple = ref('')

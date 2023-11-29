@@ -75,6 +75,7 @@ const showLang = ref(false)
 
 onMounted(() => {
   theme.global.name.value = prefStore.isDark ? 'customDarkTheme' : 'customLightTheme'
+  setLang(prefStore.lang)
 })
 
 function openDocumentation() {
@@ -87,7 +88,6 @@ function getFlag(lang) {
 async function setLang(lang) {
   prefStore.setLang(lang)
   showLang.value = false
-  this.$refs
 }
 
 </script>

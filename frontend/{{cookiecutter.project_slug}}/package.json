@@ -25,7 +25,7 @@
     "vue-currency-input": "^3.0.5",
     "vue-i18n": "^9.6.5",
     "vue-router": "^4.2.2",
-    "vuetify": "^3.3.23"
+    "vuetify": "^3.4.4"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",

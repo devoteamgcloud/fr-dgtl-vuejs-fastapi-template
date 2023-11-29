@@ -1,5 +1,4 @@
 <template>
-  <!-- Waiting for stable version 3.4.0 -->
   <v-date-picker
     v-model="date"
     :min="props.min"
@@ -8,18 +7,16 @@
     show-adjacent-months
     class="pa-2"
   >
-    <!-- <template
+    <template
       v-if="$slots.actions"
       #actions
     >
       <slot name="actions" />
-    </template> -->
+    </template>
   </v-date-picker>
 </template>
 
 <script setup lang="ts">
-import { VDatePicker } from 'vuetify/labs/VDatePicker'
-
 const props = defineProps({
   modelValue: {
     type: Array[Date as any],
@@ -36,7 +33,7 @@ const props = defineProps({
   allowedDates: {
     type: Function as any,
     default: null
-  },
+  }
 })
 
 let date = props.modelValue

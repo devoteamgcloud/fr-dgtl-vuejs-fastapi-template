@@ -1,7 +1,7 @@
 <template>
   <v-file-input
     :accept="accept"
-    :label="$t(label) || label"
+    :label="$t(label)"
     :multiple="multiple"
     :rules="rules"
     show-size

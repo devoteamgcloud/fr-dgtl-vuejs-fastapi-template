@@ -3,7 +3,7 @@
     ref="inputRef"
     clearable
     :rules="props.rules"
-    :label="$t(props.label) || label"
+    :label="$t(props.label)"
     class="pa-2"
   >
     <template

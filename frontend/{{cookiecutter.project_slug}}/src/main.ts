@@ -84,12 +84,7 @@ const vuetify = createVuetify({
   }
 })
 
-const app = createApp(App, {
-  setup() {
-    const { t } = useI18n()
-    return { t }
-  },
-})
+const app = createApp(App)
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

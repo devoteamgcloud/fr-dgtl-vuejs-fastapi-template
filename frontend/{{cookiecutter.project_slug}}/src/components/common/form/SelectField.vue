@@ -1,7 +1,7 @@
 <template>
   <v-select
     v-model="selectedItems"
-    :label="$t(props.label) || label"
+    :label="$t(props.label)"
     :items="props.items"
     :item-value="props.itemValue"
     :item-title="props.itemTitle"
