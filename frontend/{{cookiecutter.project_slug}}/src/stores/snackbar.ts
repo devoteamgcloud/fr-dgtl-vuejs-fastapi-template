@@ -4,7 +4,7 @@ const DEFAULT_TIMEOUT = 3000
 
 export const snackStore = defineStore({
   id: 'snackbar',
-  state: (): any => ({
+  state: () => ({
     displayed: false,
     text: null,
     type: null,

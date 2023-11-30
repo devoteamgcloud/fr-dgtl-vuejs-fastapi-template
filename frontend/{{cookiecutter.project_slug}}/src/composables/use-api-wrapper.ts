@@ -2,7 +2,7 @@ import { Ref } from 'vue'
 import { getReasonPhrase } from 'http-status-codes'
 import { AxiosResponse } from 'axios'
 import { useStores } from '@/composables/use-stores.ts'
-import { SnackBar } from '@/api/config.ts'
+import { SnackBar } from '@/types/api-types.ts'
 
 export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boolean>, options: SnackBar = null) {
   const { snack } = useStores()

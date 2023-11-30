@@ -4,7 +4,7 @@ import { i18n } from '@/main.ts'
 
 export const preferencesStore = defineStore({
   id: 'preferences',
-  state: (): any => ({
+  state: () => ({
     isDark: true,
     lang: defaultLocale,
   }),

@@ -17,9 +17,10 @@
 </template>
   
   <script setup lang="ts">
-  import { watch } from "vue";
+  import { PropType, watch } from "vue";
   import { CurrencyInputOptions, useCurrencyInput } from "vue-currency-input";
-  
+  import { ValidationRules } from "@/types/vuetify-types.ts";
+
   const emit = defineEmits(["update:modelValue"]);
   
   const props = defineProps( {
@@ -29,7 +30,7 @@
       default: 0,
     },
     rules: {
-      type: Array[Function as any],
+      type: Array as PropType<ValidationRules[]>,
       default: () => []
     },
     label: {
@@ -48,7 +49,7 @@
       default: () => (defaultOptions),
     },
     density: {
-      type: String as any,
+      type: String as () => null | 'default' | 'comfortable' | 'compact',
       default: 'comfortable'
     }
   })

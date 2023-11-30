@@ -69,7 +69,7 @@ const props = defineProps({
     default: 'common.selectField.label'
   },
   density: {
-    type: String as any,
+    type: String as () => null | 'default' | 'comfortable' | 'compact',
     default: 'comfortable'
   },
   showAsChips: {

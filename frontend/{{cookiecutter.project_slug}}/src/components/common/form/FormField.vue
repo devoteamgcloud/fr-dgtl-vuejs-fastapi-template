@@ -52,7 +52,7 @@ const props = defineProps({
 
 let refs = ref([])
 
-function refHandler(el: any, i: number) {
+function refHandler(el: unknown, i: number) {
   if (el) {
     refs.value[i] = el
   }

@@ -30,8 +30,9 @@
   </v-file-input>
 </template>
   
-  <script setup lang="ts">
-  import { ref } from 'vue'
+<script setup lang="ts">
+  import { PropType, ref } from 'vue'
+  import { ValidationRules } from "@/types/vuetify-types.ts";
 
   const emit = defineEmits(['fileChange'])
 
@@ -41,7 +42,7 @@
       default: () => []
     },
     rules: {
-      type: Array[Function as any],
+      type: Array as PropType<ValidationRules[]>,
       default: () => []
     },
     accept: {
@@ -64,7 +65,7 @@
     this.files = event
     emit('fileChange', event)
   }
-  </script>
+</script>
   
-  <style scoped></style>
+<style scoped></style>
   

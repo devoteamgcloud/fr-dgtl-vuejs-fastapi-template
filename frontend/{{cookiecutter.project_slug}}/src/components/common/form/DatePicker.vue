@@ -38,8 +38,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { PropType, computed, ref } from 'vue'
 import { useDate } from 'vuetify'
+import { ValidationRules } from "@/types/vuetify-types.ts";
 import { preferencesStore } from '@/stores/preferences.ts'
 
 const date = useDate()
@@ -47,7 +48,7 @@ const prefStore = preferencesStore()
 
 const props = defineProps({
   modelValue: {
-    type: Array<Date> || Date,
+    type: Array<String> || String,
     default: null
   },
   label: {
@@ -67,8 +68,8 @@ const props = defineProps({
     default: null
   },
   rules: {
-    type: Array[Function as any],
-    default: null
+    type: Array as PropType<ValidationRules[]>,
+    default: () => []
   },
   multiple: {
     type: Boolean,
@@ -99,7 +100,7 @@ const dateFormatted = computed({
     }
     // Format multiple dates
     if (innerDate.value) {
-      const tmpArray = innerDate.value.slice(0)
+      const tmpArray = innerDate.value.slice(0) as Array<String>
       tmpArray.sort((a: any, b: any) => {
         return a - b
       })

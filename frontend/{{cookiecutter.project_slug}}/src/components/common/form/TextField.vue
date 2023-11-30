@@ -18,9 +18,12 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from 'vue'
+import { ValidationRules } from "@/types/vuetify-types.ts";
+
 defineProps({
   rules: {
-    type: Array[Function as any],
+    type: Array as PropType<ValidationRules[]>,
     default: () => []
   },
   label: {
@@ -33,7 +36,7 @@ defineProps({
 
   },
   density: {
-    type: String as any,
+    type: String as () => null | 'default' | 'comfortable' | 'compact',
     default: 'comfortable'
   }
 })
