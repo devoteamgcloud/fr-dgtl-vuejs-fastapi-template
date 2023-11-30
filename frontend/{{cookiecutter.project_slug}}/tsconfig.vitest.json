@@ -1,3 +1,4 @@
+// ts-ignore
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],

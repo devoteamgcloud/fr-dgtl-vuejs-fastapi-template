@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import { setActivePinia, createPinia } from 'pinia'
 import { beforeEach, expect, test } from 'vitest'
-import { wrapper } from '@/composables/use-api-wrapper'
-import { useApis } from '@/composables/use-apis'
+import { wrapper } from '@/composables/use-api-wrapper.ts'
+import { useApis } from '@/composables/use-apis.ts'
 
 beforeEach(() => {
     // creates a fresh pinia and makes it active

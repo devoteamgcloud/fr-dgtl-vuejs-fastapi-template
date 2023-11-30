@@ -31,17 +31,18 @@
             "label": "Text"
         },
         "datePickerField": {
-            "label": "Select a date"
+            "label": "Select a date",
+            "labelMultiple": "Select one ou more dates"
         }
     },
     "form": {
         "required": "Field is required",
-        "minimalLength": "Minimal length: {length} characters",
-        "maxLength": "Maximal length: {length} characters",
+        "minimalLength": "Minimal length: {length}",
+        "maximalLength": "Maximal length: {length}",
         "minimalValue": "Minimal value: {value}",
         "maximalValue": "Maximal value: {value}",
         "emailNotValid": "Email is not valid",
-        "passwordRequirements": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one one number"
+        "passwordRequirements": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number"
     },
     "homeView": {
         "formTitle": "Form & API call exemple",

@@ -64,7 +64,7 @@
 import imgSrc from '@/assets/logo.svg'
 import { ref } from 'vue'
 import { useLocale, useTheme } from 'vuetify'
-import { preferencesStore } from '@/stores/preferences'
+import { preferencesStore } from '@/stores/preferences.ts'
 import { onMounted } from 'vue'
 import CountryFlag from 'vue-country-flag-next'
 import { countries_infos } from '@/../i18n/index.js'

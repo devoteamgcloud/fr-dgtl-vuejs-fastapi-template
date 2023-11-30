@@ -1,8 +1,8 @@
 import { Ref } from 'vue'
-import { useStores } from './use-stores'
 import { getReasonPhrase } from 'http-status-codes'
-import { SnackBar } from '@/api/config'
 import { AxiosResponse } from 'axios'
+import { useStores } from '@/composables/use-stores.ts'
+import { SnackBar } from '@/api/config.ts'
 
 export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boolean>, options: SnackBar = null) {
   const { snack } = useStores()
@@ -48,7 +48,7 @@ function getText(res: AxiosResponse, options: SnackBar) {
   return res.data?.message || `${res.status}: ${getReasonPhrase(res.status)}`
 }
 
-function getType(status) {
+function getType(status: number) {
   switch (status) {
     case 200:
     case 201:
@@ -62,7 +62,7 @@ function getType(status) {
   }
 }
 
-function getIcon(status) {
+function getIcon(status: number) {
   switch (status) {
     case 200:
     case 201:

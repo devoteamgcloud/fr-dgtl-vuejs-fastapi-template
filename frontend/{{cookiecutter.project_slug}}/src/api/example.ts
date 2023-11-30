@@ -1,5 +1,5 @@
-import api from '@/helpers/axios-wrapper'
-import { TEST_PREFIX } from './config'
+import api from '@/helpers/axios-wrapper.ts'
+import { TEST_PREFIX } from '@/api/config.ts'
 
 export default {
   baseAuthUrl: `/${TEST_PREFIX}`,

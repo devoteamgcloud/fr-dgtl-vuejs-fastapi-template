@@ -1,11 +1,11 @@
-import { APISettings } from '@/api/config'
+import { APISettings } from '@/api/config.ts'
 import axios from 'axios'
 
 const axiosInstance = axios.create(APISettings)
 
 export default {
   axiosInstance,
-  async get(path: any, params: any, headers = null) {
+  async get(path: string, params: {}, headers: Headers = null) {
     const config = {
       method: 'GET',
       url: `${path}`,
@@ -16,28 +16,28 @@ export default {
     }
     return await axiosInstance(config)
   },
-  async post(path: any, payload: any) {
+  async post(path: string, payload: {}) {
     return await axiosInstance({
       method: 'POST',
       url: `${path}`,
       data: payload
     })
   },
-  async patch(path: any, payload: any, headers = {}) {
+  async patch(path: string, payload: {}, headers: Headers = null) {
     const config = { method: 'PATCH', url: `${path}`, data: payload }
-    if (Object.keys(headers).length > 0) {
+    if (headers) {
       config['headers'] = headers
     }
     return await axiosInstance(config)
   },
-  async put(path: any, payload: any, headers = {}) {
+  async put(path: string, payload: {}, headers: Headers = null) {
     const config = { method: 'PUT', url: `${path}`, data: payload }
-    if (Object.keys(headers).length > 0) {
+    if (headers) {
       config['headers'] = headers
     }
     return await axiosInstance(config)
   },
-  async delete(path: any) {
+  async delete(path: string) {
     return await axiosInstance({
       method: 'DELETE',
       url: `${path}`

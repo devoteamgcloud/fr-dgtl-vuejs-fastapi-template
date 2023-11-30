@@ -1,5 +1,5 @@
-import router from '@/router'
-import axiosInstance from '@/helpers/axios-wrapper'
+import router from '@/router/index.ts'
+import axiosInstance from '@/helpers/axios-wrapper.ts'
 
 const interceptor = () => {
   router.beforeEach((to, from, next) => {

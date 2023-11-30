@@ -31,17 +31,18 @@
             "label": "Texte"
         },
         "datePickerField": {
-            "label": "Sélectionnez une date"
+            "label": "Sélectionnez une date",
+            "labelMultiple": "Sélectionnez une ou plusieurs dates"
         }
     },
     "form": {
         "required": "Ce champ est obligatoire",
-        "minimalLength": "Taille minimale: {length} caractères",
-        "maxLength": "Taille maximale: {length} caractères",
+        "minimalLength": "Taille minimale: {length}",
+        "maximalLength": "Taille maximale: {length}",
         "minimalValue": "Valeur minimale: {value}",
         "maximalValue": "Valeur maximale: {value}",
         "emailNotValid": "Ce champ doit être un email valide",
-        "passwordRequirements": "Ce champ doit contenir au moins 8 caractères, une majuscule, une minuscule, et un un chiffre"
+        "passwordRequirements": "Ce champ doit contenir au moins 8 caractères, une majuscule, une minuscule, et un chiffre"
     },
     "homeView": {
         "formTitle": "Exemple de formulaire & appel API",

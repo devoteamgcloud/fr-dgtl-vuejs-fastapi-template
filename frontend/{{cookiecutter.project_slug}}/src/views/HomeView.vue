@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h2 class="text-center">
+    <h2 class="text-center pb-4">
       {% raw %}{{ $t('homeView.formTitle') }}{% endraw %}
     </h2>
     <!-- Form Example -->
@@ -11,12 +11,32 @@
       @submit="showModal = true"
     >
       <template #body>
-        <!-- DatePicker exemple WIP -->
-        <DatePicker
-          v-model="dateExemple"
-          :min="date.addDays(new Date(), -10)"
-          :max="date.addDays(new Date(), 10)"
-        />
+        <v-row>
+          <!-- DatePicker exemple WIP -->
+          <v-col cols="6">
+            <DatePicker
+              v-model="dateExemple"
+              :rules="[formValidation.fieldRequired()]"
+              :allowed-dates="[
+                date.addDays(new Date(), -3),
+                date.addDays(new Date(), -1),
+                date.addDays(new Date(), 1),
+                date.addDays(new Date(), 3),
+              ]"
+              show-as-text
+            />
+          </v-col>
+          <v-col cols="6">
+            <DatePicker
+              v-model="dateMultipleExemple"
+              label="common.datePickerField.labelMultiple"
+              :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
+              :multiple="true"
+              :min="date.addDays(new Date(), -10)"
+              :max="date.addDays(new Date(), 10)"
+            />
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="6">
             <!-- TextField example -->
@@ -218,11 +238,11 @@ import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
 import CurrencyField from '@/components/common/form/CurrencyField.vue'
 import DatePicker from '@/components/common/form/DatePicker.vue'
-import formValidation from '@/helpers/form-validation'
-import { SnackBar } from '@/api/config'
+import formValidation from '@/helpers/form-validation.ts'
+import { SnackBar } from '@/api/config.ts'
 import { ref } from 'vue'
-import { useApis } from '@/composables/use-apis'
-import { wrapper } from '@/composables/use-api-wrapper'
+import { useApis } from '@/composables/use-apis.ts'
+import { wrapper } from '@/composables/use-api-wrapper.ts'
 import { useDate } from 'vuetify'
 
 const apis = useApis()
@@ -230,7 +250,8 @@ const date = useDate()
 
 let apiResult = ref([] as any[])
 let loading = ref(false)
-let dateExemple = ref([] as any)
+let dateExemple = ref(null as any)
+let dateMultipleExemple = ref([] as any)
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
