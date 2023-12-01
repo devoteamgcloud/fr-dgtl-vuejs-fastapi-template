@@ -3,7 +3,7 @@ import './assets/main.css'
 
 // Pinia
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createPinia, PiniaPlugin } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // I18n
@@ -13,7 +13,7 @@ import { defaultLocale } from '../i18n/index.js'
 
 // Global components
 import App from './App.vue'
-import router from './router'
+import router from '@/router/index.ts'
 
 // Vuetify
 import { createVuetify, ThemeDefinition } from 'vuetify'
@@ -79,7 +79,7 @@ const vuetify = createVuetify({
   locale: {
     locale: defaultLocale,
     fallback: "en",
-    messages: {fr, en},
+    messages: { fr, en },
   },
   theme: {
     defaultTheme: 'customDarkTheme',
@@ -93,7 +93,7 @@ const vuetify = createVuetify({
 const app = createApp(App)
 
 const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
+pinia.use(piniaPluginPersistedstate as unknown as PiniaPlugin)
 
 app.use(pinia)
 app.use(router)

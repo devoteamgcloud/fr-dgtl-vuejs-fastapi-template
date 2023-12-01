@@ -18,7 +18,7 @@
     </template>
     <v-date-picker
       v-model="innerDate"
-      :locale="prefStore.locale"
+      :locale="prefStore.lang"
       :color="props.color"
       :min="props.min"
       :max="props.max"

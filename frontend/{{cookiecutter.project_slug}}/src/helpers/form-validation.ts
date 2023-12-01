@@ -2,6 +2,7 @@ import { i18n } from '@/main.ts'
 
 export default {
   fieldRequired() {
+    // @ts-ignore
     return (value: String | Array<unknown>) => !!value || (!!value && value.length > 0) || i18n.global.t('form.required')
   },
 
@@ -18,6 +19,7 @@ export default {
       if (typeof value === 'number') {
         return value >= size || i18n.global.t('form.minimalValue', { value: size })
       }
+      // @ts-ignore
       return Number.parseFloat(value.replaceAll(',', '.')) >= size || i18n.global.t('form.minimalValue', { value: size })
     }
   },
@@ -27,6 +29,7 @@ export default {
       if (typeof value === 'number') {
         return value <= size || i18n.global.t('form.maximalValue', { value: size })
       }
+      // @ts-ignore
       return Number.parseFloat(value.replaceAll(',', '.')) <= size || i18n.global.t('form.maximalValue', { value: size })
     }
   },

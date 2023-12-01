@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { Anchor } from '@/types/vuetify-types.ts'
 
 const DEFAULT_TIMEOUT = 3000
 
@@ -9,7 +10,7 @@ export const snackStore = defineStore({
     text: null,
     type: null,
     timeout: DEFAULT_TIMEOUT,
-    location: 'bottom',
+    location: 'bottom' as Anchor,
     icon: null,
     closable: true
   }),

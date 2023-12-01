@@ -1,5 +1,5 @@
 #{% raw %}
-name: Lint & Unit Tests
+name: Lint & Type Check & Unit Tests
 
 on:
   pull_request:
@@ -23,5 +23,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install --save-dev
       - run: npm run lint
+      - run: npm run typecheck
       - run: npm run test:unit
 #{% endraw %}
