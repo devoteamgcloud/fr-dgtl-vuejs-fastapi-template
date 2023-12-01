@@ -6,5 +6,4 @@ export const APISettings = {
   }
 }
 
-
 export const TEST_PREFIX = 'quotes'

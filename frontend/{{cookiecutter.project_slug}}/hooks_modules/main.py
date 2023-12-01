@@ -15,6 +15,7 @@ def checkSidebarOption():
     if path and os.path.exists(path):
         os.unlink(path)
         utils.removeReferenceFromProject("NavigationDrawer")
+        utils.removeFunctionFromProject(os.path.abspath("src/App.vue"), "adaptMargin")
 
 
 def checkNavBarOption():
