@@ -10,8 +10,8 @@ def checkSidebarOption():
     Remove Sidebar from the project if not selected
     """
     # Remove Sidebar from the project if not selected
-    pathToRemove = "{% if not cookiecutter.sidebar %} src/components/NavigationDrawer.vue {% endif %}"
-    path = pathToRemove.strip()
+    path_to_remove = "{% if not cookiecutter.sidebar %} src/components/NavigationDrawer.vue {% endif %}"
+    path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
         utils.removeReferenceFromProject("NavigationDrawer")
@@ -23,10 +23,10 @@ def checkNavBarOption():
     Remove Navbar from the project if not selected
     """
     # Remove Navbar from the project if not selected
-    pathToRemove = (
+    path_to_remove = (
         "{% if not cookiecutter.navbar %} src/components/NavBar.vue {% endif %}"
     )
-    path = pathToRemove.strip()
+    path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
         utils.removeReferenceFromProject("NavBar")
@@ -37,10 +37,10 @@ def checkBottomNavOption():
     Remove BottomNav from the project if not selected
     """
     # Remove BottomNav from the project if not selected
-    pathToRemove = (
+    path_to_remove = (
         "{% if not cookiecutter.footer %} src/components/BottomNav.vue {% endif %}"
     )
-    path = pathToRemove.strip()
+    path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
         utils.removeReferenceFromProject("BottomNav")
@@ -74,3 +74,16 @@ def checkRepositoryNameOption(repo_name):
 
     g.push("-u", "origin", "--all")
     print(f"Pushed to remote repository: https://github.com/{repo_name}")
+
+
+def checkAsContainerOption():
+    """
+    Check if as_container is empty,
+    if not init & fill empty git repo
+    """
+    as_container = "{% if cookiecutter.as_container %}y{% endif %}"
+    if not as_container:
+        print("Removing docker requirements...")
+        os.remove("Dockerfile.dev")
+        os.remove("Dockerfile.prod")
+        os.remove("nginx.conf")

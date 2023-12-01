@@ -18,6 +18,7 @@
   "navbar": true,
   "sidebar": true,
   "footer": true,
+  "as_container": false,
   "__prompts__": {
     "repository_name": "Empty repository name you want to push to (let empty to refuse):",
     "project_name": "Select your project name:",
@@ -26,6 +27,7 @@
     "maintainer": "Add the main maintainer of the project:",
     "navbar": "Do you want a navbar? (Dark theme & i18n included)",
     "sidebar": "Do you want a sidebar?",
-    "footer": "Do you want a footer?"
+    "footer": "Do you want a footer?",
+    "as_container": "Do you want to deploy the template in a container ?"
   }
 }

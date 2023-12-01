@@ -32,14 +32,23 @@ To add any new langage:
 
 ## Project Setup
 
+### Locally
+
 ```sh
 npm install
+npm run dev
 ```
 
-### Compile and Hot-Reload for Development
+### With Docker
 
 ```sh
-npm run dev
+# Dev server (vite)
+docker build -t <image>:<tag> -f Dockerfile.dev .
+docker run -p 5173:5173 <image>:<tag>
+
+# Prod server (nginx)
+docker build -t <image>:<tag> -f Dockerfile.prod .
+docker run -p <host_port>:8080 <image>:<tag>  # Port forward to nginx
 ```
 
 ### Maintainers

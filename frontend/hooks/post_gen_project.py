@@ -37,6 +37,9 @@ if __name__ == "__main__":
             print("Pushing template to {{ cookiecutter.repository_name }}...")
             main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
 
+        if "{{ cookiecutter.as_container }}" == "False":
+            main.checkAsContainerOption()
+
         print("\nDone ! 🎉")
         print(
             "Project is ready to be used in folder './{{ cookiecutter.project_slug }}'"
