@@ -13,7 +13,35 @@ from hooks_modules import main
 
 
 if __name__ == "__main__":
-    main.checkSidebarOption()
-    main.checkNavBarOption()
-    main.checkBottomNavOption()
-    main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
+    print("\nRunning post generation hooks...\n")
+    try:
+        if "{{ cookiecutter.sidebar }}" == "True":
+            print("Integrating Sidebar...")
+        else:
+            print("Skipping Sidebar...")
+        main.checkSidebarOption()
+
+        if "{{ cookiecutter.navbar }}" == "True":
+            print("Integrating Navbar...")
+        else:
+            print("Skipping Navbar...")
+        main.checkNavBarOption()
+
+        if "{{ cookiecutter.footer }}" == "True":
+            print("Integrating Footer...")
+        else:
+            print("Skipping Footer...")
+        main.checkBottomNavOption()
+
+        if "{{ cookiecutter.repository_name}}":
+            print("Pushing template to {{ cookiecutter.repository_name }}...")
+            main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
+
+        print("\nDone ! 🎉")
+        print(
+            "Project is ready to be used in folder './{{ cookiecutter.project_slug }}'"
+        )
+        print("Check the README.md for more information about how to use the project")
+    except Exception as e:
+        print(e)
+        sys.exit(1)

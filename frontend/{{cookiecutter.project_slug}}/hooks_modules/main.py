@@ -72,3 +72,4 @@ def checkRepositoryNameOption(repo_name):
     g.config("init.defaultBranch", "develop")
 
     g.push("-u", "origin", "--all")
+    print(f"Pushed to remote repository: https://github.com/{repo_name}")
