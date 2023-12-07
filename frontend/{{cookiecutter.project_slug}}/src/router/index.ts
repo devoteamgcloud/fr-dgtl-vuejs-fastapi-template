@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import FormView from '@/views/FormView.vue'
+import TableView from '@/views/TableView.vue'
 import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
@@ -7,9 +8,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'form',
       meta: { requiresAuth: false },
-      component: HomeView
+      component: FormView
+    },
+    {
+      path: '/table',
+      name: 'table',
+      meta: { requiresAuth: false },
+      component: TableView
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
   ]

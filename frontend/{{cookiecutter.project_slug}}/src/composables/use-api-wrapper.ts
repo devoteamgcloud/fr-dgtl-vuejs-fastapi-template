@@ -18,7 +18,7 @@ export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boo
         text: getText(res, options),
         type: getType(res.status),
         icon: getIcon(res.status),
-        location: options.location || 'bottom'
+        location: options.location
       })
     }
     return res.data
@@ -28,10 +28,10 @@ export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boo
         text: res.message,
         type: 'error',
         icon: getIcon(null),
-        location: options.location || 'bottom'
+        location: options.location
       })
-      return []
     }
+    return []
   } finally {
     loading.value = false
   }

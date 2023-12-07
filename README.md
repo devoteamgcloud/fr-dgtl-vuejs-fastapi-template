@@ -47,11 +47,11 @@ Ensure you have corrects  **SSH rights & access**
 
 - **'maintainer'** has an informativ goal (not used in the template)
 
-- **'navbar'** allow you to choose if you want an existing navbar on first run.
+- **'navbar'** integrate a navbar with i18n support, and a dark mode switch.
 
-- **'sidebar'** allow you to choose if you want an existing left sidebar on first run.
+- **'sidebar'** integrate a left sidebar with navigation.
 
-- **'footer'** allow you to choose if you want an existing footer on first run.
+- **'footer'** integrate a footer.
 
 - **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
 
@@ -73,15 +73,7 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 ### TODO
 
-#### Front
-
-- Add another tab/page for routing example
-- Generic components : Tables
-
 #### Back
 
 - Allow to choose either Firestore or SQL + use multi cookiecutter.json
-
-#### Both
-
-- CookieCut Dockerfile questions (For both Front & Back, & docker-compose)
+- CookieCut Dockerfile questions & Cloud Run deploy

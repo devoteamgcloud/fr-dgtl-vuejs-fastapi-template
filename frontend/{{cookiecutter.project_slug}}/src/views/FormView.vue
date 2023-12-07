@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <h2 class="text-center pb-4">
-      {% raw %}{{ $t('homeView.formTitle') }}{% endraw %}
+      {% raw %}{{ $t('formView.formTitle') }}{% endraw %}
     </h2>
     <!-- Form Example -->
     <FormField
@@ -43,8 +43,8 @@
             <TextField
               v-model="usernameExample"
               :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
-              label="homeView.usernameField.label"
-              placeholder="homeView.usernameField.placeholder"
+              label="formView.usernameField.label"
+              placeholder="formView.usernameField.placeholder"
               prepend-inner-icon="mdi-account"
             />
           </v-col>
@@ -180,7 +180,7 @@
       @close="showModal = false"
     >
       <template #body>
-        {% raw %}{{ $t('homeView.modalBody') }}{% endraw %}
+        {% raw %}{{ $t('formView.modalBody') }}{% endraw %}
       </template>
       <!-- Replace default actions if needed -->
       <!-- <template #customActions="{ confirm, close }">

@@ -44,7 +44,7 @@
         "emailNotValid": "Ce champ doit être un email valide",
         "passwordRequirements": "Ce champ doit contenir au moins 8 caractères, une majuscule, une minuscule, et un chiffre"
     },
-    "homeView": {
+    "formView": {
         "formTitle": "Exemple de formulaire & appel API",
         "usernameField": {
             "label": "Nom d'utilisateur",
