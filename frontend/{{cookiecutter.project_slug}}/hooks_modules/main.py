@@ -87,3 +87,5 @@ def checkAsContainerOption():
         os.remove("Dockerfile.dev")
         os.remove("Dockerfile.prod")
         os.remove("nginx.conf")
+        os.remove(".dockerignore")
+        shutil.rmtree(".cloudbuild")

@@ -32,16 +32,16 @@ To add any new langage:
 
 ## Project Setup
 
-### Locally
+### Run locally
 
 ```sh
+# WITHOUT DOCKER
 npm install
 npm run dev
-```
 
-### With Docker
+# OR 
 
-```sh
+# WITH DOCKER
 # Dev server (vite)
 docker build -t <image>:<tag> -f Dockerfile.dev .
 docker run -p 5173:5173 <image>:<tag>
@@ -49,7 +49,38 @@ docker run -p 5173:5173 <image>:<tag>
 # Prod server (nginx)
 docker build -t <image>:<tag> -f Dockerfile.prod .
 docker run -p <host_port>:8080 <image>:<tag>  # Port forward to nginx
+
 ```
+
+## CI/CD
+
+### CI with Github Actions
+
+Use .github/workflows/lint.yaml by enabling Github Actions API in your repository
+
+This will run linting for every Pull Request on develop, uat and master branches
+
+### CD with Cloud Build & Cloud Run
+
+.cloudbuild/cloudbuild.yaml is used automatically to deploy to Cloud Run according to your Cloud Build trigger configuration
+
+*Requirements*:
+
+APIs enabled:
+
+- Cloud Build API
+- Cloud Run API
+- Secret Manager API
+
+Roles:
+
+- Cloud Build Service Account has Cloud Run Admin role
+- Cloud Build Service Account has Secret Manager Secret Accessor role
+
+Other:
+
+- Cloud Build trigger created for the repository
+- Secret Manager secret created with same name as the project_slug you specified
 
 ### Maintainers
 

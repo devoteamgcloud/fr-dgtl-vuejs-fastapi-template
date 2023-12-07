@@ -53,7 +53,9 @@ Ensure you have corrects  **SSH rights & access**
 
 - **'footer'** allow you to choose if you want an existing footer on first run.
 
-### ### Generate Backend Project (WIP)
+- **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
+
+### Generate Backend Project (WIP)
 
 Use this repository to generate a FastApi template project
 
@@ -73,7 +75,7 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 #### Front
 
-- Deployment method (App Engine, Cloud Run...)
+- Add another tab/page for routing example
 - Generic components : Tables
 
 #### Back

@@ -1,7 +1,7 @@
 {
   "repository_name": "",
   "project_name": "VueJS template",
-  "project_slug": "{{cookiecutter.project_name.lower().replace(' ', '_')}}",
+  "project_slug": "{{cookiecutter.project_name.lower().replace(' ', '-')}}",
   "description": "Short description",
   "maintainer": [
     "Digital Lab",
@@ -18,9 +18,9 @@
   "navbar": true,
   "sidebar": true,
   "footer": true,
-  "as_container": false,
+  "as_container": true,
   "__prompts__": {
-    "repository_name": "Empty repository name you want to push to (let empty to refuse):",
+    "repository_name": "Empty repository name you want to push to (let empty to refuse or use format <github_username>/<repo_name>):",
     "project_name": "Select your project name:",
     "project_slug": "Select your project slug:",
     "description": "Add a description to the Readme:",
@@ -28,6 +28,6 @@
     "navbar": "Do you want a navbar? (Dark theme & i18n included)",
     "sidebar": "Do you want a sidebar?",
     "footer": "Do you want a footer?",
-    "as_container": "Do you want to deploy the template in a container ?"
+    "as_container": "Use Docker configuration (Local containers & Cloud Run auto-deploy) ?"
   }
 }
