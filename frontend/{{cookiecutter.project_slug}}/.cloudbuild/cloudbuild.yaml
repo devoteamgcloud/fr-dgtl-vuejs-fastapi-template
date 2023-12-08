@@ -41,7 +41,7 @@ images:
 
 substitutions:
   _REPO: cookiecutter-template
-  _SERVICE: "{{ cookiecutter.project_slug }}"
+  _SERVICE: "{{ cookiecutter.project_slug.replace('_', '-') }}"
 
 options:
   logging: CLOUD_LOGGING_ONLY
