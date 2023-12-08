@@ -1,10 +1,10 @@
-import api from '@/helpers/axios'
-import { TEST_PREFIX } from './config'
+import api from '@/helpers/axios-wrapper.ts'
+import { TEST_PREFIX } from '@/api/config.ts'
 
 export default {
   baseAuthUrl: `/${TEST_PREFIX}`,
   async callExemple() {
-    return await api.get(`${this.baseAuthUrl}`, {})
+    return await api.get(`${this.baseAuthUrl}`, { "cors": "no" })
   }
   // async functionExemple2() {
   //   return await api.post(`${this.baseAuthUrl}/<route_name>`, {})

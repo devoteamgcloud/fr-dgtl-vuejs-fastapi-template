@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "../"
+    },
+    {
+      "name": "frontend_config",
+      "path": "../frontend"
+    },
+    {
+      "name": "frontend",
+      "path": "../frontend/{{cookiecutter.project_slug}}"
+    },
+    {
+      "name": "backend",
+      "path": "../backend"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "node_modules/": true,
+      ".nuxt/": true,
+      ".venv/": true,
+      ".mypy_cache/": true,
+      ".pytest_cache/": true,
+      ".pgdata/": true,
+      "frontend/": true,
+      "backend/": true
+    }
+  }
+}

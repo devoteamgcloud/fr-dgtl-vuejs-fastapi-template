@@ -1,11 +1,11 @@
 <template>
   <v-select
     v-model="selectedItems"
-    :label="label"
+    :label="$t(props.label)"
     :items="props.items"
     :item-value="props.itemValue"
     :item-title="props.itemTitle"
-    :multiple="multiple"
+    :multiple="props.multiple"
     :chips="showAsChips"
     class="pa-2"
     @update:model-value="$emit('selectionUpdated', $event)"
@@ -29,11 +29,11 @@
       </div>
     </template>
 
-    <template #append>
-      <slot
-        v-if="$slots['append']"
-        name="append"
-      />
+    <template
+      v-if="$slots['append']"
+      #append
+    >
+      <slot name="append" />
     </template>
   </v-select>
 </template>
@@ -66,10 +66,10 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: 'Select items'
+    default: 'common.selectField.label'
   },
   density: {
-    type: String as any,
+    type: String as () => null | 'default' | 'comfortable' | 'compact',
     default: 'comfortable'
   },
   showAsChips: {

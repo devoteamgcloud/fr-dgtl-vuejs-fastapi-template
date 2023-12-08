@@ -27,3 +27,18 @@ def removeReferenceFromProject(pattern):
                                 f_content.decode("utf-8", errors="ignore"),
                             )
                         )
+
+
+def removeFunctionFromProject(file_path, function_name):
+    """Remove a simple function from its name (only with a single '}')"""
+    with open(file_path, "r") as f:
+        f_content = f.read()
+        modified_content = re.sub(
+            f"function {function_name}[\\S\\s]*?}}\n",
+            "",
+            f_content,
+            flags=re.DOTALL,
+        )
+
+    with open(file_path, "w") as f:
+        f.write(modified_content)

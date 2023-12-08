@@ -1,36 +1,54 @@
-import { useStores } from './use-stores'
+import { Ref } from 'vue'
 import { getReasonPhrase } from 'http-status-codes'
+import { AxiosResponse } from 'axios'
+import { useStores } from '@/composables/use-stores.ts'
+import { SnackBar } from '@/types/api-types.ts'
 
-export async function wrapper(callback, options) {
-  // Manage loading state
-  options.loading.value = true
-  const res = await callback
-  options.loading.value = false
-  // Manage snackbar
-  if (options.popup) {
-    const { snack } = useStores()
-    snack.display({
-      text: getText(res, options),
-      type: getType(res.status),
-      icon: getIcon(res.status),
-      location: options.location || 'bottom'
-    })
+export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boolean>, options: SnackBar = null) {
+  const { snack } = useStores()
+  if (!options) {
+    options = new SnackBar(true, 'top right', null)
   }
-  return res.data
+  loading.value = true
+  try {
+    const res = await callback
+    if (options.show) {
+      const { snack } = useStores()
+      snack.display({
+        text: getText(res, options),
+        type: getType(res.status),
+        icon: getIcon(res.status),
+        location: options.location
+      })
+    }
+    return res.data
+  } catch (res) {
+    if (options.show) {
+      snack.display({
+        text: res.message,
+        type: 'error',
+        icon: getIcon(null),
+        location: options.location
+      })
+    }
+    return []
+  } finally {
+    loading.value = false
+  }
 }
 
-function getText(res, options) {
-  //  Define snackbar text priority:
+function getText(res: AxiosResponse, options: SnackBar) {
+  // Define snackbar text priority:
   // 1. Custom Mapping
-  // 2. API message
+  // 2. API 'message' key
   // 3. HTTP status message from http-status-codes
-  if ('mapping' in options && res.status in options.mapping) {
+  if (options.mapping && res.status in options.mapping) {
     return options.mapping[res.status]
   }
   return res.data?.message || `${res.status}: ${getReasonPhrase(res.status)}`
 }
 
-function getType(status) {
+function getType(status: number) {
   switch (status) {
     case 200:
     case 201:
@@ -44,7 +62,7 @@ function getType(status) {
   }
 }
 
-function getIcon(status) {
+function getIcon(status: number) {
   switch (status) {
     case 200:
     case 201:

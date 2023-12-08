@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    :label="label || 'Autocomplete'"
+    :label="$t(props.label)"
     :items="props.items"
     :item-value="props.itemValue"
     :item-title="props.itemTitle"
@@ -8,11 +8,11 @@
     :chips="props.chips"
     class="pa-2"
   >
-    <template #append>
-      <slot
-        v-if="$slots['append']"
-        name="append"
-      />
+    <template
+      v-if="$slots['append']"
+      #append
+    >
+      <slot name="append" />
     </template>
   </v-autocomplete>
 </template>
@@ -21,7 +21,7 @@
 const props = defineProps({
   label: {
     type: String,
-    default: ''
+    default: 'common.autocompleteField.label'
   },
   items: {
     type: Array,

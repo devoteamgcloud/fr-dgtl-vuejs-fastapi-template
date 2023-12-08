@@ -1,4 +1,4 @@
-import test from '@/api/test'
+import test from '@/api/example.ts'
 
 export function useApis() {
   return {

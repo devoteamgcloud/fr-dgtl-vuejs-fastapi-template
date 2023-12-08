@@ -5,7 +5,7 @@
       width="auto"
     >
       <CardContainer
-        :title="mainTitle"
+        :title="$t(mainTitle) || mainTitle"
         class="text-center"
       >
         <template #body>
@@ -54,7 +54,7 @@
     },
     mainTitle: {
       type: String,
-      default: 'Modal title'
+      default: 'common.modalContainer.title'
     }
   })
   

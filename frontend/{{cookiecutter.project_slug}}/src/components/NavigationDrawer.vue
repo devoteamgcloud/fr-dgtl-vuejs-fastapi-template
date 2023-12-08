@@ -20,9 +20,15 @@
     >
       <v-list-item
         to="/"
-        prepend-icon="mdi-home-city"
-        title="Home"
-        value="home"
+        prepend-icon="mdi-list-box-outline"
+        title="Form"
+        value="form"
+      />
+      <v-list-item
+        to="/table"
+        prepend-icon="mdi-table"
+        title="Table"
+        value="table"
       />
     </v-list>
   </v-navigation-drawer>

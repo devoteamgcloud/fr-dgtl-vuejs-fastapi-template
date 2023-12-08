@@ -27,6 +27,6 @@
 </template>
 
 <script setup lang="ts">
-import { snackStore } from '@/stores/snackbar'
+import { snackStore } from '@/stores/snackbar.ts'
 const sStore = snackStore()
 </script>

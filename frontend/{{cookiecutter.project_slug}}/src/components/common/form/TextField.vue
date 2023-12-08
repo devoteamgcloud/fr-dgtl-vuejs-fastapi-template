@@ -1,37 +1,42 @@
 <template>
   <v-text-field
     :rules="rules"
-    :label="label"
-    :placeholder="placeholder"
+    :label="$t(label)"
+    :placeholder="$t(placeholder)"
     :density="density"
     clearable
+    autocomplete="on"
     class="pa-2"
   >
-    <template #append>
-      <slot
-        v-if="$slots['append']"
-        name="append"
-      />
+    <template
+      v-if="$slots['append']"
+      #append
+    >
+      <slot name="append" />
     </template>
   </v-text-field>
 </template>
 
 <script setup lang="ts">
+import { PropType } from 'vue'
+import { ValidationRules } from "@/types/vuetify-types.ts";
+
 defineProps({
   rules: {
-    type: Array[Function as any],
+    type: Array as PropType<ValidationRules[]>,
     default: () => []
   },
   label: {
     type: String,
-    default: 'Label'
+    default: 'common.textField.label'
   },
   placeholder: {
     type: String,
-    default: 'Enter text...'
+    default: 'common.textField.placeholder'
+
   },
   density: {
-    type: String as any,
+    type: String as () => null | 'default' | 'comfortable' | 'compact',
     default: 'comfortable'
   }
 })
