@@ -1,6 +1,4 @@
-# cookiecutter-vuejs-fastapi-template
-
-& FastApi Stack
+# Cookiecutter Template Generation
 
 This repository provides:
 
@@ -29,9 +27,12 @@ Install dependencies
 ```bash
 cd cookiecutter-vuejs-fastapi-template
 python3 -m pip install -r requirements.txt
+
 # Open provided workspace
 code .vscode/cookiecutter.code-workspace
 ```
+
+Then create a .env file & set 'GITHUB_ACCESS_TOKEN' variable with your personal access token
 
 ## Generate Frontend Project
 
@@ -45,10 +46,12 @@ cookiecutter cookiecutter-vuejs-fastapi-template/frontend   # Will ask your need
 
 ```bash
 <github_username>/<repo_name>  # Required format
-```
 
-If specified, it will auto-commit the generated template both in develop, uat & main branches.
-Ensure you have corrects **SSH rights & access**
+# - Auto-commit the generated template both in develop, uat & main branches.
+# - Get "GITHUB_TOKEN" from .env, to set default branches protection from the config file hooks_modules/branch_protection.json.
+
+# Ensure you have corrects **SSH rights & access**
+```
 
 - **'project_name'** is the name on the top of ReadMe.
 
@@ -64,7 +67,7 @@ Ensure you have corrects **SSH rights & access**
 
 - **'footer'** integrate a footer.
 
-- **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
+- **'as_container'** provide local dockerization and auto deploy on Cloud Run
 
 ## Generate Backend Project
 
@@ -78,6 +81,11 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 ```bash
 <github_username>/<repo_name>  # Required format
+
+# - Auto-commit the generated template both in develop, uat & main branches.
+# - Get "GITHUB_TOKEN" from .env, to set default branches protection from the config file hooks_modules/branch_protection.json.
+
+# Ensure you have corrects **SSH rights & access**
 ```
 
 - **'project_name'** is the name on the top of ReadMe.
@@ -88,22 +96,12 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 - **'maintainer'** has an informativ goal (not used in the template)
 
-- **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
+- **'as_container'** provide local dockerization and auto deploy on Cloud Run
 
 - **'gcloud_project'** is the GCP project ID on which the project will be deployed
 
-## Automate Cloud Run deployment
+## Deployment
 
-Create a Cloud Build trigger for each repository on you Google Cloud Project and specify the cloudbuild.yaml path
+Create a Cloud Build trigger for each repository on your Google Cloud Project and specify the cloudbuild.yaml path
 
-Deployment will then run automatically based on your conditions
-
-### TODO
-
-#### Back
-
-- Allow to choose either Firestore or SQL + use multi cookiecutter.json
-
-#### Both
-
-- Add access token to .env & check existence after project creation to call Github API & manage branches protections
+Deployment will start on Cloud Run based on your trigger conditions

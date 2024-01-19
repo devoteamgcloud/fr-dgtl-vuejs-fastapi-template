@@ -11,8 +11,10 @@ sys.path.insert(0, PROJECT_DIRECTORY)
 
 from hooks_modules import main
 
+from dotenv import load_dotenv
 
 if __name__ == "__main__":
+    load_dotenv(dotenv_path="./.env")
     print("\nRunning post generation hooks...\n")
     try:
         if "{{ cookiecutter.sidebar }}" == "True":
@@ -36,6 +38,16 @@ if __name__ == "__main__":
         if "{{ cookiecutter.repository_name}}":
             print("Pushing template to {{ cookiecutter.repository_name }}...")
             main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
+            if os.getenv("GITHUB_ACCESS_TOKEN"):
+                print(
+                    "Github token found ! Activating & settings branches protection..."
+                )
+                main.enableBranchesProtection(
+                    "{{ cookiecutter.repository_name }}",
+                    os.getenv("GITHUB_ACCESS_TOKEN"),
+                )
+            else:
+                print("No github token found. Skip branches protection...")
 
         if "{{ cookiecutter.as_container }}" == "False":
             main.checkAsContainerOption()
