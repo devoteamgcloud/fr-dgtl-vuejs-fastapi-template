@@ -20,7 +20,7 @@ These templates are:
 
 - Based on [cookiecutter](https://www.cookiecutter.io/)
 - Auto-pushable on Github when generated
-- Auto-deployable on [Cloud Run](https://cloud.google.com/run)
+- Auto-deployable on [Cloud Run](https://cloud.google.com/run).
 
 ## Installation
 
@@ -91,6 +91,12 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 - **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
 
 - **'gcloud_project'** is the GCP project ID on which the project will be deployed
+
+## Automate Cloud Run deployment
+
+Create a Cloud Build trigger for each repository on you Google Cloud Project and specify the cloudbuild.yaml path
+
+Deployment will then run automatically based on your conditions
 
 ### TODO
 
