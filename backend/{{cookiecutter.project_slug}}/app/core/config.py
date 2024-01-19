@@ -1,5 +1,5 @@
 import logging
-from typing import List
+from typing import List, Optional
 
 from pydantic_settings import BaseSettings
 
@@ -13,9 +13,7 @@ class Settings(BaseSettings):
     API_PREFIX: str = "/api"
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5174"]
 
-    # SQLALCHEMY_DATABASE_URI: str = "postgresql://postgres:postgres@localhost:5432/minseed"
-    # PROJECT_ID: Optional[str] = None
-    # PROJECT_NUMBER: Optional[str] = None
+    GCLOUD_PROJECT_ID: Optional[str] = "{{cookiecutter.gcloud_project}}"
 
     class Config:
         env_file = ".env"

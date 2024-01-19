@@ -1,6 +1,26 @@
-# cookie-cutter-vuejs-fastapi-template
+# cookiecutter-vuejs-fastapi-template
 
-VueJs & FastApi Stack template based on [cookiecutter](https://www.cookiecutter.io/)
+& FastApi Stack
+
+This repository provides:
+
+- a [VueJS](https://vuejs.org) base stack:
+
+  - Customizable layout (Navbar, Sidebar, Footer) & generic components with [Vuetify](https://vuetify.com)
+  - API axios client wrapped into reusable service
+  - Form validation & unit tests
+  - Dark theme & i18n support
+
+- a [FastAPI](https://fastapi.tiangolo.com/) base stack integrated with [GCP](https://console.cloud.google.com/)
+  - Runnable from VSCode launch with or without docker containers
+  - Generic [Firestore](https://firebase.google.com/docs/firestore?hl=fr) client (authentication with [ADC](https://cloud.google.com/docs/authentication/provide-credentials-adc?hl=fr))
+  - Environment injection from .env file
+
+These templates are:
+
+- Based on [cookiecutter](https://www.cookiecutter.io/)
+- Auto-pushable on Github when generated
+- Auto-deployable on [Cloud Run](https://cloud.google.com/run)
 
 ## Installation
 
@@ -9,20 +29,11 @@ Install dependencies
 ```bash
 cd cookiecutter-vuejs-fastapi-template
 python3 -m pip install -r requirements.txt
-```
-
-## Usage
-
-### Workspace
-
-To open the template in VSCode, use the following command
-
-```bash
-cd cookiecutter-vuejs-fastapi-template
+# Open provided workspace
 code .vscode/cookiecutter.code-workspace
 ```
 
-### Generate Frontend Project
+## Generate Frontend Project
 
 Use this repository to generate a Vuejs template project
 
@@ -30,14 +41,14 @@ Use this repository to generate a Vuejs template project
 cookiecutter cookiecutter-vuejs-fastapi-template/frontend   # Will ask your needs from cookiecutter.json
 ```
 
-- **'repository_name'** allows you to specify an empty-existing Git repository.
+- **'repository_name'** allows you to specify an empty-existing Git repository to push the template on.
 
 ```bash
 <github_username>/<repo_name>  # Required format
 ```
 
 If specified, it will auto-commit the generated template both in develop, uat & main branches.
-Ensure you have corrects  **SSH rights & access**
+Ensure you have corrects **SSH rights & access**
 
 - **'project_name'** is the name on the top of ReadMe.
 
@@ -55,12 +66,18 @@ Ensure you have corrects  **SSH rights & access**
 
 - **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
 
-### Generate Backend Project (WIP)
+## Generate Backend Project
 
 Use this repository to generate a FastApi template project
 
 ```bash
 cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs from cookiecutter.json
+```
+
+- **'repository_name'** allows you to specify an empty-existing Git repository to push the template on.
+
+```bash
+<github_username>/<repo_name>  # Required format
 ```
 
 - **'project_name'** is the name on the top of ReadMe.
@@ -71,9 +88,16 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 - **'maintainer'** has an informativ goal (not used in the template)
 
+- **'as_container'** allow you to dockerize local run and auto deploy on Cloud Run
+
+- **'gcloud_project'** is the GCP project ID on which the project will be deployed
+
 ### TODO
 
 #### Back
 
 - Allow to choose either Firestore or SQL + use multi cookiecutter.json
-- CookieCut Dockerfile questions & Cloud Run deploy
+
+#### Both
+
+- Add access token to .env & check existence after project creation to call Github API & manage branches protections

@@ -6,7 +6,7 @@
       "label": "docker-build",
       "platform": "python",
       "dockerBuild": {
-        "tag": "fastapi_template:latest",
+        "tag": "{{cookiecutter.project_slug}}:latest",
         "dockerfile": "${workspaceFolder}/Dockerfile",
         "context": "${workspaceFolder}",
         "pull": true
@@ -25,7 +25,7 @@
         ],
         "env": {
           "GOOGLE_APPLICATION_CREDENTIALS": "/gcp/application_default_credentials.json",
-          "GCLOUD_PROJECT": "sandbox-ahourlier"
+          "GCLOUD_PROJECT": "{{cookiecutter.gcloud_project}}"
         },
         "volumes": [
           {
@@ -39,7 +39,7 @@
             "permissions": "rw"
           }
         ],
-        "image": "fastapi_template:latest"
+        "image": "{{cookiecutter.project_slug}}:latest"
       },
       "python": {
         "args": [
