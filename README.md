@@ -22,17 +22,28 @@ These templates are:
 
 ## Installation
 
-Install dependencies
+- Install dependencies
 
-```bash
-cd cookiecutter-vuejs-fastapi-template
-python3 -m pip install -r requirements.txt
+  ```bash
+  cd cookiecutter-vuejs-fastapi-template
+  python3 -m pip install -r requirements.txt
 
-# Open provided workspace
-code .vscode/cookiecutter.code-workspace
-```
+  # Open provided workspace
+  code .vscode/cookiecutter.code-workspace
+  ```
 
-Then create a .env file & set 'GITHUB_ACCESS_TOKEN' variable with your personal access token
+- Add required .env in both folders
+
+  ```bash
+  # In frontend/
+  VITE_BASE_URL="<YOUR_ROOT_URL>"
+  GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+
+  # In backend/
+  ENV="local"
+  GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   # Don't modify value here (replaced at generation)
+  GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+  ```
 
 ## Generate Frontend Project
 
@@ -47,10 +58,10 @@ cookiecutter cookiecutter-vuejs-fastapi-template/frontend   # Will ask your need
 ```bash
 <github_username>/<repo_name>  # Required format
 
-# - Auto-commit the generated template both in develop, uat & main branches.
-# - Get "GITHUB_TOKEN" from .env, to set default branches protection from the config file hooks_modules/branch_protection.json.
+# 1. Ensure you have corrects SSH rights & access
 
-# Ensure you have corrects **SSH rights & access**
+# 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
+# Change settings as you convenience in hooks_modules/branch_protection.json
 ```
 
 - **'project_name'** is the name on the top of ReadMe.
@@ -82,10 +93,10 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 ```bash
 <github_username>/<repo_name>  # Required format
 
-# - Auto-commit the generated template both in develop, uat & main branches.
-# - Get "GITHUB_TOKEN" from .env, to set default branches protection from the config file hooks_modules/branch_protection.json.
+# 1. Ensure you have corrects SSH rights & access
 
-# Ensure you have corrects **SSH rights & access**
+# 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
+# Change settings as you convenience in hooks_modules/branch_protection.json
 ```
 
 - **'project_name'** is the name on the top of ReadMe.

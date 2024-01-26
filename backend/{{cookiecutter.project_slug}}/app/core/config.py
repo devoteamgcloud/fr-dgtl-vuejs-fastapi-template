@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     API_PREFIX: str = "/api"
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5174"]
 
+    GITHUB_ACCESS_TOKEN: Optional[str] = None
     GCLOUD_PROJECT_ID: Optional[str] = "{{cookiecutter.gcloud_project}}"
 
     class Config:

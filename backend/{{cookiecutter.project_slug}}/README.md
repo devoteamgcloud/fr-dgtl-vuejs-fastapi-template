@@ -16,8 +16,10 @@
 
 - Set config for venv in local
 
-  ```bash
+  ```sh
   poetry config virtualenvs.in-project true
+  poetry env use 3.11
+  poetry shell                # Launch terminal with dependencies
   poetry install
   ```
 
@@ -25,7 +27,6 @@
 
 ```sh
 # WITHOUT DOCKER (Guess ADC from env)
-poetry shell                  # Launch terminal with dependencies
 uvicorn app.main:app --reload # Or from VSCode launcher
 
 # OR
@@ -33,7 +34,7 @@ uvicorn app.main:app --reload # Or from VSCode launcher
 # WITH DOCKER
 Use the launch.json configuration to build and run the container
 
-# Running the launch is an equivalent to:
+# (Running the launch is an equivalent to):
 docker build -t <image>:<tag> -f Dockerfile .
 docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "$HOME/.config/gcloud/application_default_credentials.json":/gcp/creds.json --env GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json --env GCLOUD_PROJECT=<gcp_project_id> <image>:<tag>
 
@@ -42,7 +43,7 @@ docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "
 
 ## Api docs
 
-- [Swagger](http://localhost:8000/docs)
+- [Swagger](http://localhost:8000/api/docs)
 
 ### Maintainers
 

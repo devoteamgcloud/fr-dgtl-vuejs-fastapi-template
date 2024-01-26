@@ -2,10 +2,11 @@ from typing import Any
 
 from fastapi import APIRouter
 
-from app.api.endpoints import firestore_user as user
+from app.firestore.endpoints import firestore_user as user
 
 
 api_router = APIRouter()
+
 api_router.include_router(user.router, prefix="/users", tags=["Firestore User"])
 
 
