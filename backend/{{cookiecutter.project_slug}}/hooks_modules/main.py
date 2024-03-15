@@ -72,3 +72,17 @@ def checkAsContainerOption():
         os.remove("Dockerfile")
         os.remove("Dockerfile.prod")
         shutil.rmtree(".cloudbuild")
+
+
+def checkDatabaseTypeOption(value):
+    """
+    Check database type choice and set folders according to it
+    """
+    if value == "PostgreSQL":
+        print("Setting up PostgreSQL configuration...")
+        shutil.rmtree("app/firestore")
+    if value == "Firestore client":
+        print("Setting up Firestore client configuration...")
+        shutil.rmtree("app/sqlmodel")
+    if value == "Both":
+        print("Setting up Firestore client & PostgreSQL configurations...")

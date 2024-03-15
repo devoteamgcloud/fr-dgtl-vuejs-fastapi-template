@@ -12,13 +12,15 @@ This repository provides:
 - a [FastAPI](https://fastapi.tiangolo.com/) base stack integrated with [GCP](https://console.cloud.google.com/)
   - Runnable from VSCode launch with or without docker containers
   - Generic [Firestore](https://firebase.google.com/docs/firestore?hl=fr) client (authentication with [ADC](https://cloud.google.com/docs/authentication/provide-credentials-adc?hl=fr))
-  - Environment injection from .env file
+  - Generic [PostgreSQL](https://www.postgresql.org/about/) async client wrapped with [SQLModel](https://sqlmodel.tiangolo.com/) (SQLAlchemy 2.0)
 
 These templates are:
 
 - Based on [cookiecutter](https://www.cookiecutter.io/)
 - Auto-pushable on Github when generated
 - Auto-deployable on [Cloud Run](https://cloud.google.com/run).
+
+It assumes that each template is pushed on a separate Github repository
 
 ## Installation
 
@@ -36,13 +38,17 @@ These templates are:
 
   ```bash
   # In frontend/
-  VITE_BASE_URL="<YOUR_ROOT_URL>"
-  GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+    VITE_BASE_URL="<YOUR_ROOT_URL>"
+    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
 
   # In backend/
-  ENV="local"
-  GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   # Don't modify value here (replaced at generation)
-  GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+    ENV="local"
+    GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   # Don't modify value here (replaced at generation)
+    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+
+    # Make sure it matches docker-compose.yml
+    SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"   
+    # Add '?host=/cloudsql/<DB_INSTANCE_NAME>' for deployed version
   ```
 
 ## Generate Frontend Project
@@ -55,14 +61,14 @@ cookiecutter cookiecutter-vuejs-fastapi-template/frontend   # Will ask your need
 
 - **'repository_name'** allows you to specify an empty-existing Git repository to push the template on.
 
-```bash
-<github_username>/<repo_name>  # Required format
+  ```bash
+  <github_username>/<repo_name>  # Required format
 
-# 1. Ensure you have corrects SSH rights & access
+  # 1. Ensure you have corrects SSH rights & access
 
-# 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
-# Change settings as you convenience in hooks_modules/branch_protection.json
-```
+  # 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
+  # Change settings as your convenience in hooks_modules/branch_protection.json
+  ```
 
 - **'project_name'** is the name on the top of ReadMe.
 
@@ -90,14 +96,14 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 - **'repository_name'** allows you to specify an empty-existing Git repository to push the template on.
 
-```bash
-<github_username>/<repo_name>  # Required format
+  ```bash
+  <github_username>/<repo_name>  # Required format
 
-# 1. Ensure you have corrects SSH rights & access
+  # 1. Ensure you have corrects SSH rights & access
 
-# 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
-# Change settings as you convenience in hooks_modules/branch_protection.json
-```
+  # 2. This will also set branch protection if you specified GITHUB_ACCESS_TOKEN variable in .env.
+  # Change settings as your convenience in hooks_modules/branch_protection.json
+  ```
 
 - **'project_name'** is the name on the top of ReadMe.
 
@@ -107,12 +113,8 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 
 - **'maintainer'** has an informativ goal (not used in the template)
 
+- **'database'** make you choose which type of database will be provided (Firestore, PostgreSQL with SQLModel, or Both)
+
 - **'as_container'** provide local dockerization and auto deploy on Cloud Run
 
 - **'gcloud_project'** is the GCP project ID on which the project will be deployed
-
-## Deployment
-
-Create a Cloud Build trigger for each repository on your Google Cloud Project and specify the cloudbuild.yaml path
-
-Deployment will start on Cloud Run based on your trigger conditions
