@@ -118,3 +118,15 @@ cookiecutter cookiecutter-vuejs-fastapi-template/backend   # Will ask your needs
 - **'as_container'** provide local dockerization and auto deploy on Cloud Run
 
 - **'gcloud_project'** is the GCP project ID on which the project will be deployed
+
+
+## CICD
+
+Each template has its own github actions for generating the template, install dependencies, runs dev server & unit tests.
+
+You can try github actions locally from root folder using:
+
+```bash
+act -j test-run-template --rm -W .github/workflows/frontend_template.yaml
+act -j test-run-template --rm -W .github/workflows/backend_template.yaml
+```
