@@ -10,7 +10,7 @@ on:
       - feat/backend
 
 jobs:
-  test-run-backend-template:
+  test-run-template:
 
     runs-on: ubuntu-latest
 
