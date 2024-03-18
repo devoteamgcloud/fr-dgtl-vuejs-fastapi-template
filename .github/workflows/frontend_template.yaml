@@ -1,6 +1,10 @@
 name: Test frontend cookiecutter template generation & usage
 
 on:
+  pull_request:
+    branches:
+      - main
+      
   push:
     branches:
       - frontend
