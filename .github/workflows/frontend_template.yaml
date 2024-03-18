@@ -1,0 +1,40 @@
+name: Test frontend cookiecutter template generation & usage
+
+on:
+  pull_request:
+    branches:
+      - main
+      
+  push:
+    branches:
+      - feat/frontend
+
+jobs:
+  test-run-frontend-template:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install global dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Generate frontend template
+      run: | 
+        cd ../
+        cookiecutter cookiecutter-vuejs-fastapi-template/frontend --no-input
+    
+    - name: Run tests
+      run: |
+        cd ../vuejs_template/
+        npm install --save-dev
+        npm run lint
+        npm run type-check
+        npm run test:unit
