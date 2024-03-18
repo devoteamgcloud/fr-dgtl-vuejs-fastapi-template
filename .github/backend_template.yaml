@@ -1,0 +1,49 @@
+name: Test backend cookiecutter template generation & usage
+
+on:
+  push:
+    branches:
+      - backend
+
+jobs:
+  services:
+      # Define a PostgreSQL service using the latest version of PostgreSQL
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fastapi_template_db
+        ports:
+          - 5434:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+  test-run-template:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Cookiecutter
+      run: pip install cookiecutter
+
+    - name: Generate backend template
+      run: cookiecutter backend --no-input
+    
+    - name: Run tests
+      run: |
+        cd fastapi_template
+        poetry config virtualenvs.in-project true
+        poetry env use 3.11
+        poetry shell
+        poetry install
+        alembic upgrade head
+        uvicorn app.main:app --reload
+
+       
