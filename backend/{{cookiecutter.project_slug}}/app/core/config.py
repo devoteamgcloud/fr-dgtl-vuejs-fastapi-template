@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5174"]
 
     SQLALCHEMY_DATABASE_URI: str = (
-        "postgresql://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
+        "postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
     )
     DEFAULT_PAGE_SIZE: int = 20
     MAX_PAGE_SIZE: int = 100

@@ -15,11 +15,7 @@
     "Benjamin Solano",
     "Valdo Negou"
   ],
-  "database": [
-    "PostgreSQL",
-    "Firestore",
-    "Both"
-  ],
+  "database": ["PostgreSQL", "Firestore", "Both"],
   "as_container": true,
   "gcloud_project": "",
   "__prompts__": {
