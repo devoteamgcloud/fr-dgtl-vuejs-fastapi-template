@@ -14,7 +14,7 @@
     },
     "types": ["vuetify", "vite/client"],
     "target": "ESNext",
-    "lib": ["DOM", "ES5", "es2018.promise", "es2016", "es2015", "ES2021.String", "es2022"]
+    "lib": ["DOM", "es2022"]
   },
   "references": [
     {

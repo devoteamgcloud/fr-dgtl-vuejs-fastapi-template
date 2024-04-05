@@ -10,6 +10,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createI18n } from 'vue-i18n'
 import { languages } from '../i18n/index.js'
 import { defaultLocale } from '../i18n/index.js'
+import type { I18nOptions } from 'vue-i18n';
 
 // Global components
 import App from './App.vue'
@@ -27,7 +28,7 @@ import { fa } from 'vuetify/iconsets/fa'
 import { mdi } from 'vuetify/iconsets/mdi'
 import 'vuetify/styles'
 
-const messages = Object.assign(languages)
+const messages = Object.assign(languages) as I18nOptions['messages']
 export const i18n = createI18n({
   legacy: false, // Composition API setup
   locale: defaultLocale,
