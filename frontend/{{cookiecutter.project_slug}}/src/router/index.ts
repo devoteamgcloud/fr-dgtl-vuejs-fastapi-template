@@ -8,15 +8,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'form',
-      meta: { requiresAuth: false },
-      component: FormView
-    },
-    {
-      path: '/table',
       name: 'table',
       meta: { requiresAuth: false },
       component: TableView
+    },
+    {
+      path: '/form',
+      name: 'form',
+      meta: { requiresAuth: false },
+      component: FormView
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
   ]

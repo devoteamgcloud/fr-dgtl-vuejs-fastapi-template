@@ -1,7 +1,7 @@
-import test from '@/api/example.ts'
+import todos from '@/api/todos.ts'
 
 export function useApis() {
   return {
-    test
+    todos
   }
 }

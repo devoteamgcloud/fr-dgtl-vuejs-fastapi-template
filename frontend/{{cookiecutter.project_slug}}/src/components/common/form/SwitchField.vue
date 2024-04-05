@@ -38,7 +38,6 @@ const props = defineProps({
 })
 
 let state = ref(props.modelValue)
-
 </script>
 
 <style scoped></style>

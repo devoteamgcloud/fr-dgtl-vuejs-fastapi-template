@@ -6,7 +6,7 @@ export const preferencesStore = defineStore({
   id: 'preferences',
   state: () => ({
     isDark: true,
-    lang: defaultLocale,
+    lang: defaultLocale
   }),
   actions: {
     toggleTheme(theme) {

@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue'
-import { ValidationRules } from "@/types/vuetify-types.ts";
+import { ValidationRules } from '@/types/vuetify-types.ts'
 
 defineProps({
   rules: {
@@ -33,7 +33,6 @@ defineProps({
   placeholder: {
     type: String,
     default: 'common.textField.placeholder'
-
   },
   density: {
     type: String as () => null | 'default' | 'comfortable' | 'compact',

@@ -19,6 +19,8 @@ The template is using [ESLint for VueJS](https://eslint.vuejs.org/).
 
 By default, **auto formatting is enabled on save**.
 
+You can run prettier formatting, but ensure eslint for VueJS is re-apply after.
+
 ## I18N
 
 To add any new langage:

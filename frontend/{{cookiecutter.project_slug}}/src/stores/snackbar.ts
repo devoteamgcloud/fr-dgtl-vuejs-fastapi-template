@@ -27,7 +27,7 @@ export const snackStore = defineStore({
       if (this.displayed) {
         // Hack to reset the timer when the snackbar is already displayed
         setTimeout(() => {
-          this.timeout = false
+          this.timeout = 0
           this.display({
             text,
             type,

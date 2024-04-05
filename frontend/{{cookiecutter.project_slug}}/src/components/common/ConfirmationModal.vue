@@ -5,7 +5,7 @@
       width="auto"
     >
       <CardContainer
-        :title="$t(mainTitle) || mainTitle"
+        :title="$t(title) || title"
         class="text-center"
       >
         <template #body>
@@ -39,44 +39,43 @@
     </v-dialog>
   </div>
 </template>
-  
-  <script setup lang="ts">
-  import { ref } from 'vue'
-  import CardContainer from '@/components/common/CardContainer.vue'
-  import { watch } from 'vue'
-  
-  const emit = defineEmits(['confirm', 'close'])
-  
-  const props = defineProps({
-    modelValue: {
-      type: Boolean,
-      default: false
-    },
-    mainTitle: {
-      type: String,
-      default: 'common.modalContainer.title'
-    }
-  })
-  
-  let isOpen = ref(props.modelValue)
-  
-  watch(
-    () => props.modelValue,
-    (newValue) => {
-      isOpen.value = newValue
-    }
-  )
-  
-  function confirm() {
-    isOpen.value = false
-    emit('confirm')
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import CardContainer from '@/components/common/CardContainer.vue'
+import { watch } from 'vue'
+
+const emit = defineEmits(['confirm', 'close'])
+
+const props = defineProps({
+  isOpen: {
+    type: Boolean,
+    default: false
+  },
+  title: {
+    type: String,
+    default: 'common.confirmationModal.title'
   }
-  
-  function close() {
-    isOpen.value = false
-    emit('close')
+})
+
+let isOpen = ref(props.isOpen)
+
+watch(
+  () => props.isOpen,
+  (newValue) => {
+    isOpen.value = newValue
   }
-  </script>
-  
-  <style scoped></style>
-  
+)
+
+function confirm() {
+  isOpen.value = false
+  emit('confirm')
+}
+
+function close() {
+  isOpen.value = false
+  emit('close')
+}
+</script>
+
+<style scoped></style>

@@ -15,8 +15,9 @@ test(
   async () => {
     const apis = useApis()
     const loading = ref(false)
-    const apiResult = await wrapper(apis.test.callExemple(), loading) // May fail due to public API
-    expect(apiResult.length !== 0).toBeTruthy()
+    const response = await wrapper(apis.todos.unitTest(), loading)
+    expect('status' in response).toBeTruthy()
+    expect(response.status === 200).toBeTruthy()
   },
-  { timeout: 8000 }
+  { timeout: 5000 }
 )

@@ -93,13 +93,12 @@ function setLang(lang) {
   prefStore.setLang(lang)
   showLang.value = false
 }
-
 </script>
 
 <style scoped>
 #navbar {
   height: var(--navigation-bar-height);
-  overflow: visible
+  overflow: visible;
 }
 
 .flag-list {

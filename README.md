@@ -9,7 +9,7 @@ This repository provides:
   - Form validation & unit tests
   - Dark theme & i18n support
 
-- a [FastAPI](https://fastapi.tiangolo.com/) base stack integrated with [GCP](https://console.cloud.google.com/)
+- a [FastAPI](https://fastapi.tiangolo.com/) base stack:
   - Runnable from VSCode launch with or without docker containers
   - Generic [Firestore](https://firebase.google.com/docs/firestore?hl=fr) client (authentication with [ADC](https://cloud.google.com/docs/authentication/provide-credentials-adc?hl=fr))
   - Generic [PostgreSQL](https://www.postgresql.org/about/) async client wrapped with [SQLModel](https://sqlmodel.tiangolo.com/) (SQLAlchemy 2.0)

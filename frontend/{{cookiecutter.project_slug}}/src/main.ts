@@ -38,7 +38,7 @@ export const i18n = createI18n({
 const customLightTheme: ThemeDefinition = {
   dark: false,
   colors: {
-    background: '#EEEEEE',
+    background: '#ededed',
     surface: '#FFFFFF',
     primary: '#6200EE',
     'primary-darken-1': '#3700B3',
@@ -78,8 +78,8 @@ const vuetify = createVuetify({
   },
   locale: {
     locale: defaultLocale,
-    fallback: "en",
-    messages: { fr, en },
+    fallback: 'en',
+    messages: { fr, en }
   },
   theme: {
     defaultTheme: 'customDarkTheme',

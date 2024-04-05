@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "{{ cookiecutter.project_name }}"
 
     API_PREFIX: str = "/api"
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:5174"]
+    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173", "http://localhost:3000"]
 
     SQLALCHEMY_DATABASE_URI: str = (
         "postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"

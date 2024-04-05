@@ -21,18 +21,25 @@ router = APIRouter()
 async def read_todos(
     *,
     db: session_dep,
-    skip: Optional[int] = Query(0, ge=0),
-    limit: Optional[int] = Query(settings.DEFAULT_PAGE_SIZE, ge=1, le=settings.MAX_PAGE_SIZE),
+    page: Optional[int] = 1,
+    per_page: Optional[int] = 20,
     sort: Optional[str] = None,
     filters: List[QueryFilter] = Depends(parse_query_filter_params),
     is_desc: bool = False,
+    use_or: bool = False,
 ) -> Page[Todo]:
     """
     Retrieve crud_todo.
     """
     try:
         todos = await crud_todo.get_multi(
-            db, skip=skip, limit=limit, sort=sort, is_desc=is_desc, filters=filters
+            db,
+            page=page,
+            per_page=per_page,
+            sort=sort,
+            is_desc=is_desc,
+            filters=filters,
+            use_or=use_or,
         )
         return todos
     except (AttributeError, KeyError, ValueError) as e:
@@ -50,23 +57,31 @@ async def read_todos(
 async def read_todos_users(
     *,
     db: session_dep,
-    skip: Optional[int] = Query(0, ge=0),
-    limit: Optional[int] = Query(settings.DEFAULT_PAGE_SIZE, ge=1, le=settings.MAX_PAGE_SIZE),
+    page: Optional[int] = 1,
+    per_page: Optional[int] = 20,
     sort: Optional[str] = None,
     filters: List[QueryFilter] = Depends(parse_query_filter_params),
     is_desc: bool = False,
+    use_or: bool = False,
 ) -> List[Todo]:
     """
     Retrieve todos sorted by users.
     """
     try:
         todos = await crud_todo.get_multi(
-            db, skip=skip, limit=limit, sort=sort, is_desc=is_desc, filters=filters
+            db,
+            page=page,
+            per_page=per_page,
+            sort=sort,
+            is_desc=is_desc,
+            filters=filters,
+            use_or=use_or,
         )
         return todos.items
     except Exception as e:
         log.exception(e)
         raise_500()
+
 
 @router.post(
     "",

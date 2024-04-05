@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { PropType, computed, ref } from 'vue'
 import { useDate } from 'vuetify'
-import { ValidationRules } from "@/types/vuetify-types.ts";
+import { ValidationRules } from '@/types/vuetify-types.ts'
 import { preferencesStore } from '@/stores/preferences.ts'
 
 const date = useDate()
@@ -120,7 +120,7 @@ const dateFormatted = computed({
     innerDate.value = value
   }
 })
- </script>
+</script>
 
 <style scoped>
 .picker {

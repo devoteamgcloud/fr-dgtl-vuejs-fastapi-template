@@ -15,8 +15,8 @@ async def test_query_filter_users(client: AsyncClient, db: AsyncSession) -> None
     await create_user(db, "Anna", "", "anna.delcourt@gmail.com", False, None)
 
     query_params = {
-        "skip": 0,
-        # "limit": None,
+        "page": 1,
+        "per_page": 20,
         "sort": None,
         "is_desc": False,
         "filters": None,
@@ -95,8 +95,3 @@ async def test_query_filter_users(client: AsyncClient, db: AsyncSession) -> None
     assert items[0].get("first_name") == "Louis"
     assert items[1].get("first_name") == "Jean"
     assert items[2].get("first_name") == "Anna"
-    # Test limit
-    query_params["limit"] = 1
-    data = await call_from_operator(client, query_params, "first_name", "is_not_empty", None)
-    # Should be 3, but limit is set
-    assert data.get("total") == 1

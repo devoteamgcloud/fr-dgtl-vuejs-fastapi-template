@@ -20,15 +20,15 @@
     >
       <v-list-item
         to="/"
-        prepend-icon="mdi-list-box-outline"
-        title="Form"
-        value="form"
-      />
-      <v-list-item
-        to="/table"
         prepend-icon="mdi-table"
         title="Table"
         value="table"
+      />
+      <v-list-item
+        to="/form"
+        prepend-icon="mdi-list-box-outline"
+        title="Form"
+        value="form"
       />
     </v-list>
   </v-navigation-drawer>

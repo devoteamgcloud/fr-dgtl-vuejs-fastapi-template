@@ -1,4 +1,4 @@
-name: Test backend cookiecutter template generation & usage
+name: Test backend template
 
 on:
   pull_request:

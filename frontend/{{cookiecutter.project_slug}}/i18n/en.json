@@ -1,5 +1,6 @@
 {
     "common": {
+        "search": "Search...",
         "autocompleteField": {
             "label": "Find a value",
             "labelMultiple": "Find one or more values"
@@ -28,7 +29,7 @@
         },
         "textField": {
             "placeholder": "Enter text",
-            "label": "Text"
+            "label": ""
         },
         "datePickerField": {
             "label": "Select a date",
@@ -46,10 +47,22 @@
     },
     "formView": {
         "formTitle": "Form & API call exemple",
+        "validationOn": "Form validation enabled",
+        "validationOff": "Form validation disabled",
         "usernameField": {
             "label": "Username",
             "placeholder": "Enter your username"
         },
-        "modalBody": "This will call a public API, are you sure?"
+        "modalBody": "An API will be contacted, ensure it is running, then confirm."
+    },
+    "tableView": {
+        "tableTitle": "Todo list exemple",
+        "titleHeader": "Title",
+        "descriptionHeader": "Description",
+        "priorityHeader": "Priority",
+        "deleteModal": {
+            "body": "Confirm todo deletion?",
+            "title": "Delete a todo"
+        }
     }
 }

@@ -4,7 +4,11 @@ import { AxiosResponse } from 'axios'
 import { useStores } from '@/composables/use-stores.ts'
 import { SnackBar } from '@/types/api-types.ts'
 
-export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boolean>, options: SnackBar = null) {
+export async function wrapper(
+  callback: Promise<AxiosResponse>,
+  loading: Ref<boolean>,
+  options: SnackBar = null
+): Promise<AxiosResponse> {
   const { snack } = useStores()
   if (!options) {
     options = new SnackBar(true, 'top right', null)
@@ -21,17 +25,17 @@ export async function wrapper(callback: Promise<AxiosResponse>, loading: Ref<boo
         location: options.location
       })
     }
-    return res.data
-  } catch (res) {
+    return res
+  } catch (error) {
     if (options.show) {
       snack.display({
-        text: res.message,
+        text: error.message,
         type: 'error',
         icon: getIcon(null),
         location: options.location
       })
     }
-    return []
+    return error
   } finally {
     loading.value = false
   }

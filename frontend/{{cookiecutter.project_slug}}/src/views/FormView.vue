@@ -3,6 +3,23 @@
     <h2 class="text-center pb-4">
       {% raw %}{{ $t('formView.formTitle') }}{% endraw %}
     </h2>
+    <SwitchField
+      v-model="rulesEnabled"
+      @change="rulesEnabled = $event"
+    >
+      <template
+        v-if="rulesEnabled"
+        #label
+      >
+        {% raw %}{{ $t('formView.validationOn') }}{% endraw %}
+      </template>
+      <template
+        v-else
+        #label
+      >
+        {% raw %}{{ $t('formView.validationOff') }}{% endraw %}
+      </template>
+    </SwitchField>
     <!-- Form Example -->
     <FormField
       :id="1"
@@ -16,12 +33,12 @@
           <v-col cols="6">
             <DatePicker
               v-model="dateExemple"
-              :rules="[formValidation.fieldRequired()]"
+              :rules="rulesEnabled ? [formValidation.fieldRequired()] : []"
               :allowed-dates="[
                 date.addDays(new Date(), -3),
                 date.addDays(new Date(), -1),
                 date.addDays(new Date(), 1),
-                date.addDays(new Date(), 3),
+                date.addDays(new Date(), 3)
               ]"
               show-as-text
             />
@@ -30,7 +47,11 @@
             <DatePicker
               v-model="dateMultipleExemple"
               label="common.datePickerField.labelMultiple"
-              :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
+              :rules="
+                rulesEnabled
+                  ? [formValidation.fieldRequired(), formValidation.fieldMinLength(3)]
+                  : []
+              "
               :multiple="true"
               :min="date.addDays(new Date(), -10)"
               :max="date.addDays(new Date(), 10)"
@@ -42,7 +63,11 @@
             <!-- TextField example -->
             <TextField
               v-model="usernameExample"
-              :rules="[formValidation.fieldRequired(), formValidation.fieldMinLength(3)]"
+              :rules="
+                rulesEnabled
+                  ? [formValidation.fieldRequired(), formValidation.fieldMinLength(3)]
+                  : []
+              "
               label="formView.usernameField.label"
               placeholder="formView.usernameField.placeholder"
               prepend-inner-icon="mdi-account"
@@ -51,7 +76,9 @@
           <v-col cols="6">
             <TextField
               v-model="emailExemple"
-              :rules="[formValidation.fieldRequired(), formValidation.isEmail()]"
+              :rules="
+                rulesEnabled ? [formValidation.fieldRequired(), formValidation.isEmail()] : []
+              "
               label="common.emailField.label"
               placeholder="common.emailField.placeholder"
               prepend-inner-icon="mdi-email"
@@ -62,7 +89,7 @@
           <v-col cols="6">
             <TextField
               v-model="passwordExemple"
-              :rules="[formValidation.passwordRules()]"
+              :rules="rulesEnabled ? [formValidation.passwordRules()] : []"
               type="password"
               label="common.passwordField.label"
               placeholder="common.passwordField.placeholder"
@@ -73,8 +100,16 @@
             <!-- CurrencyField example -->
             <CurrencyField
               v-model="currencyExemple"
-              :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 }}"
-              :rules="[formValidation.fieldRequired(), formValidation.fieldMinValue(1), formValidation.fieldMaxValue(10)]"
+              :options="{ currency: 'EUR', valueRange: { min: 1, max: 10 } }"
+              :rules="
+                rulesEnabled
+                  ? [
+                    formValidation.fieldRequired(),
+                    formValidation.fieldMinValue(1),
+                    formValidation.fieldMaxValue(10)
+                  ]
+                  : []
+              "
               prepend-inner-icon="mdi-currency-eur"
             />
           </v-col>
@@ -84,7 +119,7 @@
             <!-- SelectField example -->
             <SelectField
               v-model="selectExemple"
-              :rules="[formValidation.fieldRequired()]"
+              :rules="rulesEnabled ? [formValidation.fieldRequired()] : []"
               :items="[
                 { state: 'Florida', abbr: 'FL' },
                 { state: 'Georgia', abbr: 'GA' },
@@ -106,7 +141,11 @@
             <AutocompleteField
               v-model="autocompleteExemple"
               label="common.autocompleteField.labelMultiple"
-              :rules="[formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]"
+              :rules="
+                rulesEnabled
+                  ? [formValidation.fieldRequired(), formValidation.fieldMaxLength(2)]
+                  : []
+              "
               :items="[
                 { title: 'Florida', value: 'FL' },
                 { title: 'Georgia', value: 'GA' },
@@ -122,7 +161,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6">
+          <v-col cols="12">
             <FileField
               v-model="exampleFiles"
               label="common.fileField.labelMultiple"
@@ -130,26 +169,6 @@
               clearable
               @file-change="exampleFiles = $event"
             />
-          </v-col>
-          <v-col cols="6">
-            <SwitchField
-              v-model="switchExemple"
-              :rules="[formValidation.fieldRequired()]"
-              @change="switchExemple = $event"
-            >
-              <template
-                v-if="switchExemple"
-                #label
-              >
-                Random progress
-                <v-progress-circular
-                  indeterminate
-                  color="secondary"
-                  size="24"
-                  class="ms-2"
-                />
-              </template>
-            </SwitchField>
           </v-col>
         </v-row>
       </template>
@@ -174,8 +193,8 @@
       </template>
     </FormField>
 
-    <ModalContainer
-      :model-value="showModal"
+    <ConfirmationModal
+      :is-open="showModal"
       @confirm="confirmSubmit()"
       @close="showModal = false"
     >
@@ -187,7 +206,7 @@
         <v-btn @click="confirm()"></v-btn>
         <v-btn @click="close()"></v-btn>
       </template> -->
-    </ModalContainer>
+    </ConfirmationModal>
 
     <!-- Call API example -->
     <div
@@ -205,21 +224,21 @@
     </div>
 
     <div
-      v-else-if="apiResult.length > 0"
+      v-else-if="apiResult.items.length > 0"
       class="mt-8"
     >
       <hr>
       <div class="d-flex justify-content-center flex-wrap">
         <CardContainer
-          v-for="entry in apiResult.slice(0, 3)"
-          :key="entry.anime"
-          :title="'Anime: ' + entry.anime"
+          v-for="entry in apiResult.items.slice(0, 3)"
+          :key="entry.title"
+          :title="entry.title"
         >
           <template #body>
-            <div>"{% raw %}{{ entry.quote }}{% endraw %}"</div>
+            <div>{% raw %}{{ entry.description }}{% endraw %}</div>
           </template>
           <template #footer>
-            From {% raw %}{{ entry.character }}{% endraw %}
+            {% raw %}{{ entry.priority }}{% endraw %}
           </template>
         </CardContainer>
       </div>
@@ -232,14 +251,15 @@ import CardContainer from '@/components/common/CardContainer.vue'
 import AutocompleteField from '@/components/common/form/AutocompleteField.vue'
 import FormField from '@/components/common/form/FormField.vue'
 import FileField from '@/components/common/form/FileField.vue'
-import ModalContainer from '@/components/common/ModalContainer.vue'
+import ConfirmationModal from '@/components/common/ConfirmationModal.vue'
 import TextField from '@/components/common/form/TextField.vue'
 import SwitchField from '@/components/common/form/SwitchField.vue'
 import SelectField from '@/components/common/form/SelectField.vue'
 import CurrencyField from '@/components/common/form/CurrencyField.vue'
 import DatePicker from '@/components/common/form/DatePicker.vue'
 import formValidation from '@/helpers/form-validation.ts'
-import { SnackBar } from '@/types/api-types.ts'
+import { PaginatedResult, SnackBar } from '@/types/api-types.ts'
+import { Todo } from '@/types/todo-types.ts'
 import { ref } from 'vue'
 import { useApis } from '@/composables/use-apis.ts'
 import { wrapper } from '@/composables/use-api-wrapper.ts'
@@ -248,15 +268,15 @@ import { useDate } from 'vuetify'
 const apis = useApis()
 const date = useDate()
 
-let apiResult = ref([] as any[])
+let apiResult = ref(new PaginatedResult<Todo>())
 let loading = ref(false)
+let rulesEnabled = ref(false)
 let dateExemple = ref(null as any)
 let dateMultipleExemple = ref([] as any)
 let usernameExample = ref('')
 let emailExemple = ref('')
 let passwordExemple = ref('')
 let currencyExemple = ref(0)
-let switchExemple = ref(false)
 let selectExemple = ref(null as any)
 let autocompleteExemple = ref([])
 let exampleFiles = ref([])
@@ -264,16 +284,19 @@ let showModal = ref(false)
 
 function confirmSubmit() {
   showModal.value = false
-  callTestApi()
+  getTodos()
 }
 
-async function callTestApi() {
+async function getTodos() {
   const options = new SnackBar(true, 'bottom', {
-    200: 'Public API called with success',
+    200: 'API called with success',
     400: 'Error from client',
     500: 'Error from server'
   })
-  apiResult.value = await wrapper(apis.test.callExemple(), loading, options)
+  const params = {
+    per_page: 3
+  }
+  apiResult.value = (await wrapper(apis.todos.getTodos(params), loading, options)).data
 }
 </script>
 
@@ -282,6 +305,6 @@ async function callTestApi() {
   padding: 0 !important;
 }
 .text-info {
-  padding: 5px !important
+  padding: 5px !important;
 }
 </style>
