@@ -17,7 +17,7 @@ jobs:
           python-version: 3.11
 
       - name: Install linters
-        run: pip install flake8 black isort
+        run: pip install flake8==4.0.1 black==22.3 isort==5.13.2
 
       - name: Run Flake8
         run: flake8 app tests

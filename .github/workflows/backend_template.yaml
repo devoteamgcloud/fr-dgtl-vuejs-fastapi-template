@@ -52,6 +52,14 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
 
+      - name: Run lint
+        run: |
+          cd ../fastapi_template/
+          pip install flake8==4.0.1 black==22.3 isort==5.13.2
+          flake8 app
+          black app tests --check
+          isort app tests --check-only
+
       - name: Run server
         run: |
           cd ../fastapi_template/
