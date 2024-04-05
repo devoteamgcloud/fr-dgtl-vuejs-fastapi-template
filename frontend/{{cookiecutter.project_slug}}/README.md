@@ -54,11 +54,18 @@ docker run --name {{ cookiecutter.project_slug }} -p <host_port>:8080 <image>:<t
 
 ```
 
+## Tests
+
+```sh
+npm run test:unit
+npm run type-check
+```
+
 ## CI/CD
 
 ### CI with Github Actions
 
-Use .github/workflows/lint.yaml by enabling Github Actions API in your repository
+Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
 
 This will run linting for every Pull Request on develop, uat and master branches
 
@@ -68,8 +75,9 @@ This will run linting for every Pull Request on develop, uat and master branches
 
 *Requirements*:
 
-- Create a Cloud Build trigger and specify the cloudbuild.yaml path
-  - You will have to link Github repository to Cloud Build
+- Create a Cloud Build trigger from GCP
+  - Specify the cloudbuild.yaml path
+  - Give repository access to Cloud Build
 
 - Add .env in a Secret named '{{ cookiecutter.project_slug.replace('_', '-') }}'
 

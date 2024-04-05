@@ -21,11 +21,10 @@
   ```sh
   poetry config virtualenvs.in-project true
   poetry env use 3.11
-  poetry shell
   poetry install
   ```
 
-- Create required databases
+- Create and run required databases
 
   ```bash
   docker compose up -d
@@ -34,7 +33,7 @@
 - Apply migrations
 
   ```sh
-  alembic upgrade head        # Ensure your database is running, and SQLALCHEMY_DATABASE_URI env variable is correctly setup
+  alembic upgrade head
   ```
 
 ### Run locally
@@ -60,14 +59,25 @@ docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "
 poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI in pyproject.toml
 ```
 
-### Deployment
+## CI/CD
+
+### CI with Github Actions
+
+  TODO
+
+### CD with Cloud Build & Cloud Run
+
+Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
+
+This will run linting for every Pull Request on develop, uat and master branches
 
 .cloudbuild/cloudbuild.yaml is used automatically to deploy to Cloud Run according to your Cloud Build trigger configuration
 
 *Requirements*:
 
-- Create a Cloud Build trigger and specify the cloudbuild.yaml path
-  - You will have to link Github repository to Cloud Build
+- Create a Cloud Build trigger from GCP:
+  - Specify the cloudbuild.yaml path
+  - Give repository access to Cloud Build
 
 - Add .env in a Secret named '{{ cookiecutter.project_slug.replace('_', '-') }}'
 
@@ -86,7 +96,6 @@ poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI
 
 To allow communication between Cloud Run service & SQL instance:
 
-- Make sure connection string in .env is correct
 - [Add the connection name of your SQL instance in Cloud Run service configuration](https://cloud.google.com/sql/docs/postgres/connect-run#configure)
 
 ## Api docs

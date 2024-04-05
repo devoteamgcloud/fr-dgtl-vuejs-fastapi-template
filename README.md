@@ -37,17 +37,17 @@ It assumes that each template is pushed on a separate Github repository
 - Add required .env in both folders
 
   ```bash
+  # Do not modify 'cookiecutter.<key>' values (replaced at generation)
+
   # In frontend/
     VITE_BASE_URL="<YOUR_ROOT_URL>"
-    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
+    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # (Optional): Used to set branch protection
 
   # In backend/
     ENV="local"
-    GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   # Don't modify value here (replaced at generation)
-    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # Used to set branch protection
-
-    # Make sure it matches docker-compose.yml
-    SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"   
+    GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   
+    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # (Optional): Used to set branch protection
+    SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
     # Add '?host=/cloudsql/<DB_INSTANCE_NAME>' for deployed version
   ```
 
