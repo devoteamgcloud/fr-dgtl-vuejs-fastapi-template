@@ -129,3 +129,14 @@ You can try github actions locally from root folder using [act](https://nektosac
 act -j test-run-template --rm -W .github/workflows/frontend_template.yaml
 act -j test-run-template --rm -W .github/workflows/backend_template.yaml
 ```
+
+## TODO
+
+Backend :
+
+- Optimize unit tests (bad scope fixture)
+
+Frontend:
+
+- Add User entity into TableView
+- Add edit action into TableView
