@@ -2,11 +2,10 @@ import re
 from datetime import date, datetime, timezone
 from typing import Dict, List, Literal, Optional, Set, TypeVar, Union
 
-from sqlalchemy import TIMESTAMP, text
-
 from fastapi import HTTPException, status
 from pydantic import model_validator
-from sqlmodel import Column, DateTime, Field, SQLModel
+from sqlalchemy import TIMESTAMP, text
+from sqlmodel import Field, SQLModel
 
 from app.models.base import to_camel
 

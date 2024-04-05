@@ -1,9 +1,8 @@
-from app.api.deps import raise_404
-from app.firestore.models.user import UserRead, UserCreate, UserUpdate
 from fastapi import APIRouter, Depends, status
 
-
+from app.api.deps import raise_404
 from app.firestore import crud
+from app.firestore.models.user import UserCreate, UserRead, UserUpdate
 from app.models.base import Page
 
 router = APIRouter()

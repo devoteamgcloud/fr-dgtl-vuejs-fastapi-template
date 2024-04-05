@@ -3,7 +3,6 @@ from typing import NoReturn
 from fastapi import HTTPException, status
 from fastapi.security import HTTPBearer
 
-
 oauth2_scheme = HTTPBearer()
 
 

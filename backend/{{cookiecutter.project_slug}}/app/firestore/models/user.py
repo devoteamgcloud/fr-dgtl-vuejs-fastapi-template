@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from app.models.base import DateTimeModelMixin
 
 

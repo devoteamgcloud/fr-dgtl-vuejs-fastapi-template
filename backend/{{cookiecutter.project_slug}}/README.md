@@ -63,7 +63,9 @@ poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI
 
 ### CI with Github Actions
 
-  TODO
+Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
+
+This will run linting for every Pull Request on develop, uat and master branches
 
 ### CD with Cloud Build & Cloud Run
 

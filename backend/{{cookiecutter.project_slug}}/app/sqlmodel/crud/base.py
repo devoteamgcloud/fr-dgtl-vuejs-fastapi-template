@@ -1,7 +1,6 @@
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
-from sqlalchemy import Enum, VARCHAR, cast, asc, desc, or_
-from sqlalchemy.orm import Query
+from sqlalchemy import VARCHAR, Enum, asc, cast, desc, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import Select
 from sqlmodel import SQLModel, select

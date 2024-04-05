@@ -1,8 +1,7 @@
-import asyncio
 from contextlib import ExitStack
 
-import pytest
 import httpx
+import pytest
 
 from app.main import app as actual_app
 from app.sqlmodel import SQLModel

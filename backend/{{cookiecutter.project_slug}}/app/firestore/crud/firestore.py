@@ -1,6 +1,7 @@
 import google.cloud.firestore as firestore
-from app.core.config import settings
+
 from app.core.cloud_logging import Singleton
+from app.core.config import settings
 
 
 class Firestore(metaclass=Singleton):

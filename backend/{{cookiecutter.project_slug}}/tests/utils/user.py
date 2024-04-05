@@ -1,8 +1,10 @@
 import random
+
 from faker import Faker
-from app.sqlmodel.models.user import UserCreate, UserRead
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.sqlmodel.crud.user import users as crud_user
+from app.sqlmodel.models.user import UserCreate, UserRead
 
 fake = Faker()
 

@@ -1,8 +1,9 @@
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.config import settings
 from tests.utils.query_filter import call_from_operator
 from tests.utils.user import create_user
-from app.core.config import settings
 
 DATASOURCES_URL = f"{settings.API_PREFIX}/user"
 

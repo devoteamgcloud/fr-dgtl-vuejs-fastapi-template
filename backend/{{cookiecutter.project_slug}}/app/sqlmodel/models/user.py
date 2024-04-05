@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, List
-from pydantic import ConfigDict
 
+from pydantic import ConfigDict
 from sqlmodel import Relationship
 
 from app.sqlmodel.models.base import AppBase, ReadBase, TableBase

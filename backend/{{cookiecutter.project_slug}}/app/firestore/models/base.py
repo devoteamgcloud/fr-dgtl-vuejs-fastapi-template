@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from typing import Generic
+
+from pydantic import BaseModel
+
 from app.models.base import T, to_camel
 
 

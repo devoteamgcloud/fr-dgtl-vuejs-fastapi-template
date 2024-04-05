@@ -1,8 +1,9 @@
 from sqlmodel import select
+
+from app.sqlmodel.api.deps import session_dep
 from app.sqlmodel.crud.base import CRUDBase
 from app.sqlmodel.models.todo import Todo, TodoCreate, TodoUpdate
 from app.sqlmodel.models.user import User
-from app.sqlmodel.api.deps import session_dep
 
 
 class CrudTodo(CRUDBase[Todo, TodoCreate, TodoUpdate]):

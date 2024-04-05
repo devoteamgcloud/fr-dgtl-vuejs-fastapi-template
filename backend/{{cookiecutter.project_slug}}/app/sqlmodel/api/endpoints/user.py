@@ -1,13 +1,12 @@
 from typing import Any, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
-from app.api.deps import raise_404, raise_500
+from fastapi import APIRouter, Depends
 
-from app.sqlmodel.crud.user import users as crud_user
-from app.sqlmodel.api.deps import session_dep, parse_query_filter_params
+from app.api.deps import raise_404, raise_500
 from app.core.cloud_logging import log
-from app.core.config import settings
 from app.models.base import Page
+from app.sqlmodel.api.deps import parse_query_filter_params, session_dep
+from app.sqlmodel.crud.user import users as crud_user
 from app.sqlmodel.models.base import QueryFilter
 from app.sqlmodel.models.user import User, UserCreate, UserRead
 

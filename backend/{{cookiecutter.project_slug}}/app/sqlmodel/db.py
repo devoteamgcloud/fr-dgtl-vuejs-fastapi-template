@@ -1,10 +1,7 @@
 import contextlib
 from typing import Any, AsyncIterator
 
-from sqlalchemy import NullPool, AsyncAdaptedQueuePool
-
-from app.core.config import settings
-
+from sqlalchemy import AsyncAdaptedQueuePool, NullPool
 from sqlalchemy.ext.asyncio import (
     AsyncConnection,
     AsyncSession,
@@ -13,9 +10,12 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import declarative_base
 
+from app.core.config import settings
+
 Base = declarative_base()
 
-# Heavily inspired by https://praciano.com.br/fastapi-and-async-sqlalchemy-20-with-pytest-done-right.html
+# Heavily inspired by
+# https://praciano.com.br/fastapi-and-async-sqlalchemy-20-with-pytest-done-right.html
 
 
 class DatabaseAsyncSessionManager:

@@ -1,9 +1,9 @@
-from httpx import AsyncClient
 from fastapi.encoders import jsonable_encoder
+from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
-from tests.utils.todo import create_random_todo, build_todo_in
+from tests.utils.todo import build_todo_in, create_random_todo
 from tests.utils.user import create_random_user
 
 DATASOURCES_URL = f"{settings.API_PREFIX}/todo"

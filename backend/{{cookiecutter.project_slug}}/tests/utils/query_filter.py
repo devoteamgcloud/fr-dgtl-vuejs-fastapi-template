@@ -4,6 +4,7 @@ from app.core.config import settings
 
 DATASOURCES_URL = f"{settings.API_PREFIX}/user"
 
+
 async def call_from_operator(client, query_params, field, operator, value):
     query_params["filters"] = json.dumps([{"field": field, "operator": operator, "value": value}])
     response = await client.get(

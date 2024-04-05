@@ -1,7 +1,6 @@
 import inspect
 import json
 import time
-
 from typing import Any
 
 from fastapi import FastAPI
@@ -51,8 +50,8 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
 
 
 class LoggingMiddlewareReq(BaseHTTPMiddleware):
-    """In order to get the body request and the body respone, and all the information about the request
-    We have build this middleware.
+    """
+    Get the body request and the body response, and all the information about the request
     It will log all the information about the request and the response
     """
 

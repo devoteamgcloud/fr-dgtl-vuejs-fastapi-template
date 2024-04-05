@@ -4,9 +4,8 @@ from typing import List, Optional
 from sqlmodel import Relationship
 
 from app.sqlmodel.models.base import AppBase, ReadBase, TableBase
-from app.sqlmodel.models.userTodo import UserTodo
-
 from app.sqlmodel.models.user import User, UserRead
+from app.sqlmodel.models.userTodo import UserTodo
 
 
 class TodoPriority(str, enum.Enum):

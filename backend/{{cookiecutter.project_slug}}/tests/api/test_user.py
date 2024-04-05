@@ -3,8 +3,7 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
-from tests.utils.user import create_random_user, build_random_user_in
-
+from tests.utils.user import build_random_user_in, create_random_user
 
 DATASOURCES_URL = f"{settings.API_PREFIX}/user"
 
