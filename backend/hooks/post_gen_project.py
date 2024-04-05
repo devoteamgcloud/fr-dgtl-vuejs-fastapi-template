@@ -17,6 +17,11 @@ if __name__ == "__main__":
     load_dotenv(dotenv_path="./.env")
     print("\nRunning post generation hooks...\n")
     try:
+        main.checkDatabaseTypeOption("{{ cookiecutter.database }}")
+
+        if "{{ cookiecutter.as_container }}" == "False":
+            main.checkAsContainerOption()
+
         if "{{ cookiecutter.repository_name}}":
             print("Pushing template to {{ cookiecutter.repository_name }}...")
             main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
@@ -30,11 +35,6 @@ if __name__ == "__main__":
                 )
             else:
                 print("No github token found. Skip branches protection...")
-
-        main.checkDatabaseTypeOption("{{ cookiecutter.database }}")
-
-        if "{{ cookiecutter.as_container }}" == "False":
-            main.checkAsContainerOption()
 
         print("\nDone ! 🎉")
         print(

@@ -35,6 +35,9 @@ if __name__ == "__main__":
             print("Skipping Footer...")
         main.checkBottomNavOption()
 
+        if "{{ cookiecutter.as_container }}" == "False":
+            main.checkAsContainerOption()
+
         if "{{ cookiecutter.repository_name}}":
             print("Pushing template to {{ cookiecutter.repository_name }}...")
             main.checkRepositoryNameOption("{{ cookiecutter.repository_name }}")
@@ -48,9 +51,6 @@ if __name__ == "__main__":
                 )
             else:
                 print("No github token found. Skip branches protection...")
-
-        if "{{ cookiecutter.as_container }}" == "False":
-            main.checkAsContainerOption()
 
         print("\nDone ! 🎉")
         print(
