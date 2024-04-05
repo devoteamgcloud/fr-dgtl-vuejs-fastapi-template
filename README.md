@@ -40,16 +40,20 @@ It assumes that each template is pushed on a separate Github repository
   # Do not modify 'cookiecutter.<key>' values (replaced at generation)
 
   # In frontend/
-    VITE_BASE_URL="<YOUR_ROOT_URL>"
-    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # (Optional): Used to set branch protection
+    VITE_BASE_URL="<API_ROOT_URL>"
+    # (Optional): Used to set branch protection
+    GITHUB_ACCESS_TOKEN="<PERSONAL_ACCESS_TOKEN>"    
 
   # In backend/
     ENV="local"
-    GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"   
-    GITHUB_ACCESS_TOKEN="<YOUR_PERSONAL_ACCESS_TOKEN>"    # (Optional): Used to set branch protection
+    GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"
+    # (Optional): Used to set branch protection
+    GITHUB_ACCESS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
     SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
-    # Add '?host=/cloudsql/<DB_INSTANCE_NAME>' for deployed version
-  ```
+
+    # For deployed version
+    # SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:europe-west1:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
+    # BACKEND_CORS_ORIGIN=["<FRONT_ROOT_URL>"]
 
 ## Generate Frontend Project
 
@@ -140,3 +144,7 @@ Frontend:
 
 - Add User entity into TableView
 - Add edit action into TableView
+
+Deploy:
+
+- Ask region on template generation

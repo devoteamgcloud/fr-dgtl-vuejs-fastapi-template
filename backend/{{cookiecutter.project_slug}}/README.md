@@ -69,10 +69,6 @@ This will run linting for every Pull Request on develop, uat and master branches
 
 ### CD with Cloud Build & Cloud Run
 
-Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
-
-This will run linting for every Pull Request on develop, uat and master branches
-
 .cloudbuild/cloudbuild.yaml is used automatically to deploy to Cloud Run according to your Cloud Build trigger configuration
 
 *Requirements*:
@@ -88,6 +84,7 @@ This will run linting for every Pull Request on develop, uat and master branches
   - Cloud Build API
   - Cloud Run API
   - Secret Manager API
+  - Cloud SQL API
 
 - Roles:
 
@@ -96,9 +93,13 @@ This will run linting for every Pull Request on develop, uat and master branches
 
 ### Cloud Run & Cloud SQL
 
-To allow communication between Cloud Run service & SQL instance:
+- Add a Cloud SQL instance named '{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
 
-- [Add the connection name of your SQL instance in Cloud Run service configuration](https://cloud.google.com/sql/docs/postgres/connect-run#configure)
+- Add a database into the instance named '{{cookiecutter.project_slug}}_db'
+
+- Run migrations into the instance with Cloud SQL Proxy
+
+Note: The connection name of the SQL instance is automatically added to Cloud Run configuration while it's deploy
 
 ## Api docs
 

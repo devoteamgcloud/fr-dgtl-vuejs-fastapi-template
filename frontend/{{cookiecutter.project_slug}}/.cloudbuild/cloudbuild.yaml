@@ -4,7 +4,7 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - gcloud secrets versions access latest --secret=$_SERVICE --project=$PROJECT_ID --format='get(payload.data)' | tr '_-' '/+' | base64 -d > .env
+      - gcloud secrets versions access latest --secret=$_SERVICE --project=$PROJECT_ID > .env
 
   - id: build
     name: gcr.io/cloud-builders/docker
@@ -33,8 +33,8 @@ steps:
         --image europe-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE \
         --allow-unauthenticated \
         --set-env-vars=PROJECT_ID=$PROJECT_ID \
-        --region europe-west1 \
-        --timeout 3600
+        --region $_REGION \
+        --timeout 1200
 
 images:
   - europe-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE
@@ -42,6 +42,7 @@ images:
 substitutions:
   _REPO: cookiecutter-template
   _SERVICE: "{{ cookiecutter.project_slug.replace('_', '-') }}"
+  _REGION: europe-west1
 
 options:
   logging: CLOUD_LOGGING_ONLY
