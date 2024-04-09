@@ -59,13 +59,40 @@ docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "
 poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI in pyproject.toml
 ```
 
+## Deployment
+
+### Initialisation
+
+To deploy the infrastructure, make sure ADC is configured correctly.
+
+The main.tf will deploy:
+
+- Cloud SQL instance
+- Database into Cloud SQL instance
+- Image into the Artifact Registry used by Cloud Run
+- Cloud Run service linked to Cloud SQL instance
+- Secret in Secret Manager
+
+```bash
+
+# Ensure your .env content is the deployed version before running
+cd {{ cookiecutter.project_slug }}
+terraform init
+terraform apply
+
+```
+
+### Migrations
+
+Run migrations into the instance with Cloud SQL Proxy
+
 ## CI/CD
 
 ### CI with Github Actions
 
 Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
 
-This will run linting for every Pull Request on develop, uat and master branches
+This will run linting for every Pull Request on develop, uat and main branches
 
 ### CD with Cloud Build & Cloud Run
 
@@ -77,34 +104,16 @@ This will run linting for every Pull Request on develop, uat and master branches
   - Specify the cloudbuild.yaml path
   - Give repository access to Cloud Build
 
-- Add .env in a Secret named '{{ cookiecutter.project_slug.replace('_', '-') }}'
-
-- APIs enabled:
-
-  - Cloud Build API
-  - Cloud Run API
-  - Secret Manager API
-  - Cloud SQL API
+- Copy .env into the secret '{{ cookiecutter.project_slug.replace('_', '-') }}'' to ensure Cloud Build will have the correct environement.
 
 - Roles:
-
   - Cloud Build Service Account has Cloud Run Admin role
   - Cloud Build Service Account has Secret Manager Secret Accessor role
-
-### Cloud Run & Cloud SQL
-
-- Add a Cloud SQL instance named '{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
-
-- Add a database into the instance named '{{cookiecutter.project_slug}}_db'
-
-- Run migrations into the instance with Cloud SQL Proxy
-
-Note: The connection name of the SQL instance is automatically added to Cloud Run configuration while it's deploy
 
 ## Api docs
 
 - [Swagger](http://localhost:8000/api/docs)
 
-### Maintainers
+## Maintainers
 
 {{cookiecutter.maintainer}}

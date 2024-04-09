@@ -113,7 +113,7 @@ def checkAsContainerOption():
     as_container = "{% if cookiecutter.as_container %}y{% endif %}"
     if not as_container:
         print("Removing docker requirements...")
-        os.remove("Dockerfile.dev")
+        os.remove("Dockerfile")
         os.remove("Dockerfile.prod")
         os.remove("nginx.conf")
         os.remove(".dockerignore")

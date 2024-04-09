@@ -19,6 +19,7 @@
   "sidebar": true,
   "footer": true,
   "as_container": true,
+  "gcloud_project": "<GCP_PROJECT_ID>",
   "gcloud_region": [
     "europe-west9"
   ],
@@ -32,6 +33,7 @@
     "sidebar": "Do you want a sidebar?",
     "footer": "Do you want a footer?",
     "as_container": "Use Docker configuration (Local containers & Cloud Run auto-deploy) ?",
+    "gcloud_project": "GCP Project ID targeted by deployment:",
     "gcloud_region": "What is the region associated to your GCP resources?"
   }
 }

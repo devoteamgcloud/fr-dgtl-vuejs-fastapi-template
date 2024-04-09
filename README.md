@@ -34,16 +34,21 @@ It assumes that each template is pushed on a separate Github repository
   code .vscode/cookiecutter.code-workspace
   ```
 
-- Add required .env in both folders
+- Copy .env in both folders
+
+  Do not modify 'cookiecutter.key' values (replaced at generation)
 
   ```bash
-  # Do not modify 'cookiecutter.<key>' values (replaced at generation)
-
   # In frontend/
-    VITE_BASE_URL="<API_ROOT_URL>"
+    VITE_BASE_URL="http://localhost:8000/api"
     # (Optional): Used to set branch protection
-    GITHUB_ACCESS_TOKEN="<PERSONAL_ACCESS_TOKEN>"    
+    GITHUB_ACCESS_TOKEN="<PERSONAL_ACCESS_TOKEN>"
 
+    # For deployed version
+    VITE_BASE_URL="https://<BACK_SERVICE_NAME>-<PROJECT_NUMBER>.{{ cookiecutter.gcloud_region }}.run.app/api"
+  ```
+
+  ```bash
   # In backend/
     ENV="local"
     GCLOUD_PROJECT_ID="{{cookiecutter.gcloud_project}}"
@@ -52,8 +57,9 @@ It assumes that each template is pushed on a separate Github repository
     SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
 
     # For deployed version
+    # ENV="dev"
     # SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:{{ cookiecutter.gcloud_region }}:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
-    # BACKEND_CORS_ORIGIN=["<FRONT_ROOT_URL>"]
+    # BACKEND_CORS_ORIGINS=["https://<FRONT_SERVICE_NAME>-<PROJECT_NUMBER>.{{ cookiecutter.gcloud_region }}.run.app"]
 
 ## Generate Frontend Project
 

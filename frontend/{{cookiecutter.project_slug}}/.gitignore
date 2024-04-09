@@ -31,3 +31,7 @@ coverage
 
 # Custom files
 hooks_modules
+
+# Terraform
+terraform*
+.terraform*

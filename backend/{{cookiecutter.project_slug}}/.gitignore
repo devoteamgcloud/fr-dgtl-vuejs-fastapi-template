@@ -36,3 +36,7 @@ poetry.toml
 ### Custom files
 .pgdata
 hooks_modules
+
+# Terraform
+terraform*
+.terraform*

@@ -45,7 +45,7 @@ npm run dev
 
 # WITH DOCKER
 # Dev server (vite)
-docker build -t <image>:<tag> -f Dockerfile.dev .
+docker build -t <image>:<tag> -f Dockerfile .
 docker run --name {{ cookiecutter.project_slug }} -p 5173:5173 <image>:<tag>
 
 # Prod server (nginx)
@@ -61,13 +61,33 @@ npm run test:unit
 npm run type-check
 ```
 
+## Deployment
+
+### Initialisation
+
+To deploy the infrastructure, make sure ADC is configured correctly.
+
+The main.tf will deploy:
+
+- Image into the Artifact Registry used by Cloud Run
+- Cloud Run service
+- Secret in Secret Manager
+
+```bash
+# Ensure your .env content is the deployed version before running
+cd {{ cookiecutter.project_slug }}
+terraform init
+terraform apply
+
+```
+
 ## CI/CD
 
 ### CI with Github Actions
 
 Use .github/workflows/lint.yaml **by enabling Github Actions API** in your repository
 
-This will run linting for every Pull Request on develop, uat and master branches
+This will run linting for every Pull Request on develop, uat and main branches
 
 ### CD with Cloud Build & Cloud Run
 
@@ -75,23 +95,16 @@ This will run linting for every Pull Request on develop, uat and master branches
 
 *Requirements*:
 
-- Create a Cloud Build trigger from GCP
+- Create a Cloud Build trigger from GCP:
   - Specify the cloudbuild.yaml path
   - Give repository access to Cloud Build
 
-- Add .env in a Secret named '{{ cookiecutter.project_slug.replace('_', '-') }}'
-
-- APIs enabled:
-
-  - Cloud Build API
-  - Cloud Run API
-  - Secret Manager API
+- Copy .env into the secret '{{ cookiecutter.project_slug.replace('_', '-') }}'' to ensure Cloud Build will have the correct environement.
 
 - Roles:
-
   - Cloud Build Service Account has Cloud Run Admin role
   - Cloud Build Service Account has Secret Manager Secret Accessor role
 
-### Maintainers
+## Maintainers
 
 {{cookiecutter.maintainer}}

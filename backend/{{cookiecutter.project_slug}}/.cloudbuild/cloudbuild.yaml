@@ -4,7 +4,7 @@ steps:
     entrypoint: bash
     args:
       - -c
-      - gcloud secrets versions access latest --secret=$_SERVICE --project=$PROJECT_ID --format='get(payload.data)' | tr '_-' '/+' | base64 -d > .env
+      - gcloud secrets versions access latest --secret=$_SERVICE --project=$PROJECT_ID > .env
 
   - id: build
     name: gcr.io/cloud-builders/docker

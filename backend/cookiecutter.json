@@ -33,7 +33,7 @@
     "maintainer": "Select the main maintainer of the project:",
     "database": "Select the type of database you need:",
     "as_container": "Use Docker configuration ? (Local containers & Cloud Run auto-deploy)",
-    "gcloud_project": "What is your Google Cloud project ID?",
+    "gcloud_project": "GCP Project ID targeted by deployment:",
     "gcloud_region": "What is the region associated to your GCP resources?"
   }
 }
