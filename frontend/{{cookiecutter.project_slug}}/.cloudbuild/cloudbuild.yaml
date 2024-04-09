@@ -42,7 +42,7 @@ images:
 substitutions:
   _REPO: cookiecutter-template
   _SERVICE: "{{ cookiecutter.project_slug.replace('_', '-') }}"
-  _REGION: europe-west1
+  _REGION: "{{ cookiecutter.gcloud_region }}"
 
 options:
   logging: CLOUD_LOGGING_ONLY

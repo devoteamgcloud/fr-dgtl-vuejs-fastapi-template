@@ -15,9 +15,16 @@
     "Benjamin Solano",
     "Valdo Negou"
   ],
-  "database": ["PostgreSQL", "Firestore", "Both"],
+  "database": [
+    "PostgreSQL",
+    "Firestore",
+    "Both"
+  ],
   "as_container": true,
-  "gcloud_project": "",
+  "gcloud_project": "<GCP_PROJECT_ID>",
+  "gcloud_region": [
+    "europe-west9"
+  ],
   "__prompts__": {
     "repository_name": "Empty repository name you want to push to (let empty to refuse):",
     "project_name": "Select your project name:",
@@ -26,6 +33,7 @@
     "maintainer": "Select the main maintainer of the project:",
     "database": "Select the type of database you need:",
     "as_container": "Use Docker configuration ? (Local containers & Cloud Run auto-deploy)",
-    "gcloud_project": "What is your Google Cloud project ID?"
+    "gcloud_project": "What is your Google Cloud project ID?",
+    "gcloud_region": "What is the region associated to your GCP resources?"
   }
 }

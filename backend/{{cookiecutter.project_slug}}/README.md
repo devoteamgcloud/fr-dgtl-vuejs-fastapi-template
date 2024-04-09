@@ -49,7 +49,7 @@ Use the launch.json configuration to build and run the container
 
 # (Running the launch is an equivalent to):
 docker build -t <image>:<tag> -f Dockerfile .
-docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "$HOME/.config/gcloud/application_default_credentials.json":/gcp/creds.json --env GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json --env GCLOUD_PROJECT=<gcp_project_id> <image>:<tag>
+docker run --name {{ cookiecutter.project_slug }} -p 8000:8000 -p 5678:5678 -v "$HOME/.config/gcloud/application_default_credentials.json":/gcp/creds.json --env GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json --env GCLOUD_PROJECT={{ cookiecutter.gcloud_project }} <image>:<tag>
 
 ```
 

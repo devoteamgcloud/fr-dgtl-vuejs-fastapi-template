@@ -52,7 +52,7 @@ It assumes that each template is pushed on a separate Github repository
     SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
 
     # For deployed version
-    # SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:europe-west1:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
+    # SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:{{ cookiecutter.gcloud_region }}:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
     # BACKEND_CORS_ORIGIN=["<FRONT_ROOT_URL>"]
 
 ## Generate Frontend Project
@@ -144,7 +144,3 @@ Frontend:
 
 - Add User entity into TableView
 - Add edit action into TableView
-
-Deploy:
-
-- Ask region on template generation

@@ -19,6 +19,9 @@
   "sidebar": true,
   "footer": true,
   "as_container": true,
+  "gcloud_region": [
+    "europe-west9"
+  ],
   "__prompts__": {
     "repository_name": "Empty repository name you want to push to (let empty to refuse or use format <github_username>/<repo_name>):",
     "project_name": "Select your project name:",
@@ -28,6 +31,7 @@
     "navbar": "Do you want a navbar? (Dark theme & i18n included)",
     "sidebar": "Do you want a sidebar?",
     "footer": "Do you want a footer?",
-    "as_container": "Use Docker configuration (Local containers & Cloud Run auto-deploy) ?"
+    "as_container": "Use Docker configuration (Local containers & Cloud Run auto-deploy) ?",
+    "gcloud_region": "What is the region associated to your GCP resources?"
   }
 }
