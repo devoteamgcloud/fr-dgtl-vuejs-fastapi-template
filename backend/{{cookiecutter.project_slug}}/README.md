@@ -67,11 +67,12 @@ To deploy the infrastructure, make sure ADC is configured correctly.
 
 The main.tf will deploy:
 
-- Cloud SQL instance
-- Database into Cloud SQL instance
 - Image into the Artifact Registry used by Cloud Run
-- Cloud Run service linked to Cloud SQL instance
+- Cloud Run service
 - Secret in Secret Manager
+
+Additionally, it will deploy a Cloud SQL and/or Firestore database according to you database choice.
+You may need additional IAM roles to deploy databases
 
 ```bash
 
@@ -81,6 +82,8 @@ terraform init
 terraform apply
 
 ```
+
+Feel free to update it according to your needs
 
 ### Migrations
 

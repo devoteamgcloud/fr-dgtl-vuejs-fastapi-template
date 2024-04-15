@@ -4,6 +4,8 @@ import shutil
 import git
 import requests
 
+import hooks_modules.utils as utils
+
 
 def checkRepositoryNameOption(repo_name):
     """
@@ -81,8 +83,12 @@ def checkDatabaseTypeOption(value):
     if value == "PostgreSQL":
         print("Setting up PostgreSQL configuration...")
         shutil.rmtree("app/firestore")
-    if value == "Firestore client":
+    if value == "Firestore":
         print("Setting up Firestore client configuration...")
         shutil.rmtree("app/sqlmodel")
+        shutil.rmtree("tests")
+        utils.remove_reference_from_project("from app.sqlmodel")
+        utils.remove_reference_from_project("import asynccontextmanager")
+        utils.remove_decorated_function("app/main.py", "asynccontextmanager")
     if value == "Both":
         print("Setting up Firestore client & PostgreSQL configurations...")

@@ -16,8 +16,10 @@ def checkSidebarOption():
     path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
-        utils.removeReferenceFromProject("NavigationDrawer")
-        utils.removeFunctionFromProject(os.path.abspath("src/App.vue"), "adaptMargin")
+        utils.remove_reference_from_project("NavigationDrawer")
+        utils.remove_function_from_project(
+            os.path.abspath("src/App.vue"), "adaptMargin"
+        )
 
 
 def checkNavBarOption():
@@ -31,7 +33,7 @@ def checkNavBarOption():
     path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
-        utils.removeReferenceFromProject("NavBar")
+        utils.remove_reference_from_project("NavBar")
 
 
 def checkBottomNavOption():
@@ -45,7 +47,7 @@ def checkBottomNavOption():
     path = path_to_remove.strip()
     if path and os.path.exists(path):
         os.unlink(path)
-        utils.removeReferenceFromProject("BottomNav")
+        utils.remove_reference_from_project("BottomNav")
 
 
 def checkRepositoryNameOption(repo_name):

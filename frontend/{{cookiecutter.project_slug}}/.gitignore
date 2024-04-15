@@ -30,7 +30,6 @@ coverage
 .env
 
 # Custom files
-hooks_modules
 
 # Terraform
 terraform*

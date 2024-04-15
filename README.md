@@ -142,7 +142,11 @@ act -j test-run-template --rm -W .github/workflows/backend_template.yaml
 
 ## TODO
 
-Backend :
+Deployment:
+
+- Add a specific database user and not postgres
+
+Backend:
 
 - Optimize unit tests (bad scope fixture)
 

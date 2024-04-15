@@ -29,16 +29,20 @@ def remove_reference_from_project(pattern):
                         )
 
 
-def remove_function_from_project(file_path, function_name):
-    """Remove a simple function from its name (only with a single '}')"""
-    with open(file_path, "r") as f:
-        f_content = f.read()
-        modified_content = re.sub(
-            f"function {function_name}[\\S\\s]*?}}\n",
-            "",
-            f_content,
-            flags=re.DOTALL,
-        )
+def remove_decorated_function(file_path, decorator):
+    # Read the content of the file
+    with open(file_path, "r") as file:
+        content = file.read()
 
-    with open(file_path, "w") as f:
-        f.write(modified_content)
+    # Define the regex pattern to match a function
+    # decorated with the specified decorator
+    pattern = r"@{}\s*\n(?:async\s+)?def\s+\w+\([^)]*\)\s*:.*?\n\n".format(decorator)
+
+    matches = re.findall(pattern, content, flags=re.DOTALL)
+    if matches:
+        # Remove each matched function from the content
+        for match in matches:
+            content = content.replace(match, "")
+        # Write the modified content back to the file
+        with open(file_path, "w") as file:
+            file.write(content)
