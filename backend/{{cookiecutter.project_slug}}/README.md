@@ -6,6 +6,8 @@
 
 {{cookiecutter.description}}
 
+[GCP Project](https://console.cloud.google.com/home/dashboard?authuser=0&project={{cookiecutter.gcloud_project}}&supportedpurview=project)
+
 ## Template Stack
 
 - [FastApi](https://fastapi.tiangolo.com/)
@@ -60,6 +62,8 @@ poetry run pytest --cov=app --cov-report=term     # Uses SQLALCHEMY_DATABASE_URI
 ```
 
 ## Deployment
+
+:warning: Everything under this section assumes you choosed 'yes' to "as_container" question :warning:
 
 ### Initialisation
 

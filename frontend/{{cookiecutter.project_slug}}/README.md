@@ -6,6 +6,8 @@
 
 {{cookiecutter.description}}
 
+[GCP Project](https://console.cloud.google.com/home/dashboard?authuser=0&project={{cookiecutter.gcloud_project}}&supportedpurview=project)
+
 ## Template Stack
 
 - [Vue3 with Composition API](https://vuejs.org/guide/introduction.html)
@@ -62,6 +64,8 @@ npm run type-check
 ```
 
 ## Deployment
+
+:warning: Everything under this section assumes you choosed 'yes' to "as_container" question :warning:
 
 ### Initialisation
 

@@ -56,9 +56,9 @@ def enableBranchesProtection(repo_name, github_token):
         url = f"{base_url}/{branch}/protection"
         response = requests.put(url, body, headers=headers)
         if response.status_code != 200:
-            print(f"Failed to activate protection for branch {branch}:\n")
+            print(f"Failed to activate protection for branch {branch}:")
             print(response.json())
-            exit(1)
+            break
 
     shutil.rmtree("hooks_modules")
 

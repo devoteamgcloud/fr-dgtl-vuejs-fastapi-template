@@ -57,9 +57,9 @@ It assumes that each template is pushed on a separate Github repository
     SQLALCHEMY_DATABASE_URI="postgresql+asyncpg://postgres:postgres@localhost:5434/{{cookiecutter.project_slug}}_db"
 
     # For deployed version
-    # ENV="dev"
-    # SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:{{ cookiecutter.gcloud_region }}:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
-    # BACKEND_CORS_ORIGINS=["https://<FRONT_SERVICE_NAME>-<PROJECT_NUMBER>.{{ cookiecutter.gcloud_region }}.run.app"]
+    ENV="dev"
+    SQLALCHEMY_DATABASE_URI='postgresql+asyncpg://postgres:postgres@/{{cookiecutter.project_slug}}_db?host=/cloudsql/{{cookiecutter.gcloud_project}}:{{ cookiecutter.gcloud_region }}:{{ cookiecutter.project_slug.replace('_', '-') }}-instance'
+    BACKEND_CORS_ORIGINS=["https://<FRONT_SERVICE_NAME>-<PROJECT_NUMBER>.{{ cookiecutter.gcloud_region }}.run.app"]
 
 ## Generate Frontend Project
 
